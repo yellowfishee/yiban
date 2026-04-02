@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1A2B3C;
+  --color-accent: #C73E3A;
+  --color-bg: #F5F0E8;
+}
+
+[data-theme="xuanqing"] {
+  --color-primary: #1A2B3C;
+  --color-accent: #C73E3A;
+  --color-bg: #F5F0E8;
+}
+
+[data-theme="dailan"] {
+  --color-primary: #3D5A73;
+  --color-accent: #D4A5A5;
+  --color-bg: #FAF8F5;
+}
+
+[data-theme="mojin"] {
+  --color-primary: #1C1C1C;
+  --color-accent: #C9A84C;
+  --color-bg: #EDE8DC;
+}
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-float-slow { animation: float 4s ease-in-out infinite 0.5s; }
