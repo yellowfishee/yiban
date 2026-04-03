@@ -48,7 +48,7 @@ export default function HomePage() {
   } = useInspiration();
   const { devMode } = useSettings();
   const { reload } = useCollection();
-  const { isLoggedIn, isLoading: authLoading } = useAuth();
+  const { isLoggedIn, isLoading: authLoading, loginWithWeapp } = useAuth();
   const [checkInLoading, setCheckInLoading] = useState(false);
 
   useEffect(() => {
@@ -78,33 +78,19 @@ export default function HomePage() {
     };
   });
 
-  // 未登录时显示登录引导
-  if (!authLoading && !isLoggedIn) {
-    return (
-      <View className="home-page home-page--unauthorized">
-        <View className="home-page__welcome">
-          <Text className="home-page__taiji">☯</Text>
-          <Text className="home-page__subtitle">易伴·卦象神兽</Text>
-          <Text className="home-page__desc">登录后体验完整功能</Text>
-        </View>
-        <View
-          className="home-page__btn home-page__btn--primary"
-          onClick={() => Taro.navigateTo({ url: '/pages/login/index' })}
-        >
-          <Text className="home-page__btn-text">立即登录</Text>
-        </View>
-      </View>
-    );
-  }
-
-  // 打卡处理
+  // 打卡处理 - 未登录时先登录再打卡
   const onCheckIn = async () => {
     setCheckInLoading(true);
     try {
+      // 未登录？先拉起微信登录
+      if (!isLoggedIn) {
+        await loginWithWeapp();
+      }
       await handleCheckIn();
       await reload();
     } catch (err) {
       console.error('Checkin error:', err);
+      Taro.showToast({ title: '操作失败', icon: 'none' });
     } finally {
       setCheckInLoading(false);
     }
