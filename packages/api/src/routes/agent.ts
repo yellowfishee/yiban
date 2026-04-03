@@ -44,6 +44,9 @@ router.post('/generate', authMiddleware, async (c) => {
       );
     }
 
+    // 获取用户付费状态
+    const isPremium = (checkin as any).user?.isPremium || false;
+
     // 验证用户权限
     if (checkin.userId !== userId) {
       return c.json<ApiErrorResponse>(
@@ -74,8 +77,18 @@ router.post('/generate', authMiddleware, async (c) => {
       scene,
       hexagram,
       checkin.mood,
-      checkin.meihuaData
+      checkin.meihuaData,
+      isPremium
     );
+
+    // 检查是否需要广告
+    if (result.requiresAd) {
+      return c.json<AgentGenerateResponse>({
+        requiresAd: true,
+        message: result.message,
+        scene,
+      });
+    }
 
     return c.json<AgentGenerateResponse>({
       content: result.content,
