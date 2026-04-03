@@ -1,5 +1,5 @@
 import { View, Text } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import Taro, { useShareAppMessage } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 import { useInspiration } from '../../context/InspirationContext';
 import { useSettings } from '../../context/SettingsContext';
@@ -9,7 +9,9 @@ import HexagramCard from '../../components/hexagram/HexagramCard';
 import MeihuaDisplay from '../../components/hexagram/MeihuaDisplay';
 import MoodSelector from '../../components/inspiration/MoodSelector';
 import InspirationDisplay from '../../components/inspiration/InspirationDisplay';
+import ShareButton from '../../components/share/ShareButton';
 
+import type { Mood } from '@yiban/core';
 import './index.scss';
 
 const SCENES = [
@@ -52,6 +54,29 @@ export default function HomePage() {
   useEffect(() => {
     loadToday();
   }, [loadToday]);
+
+  // 小程序分享菜单配置
+  useEffect(() => {
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.showShareMenu({
+        withShareTicket: true,
+      });
+    }
+  }, []);
+
+  // 小程序分享内容配置
+  useShareAppMessage(() => {
+    if (!currentHexagram || !inspiration) {
+      return {
+        title: '易伴·卦象神兽',
+        path: '/pages/home/index',
+      };
+    }
+    return {
+      title: `易伴·${currentHexagram.symbol}今日指引`,
+      path: '/pages/home/index',
+    };
+  });
 
   // 未登录时显示登录引导
   if (!authLoading && !isLoggedIn) {
@@ -186,6 +211,15 @@ export default function HomePage() {
           <View className="home-page__tip">
             <Text className="home-page__tip-text">今日已打卡，明日再来遇见新伙伴吧</Text>
           </View>
+        )}
+
+        {/* 分享按钮 */}
+        {currentHexagram && inspiration && (
+          <ShareButton
+            hexagram={currentHexagram}
+            mood={(selectedMood as Mood) || 'work'}
+            inspirationText={inspiration.text}
+          />
         )}
       </View>
     );
