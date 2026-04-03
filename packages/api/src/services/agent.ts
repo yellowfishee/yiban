@@ -164,7 +164,20 @@ export async function generateAgentContent(
   requiresAd?: boolean;
   message?: string;
 }> {
-  // 1. 检查缓存（按 hexagramId + mood + scene）
+  const today = new Date().toISOString().split('T')[0];  // YYYY-MM-DD
+
+  // 1. 非付费用户检查免费次数（优先检查，避免缓存绕过配额）
+  if (!isPremium) {
+    const hasQuota = await getFreeQuota(userId, scene, today);
+    if (!hasQuota) {
+      return {
+        requiresAd: true,
+        message: '请先观看广告解锁此场景',
+      };
+    }
+  }
+
+  // 2. 检查缓存（按 hexagramId + mood + scene）
   const cachedResult = await getCachedContent(hexagram.id, mood, scene);
   if (cachedResult) {
     // 记录使用缓存，但不重复存储（同一缓存只关联原始打卡）
@@ -180,41 +193,28 @@ export async function generateAgentContent(
         cached: false, // 标记为引用缓存，非新缓存
       });
     }
-    return { content: cachedResult.content, cached: true };
-  }
-
-  const today = new Date().toISOString().split('T')[0];  // YYYY-MM-DD
-
-  // 2. 非付费用户检查免费次数
-  if (!isPremium) {
-    const hasQuota = await getFreeQuota(userId, scene, today);
-    if (!hasQuota) {
-      return {
-        requiresAd: true,
-        message: '请先观看广告解锁此场景',
-      };
-    }
+    return { content: cachedResult.content, cached: true, requiresAd: false };
   }
 
   // 3. 构建提示词
   const { system, user } = buildPrompt(hexagram, scene, mood, meihuaData);
 
-  // 3. 调用 GLM API
+  // 4. 调用 GLM API
   const rawContent = await callGLMAPI(system, user);
 
-  // 4. 合规检查
+  // 5. 合规检查
   const compliance = filterCompliance(rawContent);
   if (!compliance.safe) {
     console.warn('Compliance violations:', compliance.violations);
   }
   const content = compliance.filtered;
 
-  // 5. 记录免费使用（如果是非付费用户）
+  // 6. 记录免费使用（如果是非付费用户）
   if (!isPremium) {
     await recordFreeUsage(userId, scene, today);
   }
 
-  // 6. 存入数据库（作为缓存）
+  // 7. 存入数据库（作为缓存）
   await setCachedContent(checkinId, userId, hexagram.id, mood, scene, content);
 
   return { content, cached: false, requiresAd: false };
