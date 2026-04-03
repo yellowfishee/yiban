@@ -37,16 +37,18 @@ interface InspirationState {
   agentContents: AgentContent[];
   agentLoading: boolean;
   error: string | null;
+  currentCheckinId: string | null;
 }
 
 type InspirationAction =
-  | { type: 'LOAD'; payload: { currentHexagram: RawHexagram; inspiration: Inspiration; meihuaResult: MeihuaResult } }
+  | { type: 'LOAD'; payload: { currentHexagram: RawHexagram; inspiration: Inspiration; meihuaResult: MeihuaResult; checkinId: string } }
   | { type: 'SELECT_MOOD'; payload: { mood: Mood; inspiration: Inspiration } }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_AGENT_LOADING'; payload: boolean }
   | { type: 'SET_AGENT_CONTENTS'; payload: AgentContent[] }
-  | { type: 'RESET' };
+  | { type: 'RESET' }
+  | { type: 'SET_CHECKIN_ID'; payload: string | null };
 
 const initialState: InspirationState = {
   currentHexagram: null,
@@ -59,6 +61,7 @@ const initialState: InspirationState = {
   agentContents: [],
   agentLoading: false,
   error: null,
+  currentCheckinId: null,
 };
 
 function inspirationReducer(state: InspirationState, action: InspirationAction): InspirationState {
@@ -71,6 +74,7 @@ function inspirationReducer(state: InspirationState, action: InspirationAction):
         alreadyAdoptedToday: true,
         checkedInToday: true,
         meihuaResult: action.payload.meihuaResult,
+        currentCheckinId: action.payload.checkinId,
         isLoading: false,
         error: null,
       };
@@ -94,6 +98,8 @@ function inspirationReducer(state: InspirationState, action: InspirationAction):
         ...initialState,
         isLoading: false,
       };
+    case 'SET_CHECKIN_ID':
+      return { ...state, currentCheckinId: action.payload };
     default:
       return state;
   }
@@ -129,13 +135,14 @@ interface InspirationContextValue extends InspirationState {
   resetCheckIn: () => void;
   generateAgentContents: (checkinId: string) => Promise<void>;
   showRewardedVideoAd: (scene: AgentScene, checkinId: string) => void;
+  handleAdviceClick: (scene: AgentScene) => void;
 }
 
 const InspirationContext = createContext<InspirationContextValue | null>(null);
 
 export function InspirationProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(inspirationReducer, initialState);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
   /**
    * 加载今日打卡状态
@@ -164,6 +171,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
             currentHexagram: checkin.hexagram,
             inspiration,
             meihuaResult,
+            checkinId: checkin.id,
           },
         });
 
@@ -238,7 +246,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
       rewardedAd.onClose((res: { isEnded: boolean }) => {
         if (res.isEnded) {
           // 用户完整观看，调用上报
-          const userId = ''; // TODO: 从 AuthContext 获取
+          const userId = user?.id || '';
           const signature = Buffer.from(`${userId}${checkinId}${scene}`).toString('base64');
           agentApi.reportAdWatched(checkinId, scene, signature)
             .then(() => {
@@ -256,6 +264,17 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
       Taro.showToast({ title: '仅小程序支持广告解锁', icon: 'none' });
     }
   }, [generateAgentContents]);
+
+  /**
+   * 解锁场景建议（通过激励视频广告）
+   */
+  const handleAdviceClick = useCallback((scene: AgentScene) => {
+    if (!state.currentCheckinId) {
+      Taro.showToast({ title: '请先打卡', icon: 'none' });
+      return;
+    }
+    showRewardedVideoAd(scene, state.currentCheckinId);
+  }, [state.currentCheckinId, showRewardedVideoAd]);
 
   /**
    * 打卡 - 直接调用 API 完成
@@ -283,6 +302,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
           currentHexagram: checkin.hexagram,
           inspiration,
           meihuaResult,
+          checkinId: checkin.id,
         },
       });
 
@@ -319,6 +339,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
     resetCheckIn,
     generateAgentContents,
     showRewardedVideoAd,
+    handleAdviceClick,
   };
 
   return <InspirationContext.Provider value={value}>{children}</InspirationContext.Provider>;

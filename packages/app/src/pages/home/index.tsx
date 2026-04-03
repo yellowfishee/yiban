@@ -37,7 +37,6 @@ export default function HomePage() {
     checkedInToday,
     meihuaResult,
     agentContents,
-    agentLoading,
     error,
     loadToday,
     selectMood,
