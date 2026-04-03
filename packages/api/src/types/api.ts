@@ -57,7 +57,7 @@ export interface HexagramDetailResponse {
 
 // ========== AI Agent 相关 ==========
 
-export type AgentScene = 'suitable_for' | 'advice' | 'companionship';
+export type AgentScene = 'suitable_for' | 'advice' | 'companionship' | 'career' | 'emotion' | 'fortune';
 
 export interface AgentContent {
   id: string;
