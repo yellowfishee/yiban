@@ -268,13 +268,16 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
   /**
    * 解锁场景建议（通过激励视频广告）
    */
-  const handleAdviceClick = useCallback((scene: AgentScene) => {
+  const handleAdviceClick = useCallback((_scene: AgentScene) => {
     if (!state.currentCheckinId) {
       Taro.showToast({ title: '请先打卡', icon: 'none' });
       return;
     }
-    showRewardedVideoAd(scene, state.currentCheckinId);
-  }, [state.currentCheckinId, showRewardedVideoAd]);
+    // 广告单元 ID 未配置时提示
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.showToast({ title: '该功能即将上线', icon: 'none' });
+    }
+  }, [state.currentCheckinId]);
 
   /**
    * 打卡 - 直接调用 API 完成
@@ -284,12 +287,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'SET_ERROR', payload: null });
 
     try {
-      // 未登录时不允许打卡
-      if (!isLoggedIn) {
-        dispatch({ type: 'SET_ERROR', payload: '请先登录' });
-        throw new Error('请先登录');
-      }
-
+      // 不在这里检查登录状态，由 API 调用失败来触发错误
       const result = await checkinApi.create(mood);
       const checkin = result.checkin;
       const actualMood = (checkin.mood as Mood) || 'work';

@@ -2,7 +2,6 @@ import { View, Text } from '@tarojs/components';
 import Taro, { useShareAppMessage } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 import { useInspiration } from '../../context/InspirationContext';
-import { useSettings } from '../../context/SettingsContext';
 import { useCollection } from '../../context/CollectionContext';
 import { useAuth } from '../../context/AuthContext';
 import HexagramCard from '../../components/hexagram/HexagramCard';
@@ -43,10 +42,8 @@ export default function HomePage() {
     loadToday,
     selectMood,
     handleCheckIn,
-    resetCheckIn,
     handleAdviceClick,
   } = useInspiration();
-  const { devMode } = useSettings();
   const { reload } = useCollection();
   const { isLoggedIn, isLoading: authLoading, loginWithWeapp } = useAuth();
   const [checkInLoading, setCheckInLoading] = useState(false);
@@ -183,21 +180,9 @@ export default function HomePage() {
           </View>
         </View>
 
-        {devMode ? (
-          <View
-            className="home-page__btn home-page__btn--danger"
-            onClick={() => {
-              resetCheckIn();
-              loadToday();
-            }}
-          >
-            <Text className="home-page__btn-text">再次起卦</Text>
-          </View>
-        ) : (
-          <View className="home-page__tip">
-            <Text className="home-page__tip-text">今日已打卡，明日再来遇见新伙伴吧</Text>
-          </View>
-        )}
+        <View className="home-page__tip">
+          <Text className="home-page__tip-text">今日已打卡，明日再来遇见新伙伴吧</Text>
+        </View>
 
         {/* 分享按钮 */}
         {currentHexagram && inspiration && (
