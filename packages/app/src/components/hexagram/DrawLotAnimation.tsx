@@ -24,6 +24,15 @@ export default function DrawLotAnimation({ visible, hexagramName, onComplete }: 
   useEffect(() => {
     if (!visible) return;
 
+    // Reduced motion: skip animation entirely
+    const prefersReducedMotion = typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setPhase('done');
+      onComplete();
+      return;
+    }
+
     setPhase('enter');
 
     const t1 = setTimeout(() => setPhase('shaking'), PHASE_DURATIONS.enter);

@@ -2,10 +2,17 @@
   line-height: 1.8;
   letter-spacing: 0.5px;
   cursor: pointer;
+  max-height: calc(1.8em * 3 + 0.5px);  // 3 lines max
+  overflow: hidden;
+  position: relative;
 
   &__content {
     font-size: 22px;
     color: #1A2B3C;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__cursor {

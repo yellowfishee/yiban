@@ -1,4 +1,4 @@
-import { View, Text } from '@tarojs/components';
+import { View, Text, ScrollView } from '@tarojs/components';
 import Taro, { useShareAppMessage } from '@tarojs/taro';
 import { useEffect, useState, useCallback } from 'react';
 import { useInspiration } from '../../context/InspirationContext';
@@ -120,6 +120,7 @@ export default function HomePage() {
   if (!checkedInToday) {
     return (
       <View className="home-page">
+        <Text className="home-page__app-name">易伴</Text>
         <View className="home-page__welcome">
           <Text className="home-page__taiji">☯</Text>
           <Text className="home-page__subtitle">梅花易数起卦</Text>
@@ -158,7 +159,7 @@ export default function HomePage() {
       </View>
 
       {/* 标签栏 */}
-      <View className="home-page__tabs">
+      <ScrollView className="home-page__tabs" scrollX enableFlex>
         {SCENES.map((scene) => (
           <View
             key={scene.key}
@@ -168,7 +169,7 @@ export default function HomePage() {
             <Text className="home-page__tab-text">{scene.label}</Text>
           </View>
         ))}
-      </View>
+      </ScrollView>
 
       {/* 内容区 */}
       <View className="home-page__content">
