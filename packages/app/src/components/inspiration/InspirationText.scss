@@ -1,0 +1,23 @@
+.inspiration-text {
+  line-height: 2;
+  letter-spacing: 0.5px;
+
+  &__content {
+    font-size: 30px;
+    color: #1A2B3C;
+  }
+
+  &__cursor {
+    font-size: 30px;
+    animation: pulse 1s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

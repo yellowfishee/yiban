@@ -1,0 +1,15 @@
+.inspiration-display {
+  background-color: #fff;
+  border-radius: 32px;
+  padding: 40px;
+  border-top: 4px solid rgba(26, 43, 60, 0.08);
+  box-shadow: inset 0 -4px 16px rgba(26, 43, 60, 0.04);
+
+  &__title {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1A2B3C;
+    margin-bottom: 16px;
+  }
+}
