@@ -336,3 +336,39 @@ $color-bg-light: #FDFCF9;
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* 响应式：小屏手机 */
+@media (max-width: 375px) {
+  .home-page {
+    &__immersive {
+      padding: 24px 0 16px;
+    }
+
+    &__beast-glow {
+      .hexagram-symbol--lg {
+        width: 180px;
+        height: 180px;
+      }
+    }
+
+    &__hexagram-name {
+      font-size: 32px;
+    }
+
+    &__tab {
+      padding: 10px 12px;
+    }
+
+    &__tab-text {
+      font-size: 20px;
+    }
+  }
+}
+
+/* 响应式：大屏/平板 */
+@media (min-width: 768px) {
+  .home-page {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
