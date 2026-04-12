@@ -1,0 +1,187 @@
+.draw-lot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 15, 26, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+
+  &__container {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &--enter {
+      animation: bounceIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+  }
+
+  // 签筒
+  &__tube {
+    position: relative;
+    width: 80px;
+    height: 120px;
+  }
+
+  &__tube-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 100px;
+    background: linear-gradient(180deg, #8B6914 0%, #6B4F10 100%);
+    border-radius: 4px 4px 8px 8px;
+    border: 1px solid #D4AF37;
+  }
+
+  &__tube-rim {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 68px;
+    height: 12px;
+    background: linear-gradient(180deg, #D4AF37 0%, #B8941E 100%);
+    border-radius: 4px;
+    border: 1px solid #F5DEB3;
+  }
+
+  // 签
+  &__stick {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+
+    &--enter {
+      top: 10px;
+    }
+
+    &--shaking {
+      animation: stickShake 0.15s ease-in-out infinite alternate;
+    }
+
+    &--flying {
+      animation: stickFlyOut 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    &--expanding {
+      opacity: 0;
+    }
+  }
+
+  &__stick-body {
+    width: 6px;
+    height: 80px;
+    background: linear-gradient(180deg, #F5DEB3 0%, #D4AF37 100%);
+    border-radius: 3px;
+  }
+
+  &__stick-tip {
+    width: 10px;
+    height: 10px;
+    background: #C73E3A;
+    border-radius: 50%;
+    margin-top: -2px;
+  }
+
+  // 粒子
+  &__particles {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+  }
+
+  &__particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #D4AF37;
+    border-radius: 50%;
+    opacity: 0;
+
+    &--0 { animation: particleDrift 0.5s 0.05s ease-out forwards; }
+    &--1 { animation: particleDrift 0.5s 0.1s ease-out forwards; transform: rotate(72deg); }
+    &--2 { animation: particleDrift 0.5s 0.15s ease-out forwards; transform: rotate(144deg); }
+    &--3 { animation: particleDrift 0.5s 0.2s ease-out forwards; transform: rotate(216deg); }
+    &--4 { animation: particleDrift 0.5s 0.25s ease-out forwards; transform: rotate(288deg); }
+  }
+
+  // 展开卡片
+  &__card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 280px;
+    background: linear-gradient(145deg, #FDFCF9 0%, #F5F0E8 100%);
+    border-radius: 16px;
+    border: 2px solid #D4AF37;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: cardExpand 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  &__card-name {
+    font-family: 'STSong', 'SimSun', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #C73E3A;
+  }
+
+  &__skip-hint {
+    position: absolute;
+    bottom: 80px;
+    font-size: 20px;
+    color: rgba(212, 175, 55, 0.5);
+  }
+}
+
+// Keyframes
+@keyframes bounceIn {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stickShake {
+  0% { transform: translateX(-50%) rotate(-5deg); }
+  100% { transform: translateX(-50%) rotate(5deg); }
+}
+
+@keyframes stickFlyOut {
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); opacity: 1; }
+  60% { transform: translateX(-50%) translateY(-120px) rotate(-15deg); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-160px) rotate(-10deg); opacity: 0; }
+}
+
+@keyframes particleDrift {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-30px) scale(0); }
+}
+
+@keyframes cardExpand {
+  0% { opacity: 0; transform: translate(-50%, -50%) scaleX(0.1) scaleY(0.5); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scaleX(1.05) scaleY(1); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scaleX(1) scaleY(1); }
+}
