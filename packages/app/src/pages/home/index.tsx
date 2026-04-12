@@ -1,19 +1,18 @@
 import { View, Text } from '@tarojs/components';
 import Taro, { useShareAppMessage } from '@tarojs/taro';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useInspiration } from '../../context/InspirationContext';
 import { useCollection } from '../../context/CollectionContext';
 import { useAuth } from '../../context/AuthContext';
-import HexagramCard from '../../components/hexagram/HexagramCard';
-import MeihuaDisplay from '../../components/hexagram/MeihuaDisplay';
-import MoodSelector from '../../components/inspiration/MoodSelector';
-import InspirationDisplay from '../../components/inspiration/InspirationDisplay';
+import HexagramSymbol from '../../components/hexagram/HexagramSymbol';
+import InspirationText from '../../components/inspiration/InspirationText';
 import ShareButton from '../../components/share/ShareButton';
-
-import type { Mood } from '@yiban/core';
+import DrawLotAnimation from '../../components/hexagram/DrawLotAnimation';
+import { GUA_NAME_MAP } from '@yiban/core';
+import type { AgentScene } from '@yiban/core';
 import './index.scss';
 
-const SCENES = [
+const SCENES: { key: AgentScene; label: string }[] = [
   { key: 'suitable_for', label: '今日适合' },
   { key: 'advice', label: '处事建议' },
   { key: 'companionship', label: '情绪陪同' },
@@ -22,79 +21,73 @@ const SCENES = [
   { key: 'fortune', label: '财运参考' },
 ];
 
-const MOOD_LABELS: Record<string, string> = {
-  work: '工作协作',
-  emotion: '情感沟通',
-  inspiration: '寻找灵感',
-  encouragement: '需要鼓励',
-};
+const DISCLAIMER_TEXT = '本应用内容基于国学文化视角的灵感启发，仅供娱乐参考，不构成任何决策建议。不预测命运，不提供占卜算命服务。';
+
+const MOVING_LINE_NAMES = ['一', '二', '三', '四', '五', '六'];
 
 export default function HomePage() {
   const {
     currentHexagram,
-    selectedMood,
     inspiration,
     isLoading,
     checkedInToday,
     meihuaResult,
     agentContents,
+    agentLoading,
     error,
     loadToday,
-    selectMood,
     handleCheckIn,
-    handleAdviceClick,
   } = useInspiration();
   const { reload } = useCollection();
   const { isLoggedIn, isLoading: authLoading, loginWithWeapp } = useAuth();
-  const [checkInLoading, setCheckInLoading] = useState(false);
+  const [showDrawLot, setShowDrawLot] = useState(false);
+  const [activeScene, setActiveScene] = useState<AgentScene>('suitable_for');
+  const [disclaimerOpen, setDisclaimerOpen] = useState(false);
 
   useEffect(() => {
     loadToday();
   }, [loadToday]);
 
-  // 小程序分享菜单配置
   useEffect(() => {
     if (process.env.TARO_ENV === 'weapp') {
-      Taro.showShareMenu({
-        withShareTicket: true,
-      });
+      Taro.showShareMenu({ withShareTicket: true });
     }
   }, []);
 
-  // 小程序分享内容配置
   useShareAppMessage(() => {
     if (!currentHexagram || !inspiration) {
-      return {
-        title: '易伴·卦象神兽',
-        path: '/pages/home/index',
-      };
+      return { title: '易伴·卦象神兽', path: '/pages/home/index' };
     }
-    return {
-      title: `易伴·${currentHexagram.symbol}今日指引`,
-      path: '/pages/home/index',
-    };
+    return { title: `易伴·${currentHexagram.symbol}今日指引`, path: '/pages/home/index' };
   });
 
-  // 打卡处理 - 未登录时先登录再打卡
-  const onCheckIn = async () => {
-    setCheckInLoading(true);
+  const onCheckIn = useCallback(async () => {
     try {
-      // 未登录？先拉起微信登录
       if (!isLoggedIn) {
         await loginWithWeapp();
       }
+      setShowDrawLot(true);
       await handleCheckIn();
       await reload();
     } catch (err) {
       console.error('Checkin error:', err);
+      setShowDrawLot(false);
       Taro.showToast({ title: '操作失败', icon: 'none' });
-    } finally {
-      setCheckInLoading(false);
     }
-  };
+  }, [isLoggedIn, loginWithWeapp, handleCheckIn, reload]);
 
-  // 加载状态
-  if (isLoading || checkInLoading || authLoading) {
+  const onDrawLotComplete = useCallback(() => {
+    setShowDrawLot(false);
+  }, []);
+
+  const meihuaSummary = meihuaResult
+    ? `上${GUA_NAME_MAP[meihuaResult.upperGua] || '?'}下${GUA_NAME_MAP[meihuaResult.lowerGua] || '?'} · 动爻${MOVING_LINE_NAMES[meihuaResult.movingLine - 1] || meihuaResult.movingLine}`
+    : '';
+
+  const currentSceneContent = agentContents.find((c) => c.scene === activeScene);
+
+  // Loading state
+  if ((isLoading || authLoading) && !checkedInToday) {
     return (
       <View className="home-page home-page--loading">
         <View className="home-page__spinner" />
@@ -103,123 +96,123 @@ export default function HomePage() {
     );
   }
 
-  // 错误状态
-  if (error) {
+  // Error state
+  if (error && !checkedInToday) {
     return (
       <View className="home-page home-page--error">
         <Text className="home-page__error-text">{error}</Text>
-        <View
-          className="home-page__btn home-page__btn--secondary"
-          onClick={loadToday}
-        >
+        <View className="home-page__btn home-page__btn--secondary" onClick={loadToday}>
           <Text className="home-page__btn-text--secondary">重试</Text>
         </View>
       </View>
     );
   }
 
-  // 今日已打卡：展示主卦
-  if (checkedInToday && currentHexagram) {
+  const drawLotOverlay = (
+    <DrawLotAnimation
+      visible={showDrawLot}
+      hexagramName={currentHexagram?.name}
+      onComplete={onDrawLotComplete}
+    />
+  );
+
+  // Not checked in
+  if (!checkedInToday) {
     return (
       <View className="home-page">
-        <View className="home-page__header">
-          <Text className="home-page__title">今日灵感</Text>
+        <View className="home-page__welcome">
+          <Text className="home-page__taiji">☯</Text>
+          <Text className="home-page__subtitle">梅花易数起卦</Text>
+          <Text className="home-page__desc">以此刻为锚，感而遂通天下之故</Text>
         </View>
-
-        <HexagramCard hexagram={currentHexagram} />
-
-        {selectedMood && (
-          <View className="home-page__mood-hint">
-            <Text className="home-page__mood-text">
-              今日心境：{MOOD_LABELS[selectedMood] || selectedMood}
-            </Text>
-          </View>
-        )}
-
-        <MoodSelector selected={selectedMood} onSelect={selectMood} />
-
-        {inspiration && <InspirationDisplay inspiration={inspiration} />}
-
-        {meihuaResult && (
-          <MeihuaDisplay
-            upperGua={meihuaResult.upperGua}
-            lowerGua={meihuaResult.lowerGua}
-            movingLine={meihuaResult.movingLine}
-            hasMovingLine={meihuaResult.hasMovingLine}
-            mainHexagram={meihuaResult.mainHexagram}
-          />
-        )}
-
-        {/* 神兽建议 - 6个场景 */}
-        <View className="agent-advice-section">
-          <Text className="agent-advice-title">神兽今日建议</Text>
-
-          <View className="agent-scenes">
-            {SCENES.map((scene) => {
-              const content = agentContents.find(c => c.scene === scene.key);
-              const isUnlocked = !!content;
-
-              return (
-                <View
-                  key={scene.key}
-                  className={`agent-scene-card ${isUnlocked ? 'unlocked' : 'locked'}`}
-                  onClick={() => !isUnlocked && handleAdviceClick(scene.key as any)}
-                >
-                  <Text className="scene-label">{scene.label}</Text>
-                  {isUnlocked ? (
-                    <Text className="scene-content">{content.content}</Text>
-                  ) : (
-                    <View className="scene-locked">
-                      <Text className="scene-lock-icon">🔒</Text>
-                      <Text className="scene-lock-text">点击解锁</Text>
-                    </View>
-                  )}
-                </View>
-              );
-            })}
-          </View>
+        <View
+          className="home-page__btn home-page__btn--primary"
+          onClick={onCheckIn}
+        >
+          <Text className="home-page__btn-text">梅花起卦 · 打卡领养</Text>
         </View>
-
-        <View className="home-page__tip">
-          <Text className="home-page__tip-text">今日已打卡，明日再来遇见新伙伴吧</Text>
-        </View>
-
-        {/* 分享按钮 */}
-        {currentHexagram && inspiration && (
-          <ShareButton
-            hexagram={currentHexagram}
-            mood={(selectedMood as Mood) || 'work'}
-            inspirationText={inspiration.text}
-          />
-        )}
+        {drawLotOverlay}
       </View>
     );
   }
 
-  // 今日未打卡：初始状态
+  // Checked in — main view
   return (
     <View className="home-page">
-      <View className="home-page__header">
-        <Text className="home-page__title">今日灵感</Text>
+      {/* 沉浸区 */}
+      <View className="home-page__immersive">
+        <View className="home-page__beast-glow">
+          <HexagramSymbol symbol={currentHexagram!.symbol} size="lg" />
+        </View>
+        <Text className="home-page__hexagram-name">{currentHexagram!.name}</Text>
+        <Text className="home-page__hexagram-nature">{currentHexagram!.nature}</Text>
+        {meihuaSummary && (
+          <Text className="home-page__meihua-line">{meihuaSummary}</Text>
+        )}
+        {inspiration && (
+          <>
+            <View className="home-page__divider" />
+            <InspirationText text={inspiration.text} speed={30} />
+          </>
+        )}
       </View>
 
-      <View className="home-page__welcome">
-        <Text className="home-page__taiji">☯</Text>
-        <Text className="home-page__subtitle">梅花易数起卦</Text>
-        <Text className="home-page__desc">以此刻为锚，感而遂通天下之故</Text>
+      {/* 标签栏 */}
+      <View className="home-page__tabs">
+        {SCENES.map((scene) => (
+          <View
+            key={scene.key}
+            className={`home-page__tab ${activeScene === scene.key ? 'home-page__tab--active' : ''}`}
+            onClick={() => setActiveScene(scene.key)}
+          >
+            <Text className="home-page__tab-text">{scene.label}</Text>
+          </View>
+        ))}
       </View>
 
-      <View className="home-page__guide">
-        <Text className="home-page__guide-text">
-          点击下方按钮，以梅花易数起卦，获得今日专属卦象神兽
-        </Text>
+      {/* 内容区 */}
+      <View className="home-page__content">
+        {agentLoading && !currentSceneContent ? (
+          <View className="home-page__skeleton">
+            <View className="home-page__skeleton-line" style={{ width: '80%' }} />
+            <View className="home-page__skeleton-line" style={{ width: '60%' }} />
+            <View className="home-page__skeleton-line" style={{ width: '70%' }} />
+          </View>
+        ) : currentSceneContent ? (
+          <View className="home-page__scene">
+            <Text className="home-page__scene-label">
+              {SCENES.find((s) => s.key === activeScene)?.label}
+            </Text>
+            <View className="home-page__scene-divider" />
+            <Text className="home-page__scene-text">{currentSceneContent.content}</Text>
+          </View>
+        ) : (
+          <View className="home-page__empty-scene">
+            <Text className="home-page__empty-scene-text">神兽暂时沉默，请稍后再试</Text>
+            <View className="home-page__empty-scene-btn" onClick={() => loadToday()}>
+              <Text className="home-page__empty-scene-btn-text">重试</Text>
+            </View>
+          </View>
+        )}
       </View>
 
-      <View
-        className="home-page__btn home-page__btn--primary"
-        onClick={onCheckIn}
-      >
-        <Text className="home-page__btn-text">梅花起卦 · 打卡领养</Text>
+      {/* 底部操作区 */}
+      <View className="home-page__footer">
+        {currentHexagram && inspiration && (
+          <ShareButton
+            hexagram={currentHexagram}
+            mood={inspiration.mood}
+            inspirationText={inspiration.text}
+          />
+        )}
+        <View className="home-page__disclaimer" onClick={() => setDisclaimerOpen(!disclaimerOpen)}>
+          <Text className="home-page__disclaimer-toggle">
+            免责声明 {disclaimerOpen ? '▲' : '▼'}
+          </Text>
+        </View>
+        {disclaimerOpen && (
+          <Text className="home-page__disclaimer-text">{DISCLAIMER_TEXT}</Text>
+        )}
       </View>
     </View>
   );
