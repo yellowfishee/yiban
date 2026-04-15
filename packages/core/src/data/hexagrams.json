@@ -1,0 +1,1860 @@
+{
+  "hexagrams": [
+    {
+      "id": "dui_dui",
+      "name": "兑为泽",
+      "symbol": "当康",
+      "nature": "喜悦与喜悦",
+      "concept": "泽上泽下",
+      "source": "《山海经》",
+      "description": "兑为泽，当康天下丰收则现，兑为喜悦，当康主丰年喜乐",
+      "rationale": "当康天下丰收则现，兑为喜悦，当康主丰年喜乐",
+      "moods": {
+        "work": {
+          "interpretation": "兑为泽之象，事业当顺其自然，以当康之德为鉴。",
+          "encouragement": "当康的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "兑为泽，感情需用心经营，如当康般真诚。",
+          "encouragement": "以当康之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "兑为泽启示，灵感源于内心，当康为你指引方向。",
+          "encouragement": "当康带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "兑为泽，你拥有当康般的能量。",
+          "encouragement": "相信自己，当康与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "dui_gen",
+      "name": "泽山咸",
+      "symbol": "九尾狐",
+      "nature": "喜悦与停止",
+      "concept": "泽上山下",
+      "source": "《山海经》",
+      "description": "泽山咸，九尾狐通灵有德，咸卦山泽通气感应，九尾狐主姻缘",
+      "rationale": "九尾狐通灵有德，咸卦山泽通气感应，九尾狐主姻缘",
+      "moods": {
+        "work": {
+          "interpretation": "泽山咸之象，事业当顺其自然，以九尾狐之德为鉴。",
+          "encouragement": "九尾狐的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽山咸，感情需用心经营，如九尾狐般真诚。",
+          "encouragement": "以九尾狐之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽山咸启示，灵感源于内心，九尾狐为你指引方向。",
+          "encouragement": "九尾狐带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽山咸，你拥有九尾狐般的能量。",
+          "encouragement": "相信自己，九尾狐与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "dui_kan",
+      "name": "泽水困",
+      "symbol": "屏翳",
+      "nature": "喜悦与险陷",
+      "concept": "泽上水下",
+      "source": "《山海经》",
+      "description": "泽水困，屏翳兴云雨被困于泽，困卦困顿，屏翳主云雨却困",
+      "rationale": "屏翳兴云雨被困于泽，困卦困顿，屏翳主云雨却困",
+      "moods": {
+        "work": {
+          "interpretation": "泽水困之象，事业当顺其自然，以屏翳之德为鉴。",
+          "encouragement": "屏翳的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽水困，感情需用心经营，如屏翳般真诚。",
+          "encouragement": "以屏翳之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽水困启示，灵感源于内心，屏翳为你指引方向。",
+          "encouragement": "屏翳带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽水困，你拥有屏翳般的能量。",
+          "encouragement": "相信自己，屏翳与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "dui_kun",
+      "name": "泽地萃",
+      "symbol": "乘黄",
+      "nature": "喜悦与柔顺",
+      "concept": "泽上地下",
+      "source": "《山海经》",
+      "description": "泽地萃，乘黄似狐背有角乘之寿二千岁，萃卦聚集，乘黄主长寿吉祥",
+      "rationale": "乘黄似狐背有角乘之寿二千岁，萃卦聚集，乘黄主长寿吉祥",
+      "moods": {
+        "work": {
+          "interpretation": "泽地萃之象，事业当顺其自然，以乘黄之德为鉴。",
+          "encouragement": "乘黄的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽地萃，感情需用心经营，如乘黄般真诚。",
+          "encouragement": "以乘黄之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽地萃启示，灵感源于内心，乘黄为你指引方向。",
+          "encouragement": "乘黄带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽地萃，你拥有乘黄般的能量。",
+          "encouragement": "相信自己，乘黄与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "dui_li",
+      "name": "泽火革",
+      "symbol": "朱雀",
+      "nature": "喜悦与光明",
+      "concept": "泽上火下",
+      "source": "四象",
+      "description": "泽火革，朱雀南方火精浴火重生，革卦变革更新，朱雀主火与变化",
+      "rationale": "朱雀南方火精浴火重生，革卦变革更新，朱雀主火与变化",
+      "moods": {
+        "work": {
+          "interpretation": "泽火革之象，事业当顺其自然，以朱雀之德为鉴。",
+          "encouragement": "朱雀的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽火革，感情需用心经营，如朱雀般真诚。",
+          "encouragement": "以朱雀之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽火革启示，灵感源于内心，朱雀为你指引方向。",
+          "encouragement": "朱雀带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽火革，你拥有朱雀般的能量。",
+          "encouragement": "相信自己，朱雀与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "dui_qian",
+      "name": "泽天夬",
+      "symbol": "麒麟",
+      "nature": "喜悦与刚健",
+      "concept": "泽上天下",
+      "source": "《山海经》",
+      "description": "泽天夬，麒麟仁兽角不伤人，夬卦决断有德，麒麟刚决柔而有仁",
+      "rationale": "麒麟仁兽角不伤人，夬卦决断有德，麒麟刚决柔而有仁",
+      "moods": {
+        "work": {
+          "interpretation": "泽天夬之象，事业当顺其自然，以麒麟之德为鉴。",
+          "encouragement": "麒麟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽天夬，感情需用心经营，如麒麟般真诚。",
+          "encouragement": "以麒麟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽天夬启示，灵感源于内心，麒麟为你指引方向。",
+          "encouragement": "麒麟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽天夬，你拥有麒麟般的能量。",
+          "encouragement": "相信自己，麒麟与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "dui_xun",
+      "name": "泽风大过",
+      "symbol": "傲因",
+      "nature": "喜悦与顺从",
+      "concept": "泽上风下",
+      "source": "《神异经》",
+      "description": "泽风大过，傲因自大不可约束，大过刚过，傲因警示过刚必折",
+      "rationale": "傲因自大不可约束，大过刚过，傲因警示过刚必折",
+      "moods": {
+        "work": {
+          "interpretation": "泽风大过之象，事业当顺其自然，以傲因之德为鉴。",
+          "encouragement": "傲因的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽风大过，感情需用心经营，如傲因般真诚。",
+          "encouragement": "以傲因之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽风大过启示，灵感源于内心，傲因为你指引方向。",
+          "encouragement": "傲因带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽风大过，你拥有傲因般的能量。",
+          "encouragement": "相信自己，傲因与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "dui_zhen",
+      "name": "泽雷随",
+      "symbol": "騊駼",
+      "nature": "喜悦与震动",
+      "concept": "泽上雷下",
+      "source": "《山海经》",
+      "description": "泽雷随，騊駼野马善走随群，随卦随和，騊駼随群而行",
+      "rationale": "騊駼野马善走随群，随卦随和，騊駼随群而行",
+      "moods": {
+        "work": {
+          "interpretation": "泽雷随之象，事业当顺其自然，以騊駼之德为鉴。",
+          "encouragement": "騊駼的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "泽雷随，感情需用心经营，如騊駼般真诚。",
+          "encouragement": "以騊駼之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "泽雷随启示，灵感源于内心，騊駼为你指引方向。",
+          "encouragement": "騊駼带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "泽雷随，你拥有騊駼般的能量。",
+          "encouragement": "相信自己，騊駼与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "gen_dui",
+      "name": "山泽损",
+      "symbol": "梼杌",
+      "nature": "停止与喜悦",
+      "concept": "山上泽下",
+      "source": "《神异经》",
+      "description": "山泽损，梼杌凶兽顽固不化，损卦损上益下，梼杌警示顽固必损",
+      "rationale": "梼杌凶兽顽固不化，损卦损上益下，梼杌警示顽固必损",
+      "moods": {
+        "work": {
+          "interpretation": "山泽损之象，事业当顺其自然，以梼杌之德为鉴。",
+          "encouragement": "梼杌的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山泽损，感情需用心经营，如梼杌般真诚。",
+          "encouragement": "以梼杌之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山泽损启示，灵感源于内心，梼杌为你指引方向。",
+          "encouragement": "梼杌带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山泽损，你拥有梼杌般的能量。",
+          "encouragement": "相信自己，梼杌与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "gen_gen",
+      "name": "艮为山",
+      "symbol": "犼",
+      "nature": "停止与停止",
+      "concept": "山上山下",
+      "source": "《述异记》",
+      "description": "艮为山，犼性凶猛善守望，艮为山为止，犼主镇守静止",
+      "rationale": "犼性凶猛善守望，艮为山为止，犼主镇守静止",
+      "moods": {
+        "work": {
+          "interpretation": "艮为山之象，事业当顺其自然，以犼之德为鉴。",
+          "encouragement": "犼的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "艮为山，感情需用心经营，如犼般真诚。",
+          "encouragement": "以犼之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "艮为山启示，灵感源于内心，犼为你指引方向。",
+          "encouragement": "犼带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "艮为山，你拥有犼般的能量。",
+          "encouragement": "相信自己，犼与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "gen_kan",
+      "name": "山水蒙",
+      "symbol": "鸱吻",
+      "nature": "停止与险陷",
+      "concept": "山上水下",
+      "source": "龙生九子",
+      "description": "山水蒙，鸱吻好望喜吞，蒙卦启蒙教育，鸱吻主开启智慧",
+      "rationale": "鸱吻好望喜吞，蒙卦启蒙教育，鸱吻主开启智慧",
+      "moods": {
+        "work": {
+          "interpretation": "山水蒙之象，事业当顺其自然，以鸱吻之德为鉴。",
+          "encouragement": "鸱吻的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山水蒙，感情需用心经营，如鸱吻般真诚。",
+          "encouragement": "以鸱吻之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山水蒙启示，灵感源于内心，鸱吻为你指引方向。",
+          "encouragement": "鸱吻带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山水蒙，你拥有鸱吻般的能量。",
+          "encouragement": "相信自己，鸱吻与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "gen_kun",
+      "name": "山地剥",
+      "symbol": "驺虞",
+      "nature": "停止与柔顺",
+      "concept": "山上地下",
+      "source": "《山海经》",
+      "description": "山地剥，驺虞仁兽不食生物，剥卦剥落，驺虞至仁免于剥蚀",
+      "rationale": "驺虞仁兽不食生物，剥卦剥落，驺虞至仁免于剥蚀",
+      "moods": {
+        "work": {
+          "interpretation": "山地剥之象，事业当顺其自然，以驺虞之德为鉴。",
+          "encouragement": "驺虞的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山地剥，感情需用心经营，如驺虞般真诚。",
+          "encouragement": "以驺虞之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山地剥启示，灵感源于内心，驺虞为你指引方向。",
+          "encouragement": "驺虞带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山地剥，你拥有驺虞般的能量。",
+          "encouragement": "相信自己，驺虞与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "gen_li",
+      "name": "山火贲",
+      "symbol": "驺吾",
+      "nature": "停止与光明",
+      "concept": "山上火下",
+      "source": "《山海经》",
+      "description": "山火贲，驺吾五彩斑斓日行千里，贲卦文饰光彩，驺吾主华美速度",
+      "rationale": "驺吾五彩斑斓日行千里，贲卦文饰光彩，驺吾主华美速度",
+      "moods": {
+        "work": {
+          "interpretation": "山火贲之象，事业当顺其自然，以驺吾之德为鉴。",
+          "encouragement": "驺吾的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山火贲，感情需用心经营，如驺吾般真诚。",
+          "encouragement": "以驺吾之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山火贲启示，灵感源于内心，驺吾为你指引方向。",
+          "encouragement": "驺吾带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山火贲，你拥有驺吾般的能量。",
+          "encouragement": "相信自己，驺吾与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "gen_qian",
+      "name": "山天大畜",
+      "symbol": "谛听",
+      "nature": "停止与刚健",
+      "concept": "山上天下",
+      "source": "《地藏十轮经》",
+      "description": "山天大畜，谛听通晓万物善听人心，大畜积蓄厚重，谛听主智慧积累",
+      "rationale": "谛听通晓万物善听人心，大畜积蓄厚重，谛听主智慧积累",
+      "moods": {
+        "work": {
+          "interpretation": "山天大畜之象，事业当顺其自然，以谛听之德为鉴。",
+          "encouragement": "谛听的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山天大畜，感情需用心经营，如谛听般真诚。",
+          "encouragement": "以谛听之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山天大畜启示，灵感源于内心，谛听为你指引方向。",
+          "encouragement": "谛听带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山天大畜，你拥有谛听般的能量。",
+          "encouragement": "相信自己，谛听与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "gen_xun",
+      "name": "山风蛊",
+      "symbol": "化蛇",
+      "nature": "停止与顺从",
+      "concept": "山上风下",
+      "source": "《山海经》",
+      "description": "山风蛊，化蛇人面豺身见则大水，蛊卦败坏整治，化蛇主变化祸患",
+      "rationale": "化蛇人面豺身见则大水，蛊卦败坏整治，化蛇主变化祸患",
+      "moods": {
+        "work": {
+          "interpretation": "山风蛊之象，事业当顺其自然，以化蛇之德为鉴。",
+          "encouragement": "化蛇的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山风蛊，感情需用心经营，如化蛇般真诚。",
+          "encouragement": "以化蛇之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山风蛊启示，灵感源于内心，化蛇为你指引方向。",
+          "encouragement": "化蛇带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山风蛊，你拥有化蛇般的能量。",
+          "encouragement": "相信自己，化蛇与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "gen_zhen",
+      "name": "山雷颐",
+      "symbol": "灵龟",
+      "nature": "停止与震动",
+      "concept": "山上雷下",
+      "source": "《山海经》",
+      "description": "山雷颐，灵龟长寿主智慧养生，颐卦为口养育，灵龟主长寿调养",
+      "rationale": "灵龟长寿主智慧养生，颐卦为口养育，灵龟主长寿调养",
+      "moods": {
+        "work": {
+          "interpretation": "山雷颐之象，事业当顺其自然，以灵龟之德为鉴。",
+          "encouragement": "灵龟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "山雷颐，感情需用心经营，如灵龟般真诚。",
+          "encouragement": "以灵龟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "山雷颐启示，灵感源于内心，灵龟为你指引方向。",
+          "encouragement": "灵龟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "山雷颐，你拥有灵龟般的能量。",
+          "encouragement": "相信自己，灵龟与你同在。"
+        }
+      },
+      "category": "龟类"
+    },
+    {
+      "id": "kan_dui",
+      "name": "水泽节",
+      "symbol": "霸下",
+      "nature": "险陷与喜悦",
+      "concept": "水上泽下",
+      "source": "龙生九子",
+      "description": "水泽节，霸下好负重驮石碑，节卦有度节制，霸下稳重有节",
+      "rationale": "霸下好负重驮石碑，节卦有度节制，霸下稳重有节",
+      "moods": {
+        "work": {
+          "interpretation": "水泽节之象，事业当顺其自然，以霸下之德为鉴。",
+          "encouragement": "霸下的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水泽节，感情需用心经营，如霸下般真诚。",
+          "encouragement": "以霸下之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水泽节启示，灵感源于内心，霸下为你指引方向。",
+          "encouragement": "霸下带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水泽节，你拥有霸下般的能量。",
+          "encouragement": "相信自己，霸下与你同在。"
+        }
+      },
+      "category": "龟类"
+    },
+    {
+      "id": "kan_gen",
+      "name": "水山蹇",
+      "symbol": "玄龟",
+      "nature": "险陷与停止",
+      "concept": "水上山下",
+      "source": "《山海经》",
+      "description": "水山蹇，玄龟通灵主寿稳，蹇卦山上有水见险而止，玄龟稳健避险",
+      "rationale": "玄龟通灵主寿稳，蹇卦山上有水见险而止，玄龟稳健避险",
+      "moods": {
+        "work": {
+          "interpretation": "水山蹇之象，事业当顺其自然，以玄龟之德为鉴。",
+          "encouragement": "玄龟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水山蹇，感情需用心经营，如玄龟般真诚。",
+          "encouragement": "以玄龟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水山蹇启示，灵感源于内心，玄龟为你指引方向。",
+          "encouragement": "玄龟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水山蹇，你拥有玄龟般的能量。",
+          "encouragement": "相信自己，玄龟与你同在。"
+        }
+      },
+      "category": "龟类"
+    },
+    {
+      "id": "kan_kan",
+      "name": "坎为水",
+      "symbol": "蛟龙",
+      "nature": "险陷与险陷",
+      "concept": "水上水下",
+      "source": "《山海经》",
+      "description": "坎为水，蛟龙潜深渊能发洪水，坎为水为险，蛟龙主水与险陷",
+      "rationale": "蛟龙潜深渊能发洪水，坎为水为险，蛟龙主水与险陷",
+      "moods": {
+        "work": {
+          "interpretation": "坎为水之象，事业当顺其自然，以蛟龙之德为鉴。",
+          "encouragement": "蛟龙的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "坎为水，感情需用心经营，如蛟龙般真诚。",
+          "encouragement": "以蛟龙之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "坎为水启示，灵感源于内心，蛟龙为你指引方向。",
+          "encouragement": "蛟龙带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "坎为水，你拥有蛟龙般的能量。",
+          "encouragement": "相信自己，蛟龙与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "kan_kun",
+      "name": "水地比",
+      "symbol": "貔貅",
+      "nature": "险陷与柔顺",
+      "concept": "水上地下",
+      "source": "《山海经》",
+      "description": "水地比，貔貅只进不出纳八方财，比卦亲比辅佐，貔貅主忠诚守护",
+      "rationale": "貔貅只进不出纳八方财，比卦亲比辅佐，貔貅主忠诚守护",
+      "moods": {
+        "work": {
+          "interpretation": "水地比之象，事业当顺其自然，以貔貅之德为鉴。",
+          "encouragement": "貔貅的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水地比，感情需用心经营，如貔貅般真诚。",
+          "encouragement": "以貔貅之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水地比启示，灵感源于内心，貔貅为你指引方向。",
+          "encouragement": "貔貅带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水地比，你拥有貔貅般的能量。",
+          "encouragement": "相信自己，貔貅与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "kan_li",
+      "name": "水火既济",
+      "symbol": "螭吻",
+      "nature": "险陷与光明",
+      "concept": "水上火下",
+      "source": "龙生九子",
+      "description": "水火既济，螭吻好望好吞能避火，既济水火相交功成，螭吻主调和安全",
+      "rationale": "螭吻好望好吞能避火，既济水火相交功成，螭吻主调和安全",
+      "moods": {
+        "work": {
+          "interpretation": "水火既济之象，事业当顺其自然，以螭吻之德为鉴。",
+          "encouragement": "螭吻的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水火既济，感情需用心经营，如螭吻般真诚。",
+          "encouragement": "以螭吻之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水火既济启示，灵感源于内心，螭吻为你指引方向。",
+          "encouragement": "螭吻带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水火既济，你拥有螭吻般的能量。",
+          "encouragement": "相信自己，螭吻与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "kan_qian",
+      "name": "水天需",
+      "symbol": "玄武",
+      "nature": "险陷与刚健",
+      "concept": "水上天下",
+      "source": "四象",
+      "description": "水天需，玄武龟蛇合体主北方水，需卦云上于天待时而动，玄武契合需象",
+      "rationale": "玄武龟蛇合体主北方水，需卦云上于天待时而动，玄武契合需象",
+      "moods": {
+        "work": {
+          "interpretation": "水天需之象，事业当顺其自然，以玄武之德为鉴。",
+          "encouragement": "玄武的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水天需，感情需用心经营，如玄武般真诚。",
+          "encouragement": "以玄武之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水天需启示，灵感源于内心，玄武为你指引方向。",
+          "encouragement": "玄武带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水天需，你拥有玄武般的能量。",
+          "encouragement": "相信自己，玄武与你同在。"
+        }
+      },
+      "category": "龟类"
+    },
+    {
+      "id": "kan_xun",
+      "name": "水风井",
+      "symbol": "赑屃",
+      "nature": "险陷与顺从",
+      "concept": "水上风下",
+      "source": "龙生九子",
+      "description": "水风井，赑屃喜负重有力，井卦井养不穷需深耕，赑屃主耐力持久",
+      "rationale": "赑屃喜负重有力，井卦井养不穷需深耕，赑屃主耐力持久",
+      "moods": {
+        "work": {
+          "interpretation": "水风井之象，事业当顺其自然，以赑屃之德为鉴。",
+          "encouragement": "赑屃的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水风井，感情需用心经营，如赑屃般真诚。",
+          "encouragement": "以赑屃之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水风井启示，灵感源于内心，赑屃为你指引方向。",
+          "encouragement": "赑屃带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水风井，你拥有赑屃般的能量。",
+          "encouragement": "相信自己，赑屃与你同在。"
+        }
+      },
+      "category": "龟类"
+    },
+    {
+      "id": "kan_zhen",
+      "name": "水雷屯",
+      "symbol": "夔牛",
+      "nature": "险陷与震动",
+      "concept": "水上雷下",
+      "source": "《山海经》",
+      "description": "水雷屯，夔牛独足声如雷，屯卦初生艰难，夔牛需驯用方成大器",
+      "rationale": "夔牛独足声如雷，屯卦初生艰难，夔牛需驯用方成大器",
+      "moods": {
+        "work": {
+          "interpretation": "水雷屯之象，事业当顺其自然，以夔牛之德为鉴。",
+          "encouragement": "夔牛的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "水雷屯，感情需用心经营，如夔牛般真诚。",
+          "encouragement": "以夔牛之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "水雷屯启示，灵感源于内心，夔牛为你指引方向。",
+          "encouragement": "夔牛带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "水雷屯，你拥有夔牛般的能量。",
+          "encouragement": "相信自己，夔牛与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "kun_dui",
+      "name": "地泽临",
+      "symbol": "辟邪",
+      "nature": "柔顺与喜悦",
+      "concept": "地上泽下",
+      "source": "《山海经》",
+      "description": "地泽临，辟邪能除群凶，临卦君临关怀下民，辟邪护佑众生",
+      "rationale": "辟邪能除群凶，临卦君临关怀下民，辟邪护佑众生",
+      "moods": {
+        "work": {
+          "interpretation": "地泽临之象，事业当顺其自然，以辟邪之德为鉴。",
+          "encouragement": "辟邪的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地泽临，感情需用心经营，如辟邪般真诚。",
+          "encouragement": "以辟邪之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地泽临启示，灵感源于内心，辟邪为你指引方向。",
+          "encouragement": "辟邪带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地泽临，你拥有辟邪般的能量。",
+          "encouragement": "相信自己，辟邪与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "kun_gen",
+      "name": "地山谦",
+      "symbol": "解豸",
+      "nature": "柔顺与停止",
+      "concept": "地上山下",
+      "source": "《山海经》",
+      "description": "地山谦，解豸辨曲直主公正，谦卦屈己下人，解豸主谦逊明理",
+      "rationale": "解豸辨曲直主公正，谦卦屈己下人，解豸主谦逊明理",
+      "moods": {
+        "work": {
+          "interpretation": "地山谦之象，事业当顺其自然，以解豸之德为鉴。",
+          "encouragement": "解豸的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地山谦，感情需用心经营，如解豸般真诚。",
+          "encouragement": "以解豸之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地山谦启示，灵感源于内心，解豸为你指引方向。",
+          "encouragement": "解豸带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地山谦，你拥有解豸般的能量。",
+          "encouragement": "相信自己，解豸与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "kun_kan",
+      "name": "地水师",
+      "symbol": "皋陶",
+      "nature": "柔顺与险陷",
+      "concept": "地上水下",
+      "source": "《山海经》",
+      "description": "地水师，皋陶断狱公正，师卦军队纪律严明，皋陶主军纪公道",
+      "rationale": "皋陶断狱公正，师卦军队纪律严明，皋陶主军纪公道",
+      "moods": {
+        "work": {
+          "interpretation": "地水师之象，事业当顺其自然，以皋陶之德为鉴。",
+          "encouragement": "皋陶的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地水师，感情需用心经营，如皋陶般真诚。",
+          "encouragement": "以皋陶之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地水师启示，灵感源于内心，皋陶为你指引方向。",
+          "encouragement": "皋陶带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地水师，你拥有皋陶般的能量。",
+          "encouragement": "相信自己，皋陶与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "kun_kun",
+      "name": "坤为地",
+      "symbol": "腾蛇",
+      "nature": "柔顺与柔顺",
+      "concept": "地上地下",
+      "source": "《山海经》",
+      "description": "坤为地，腾蛇乘雾而飞，坤为地为顺，腾蛇柔韧顺从主承载包容",
+      "rationale": "腾蛇乘雾而飞，坤为地为顺，腾蛇柔韧顺从主承载包容",
+      "moods": {
+        "work": {
+          "interpretation": "坤为地之象，事业当顺其自然，以腾蛇之德为鉴。",
+          "encouragement": "腾蛇的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "坤为地，感情需用心经营，如腾蛇般真诚。",
+          "encouragement": "以腾蛇之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "坤为地启示，灵感源于内心，腾蛇为你指引方向。",
+          "encouragement": "腾蛇带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "坤为地，你拥有腾蛇般的能量。",
+          "encouragement": "相信自己，腾蛇与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "kun_li",
+      "name": "地火明夷",
+      "symbol": "烛龙",
+      "nature": "柔顺与光明",
+      "concept": "地上火下",
+      "source": "《山海经》",
+      "description": "地火明夷，烛龙睁眼为昼闭眼为夜，明夷光明受损韬光养晦，烛龙主明暗交替",
+      "rationale": "烛龙睁眼为昼闭眼为夜，明夷光明受损韬光养晦，烛龙主明暗交替",
+      "moods": {
+        "work": {
+          "interpretation": "地火明夷之象，事业当顺其自然，以烛龙之德为鉴。",
+          "encouragement": "烛龙的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地火明夷，感情需用心经营，如烛龙般真诚。",
+          "encouragement": "以烛龙之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地火明夷启示，灵感源于内心，烛龙为你指引方向。",
+          "encouragement": "烛龙带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地火明夷，你拥有烛龙般的能量。",
+          "encouragement": "相信自己，烛龙与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "kun_qian",
+      "name": "地天泰",
+      "symbol": "麒鳞",
+      "nature": "柔顺与刚健",
+      "concept": "地上天下",
+      "source": "《山海经》",
+      "description": "地天泰，麒鳞仁兽天下太平则现，泰卦天地交通，麒鳞主祥和通达",
+      "rationale": "麒鳞仁兽天下太平则现，泰卦天地交通，麒鳞主祥和通达",
+      "moods": {
+        "work": {
+          "interpretation": "地天泰之象，事业当顺其自然，以麒鳞之德为鉴。",
+          "encouragement": "麒鳞的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地天泰，感情需用心经营，如麒鳞般真诚。",
+          "encouragement": "以麒鳞之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地天泰启示，灵感源于内心，麒鳞为你指引方向。",
+          "encouragement": "麒鳞带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地天泰，你拥有麒鳞般的能量。",
+          "encouragement": "相信自己，麒鳞与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "kun_xun",
+      "name": "地风升",
+      "symbol": "冉遗鱼",
+      "nature": "柔顺与顺从",
+      "concept": "地上风下",
+      "source": "《山海经》",
+      "description": "地风升，冉遗鱼鱼身蛇首能御凶，升卦地中生木上升，冉遗鱼主成长腾升",
+      "rationale": "冉遗鱼鱼身蛇首能御凶，升卦地中生木上升，冉遗鱼主成长腾升",
+      "moods": {
+        "work": {
+          "interpretation": "地风升之象，事业当顺其自然，以冉遗鱼之德为鉴。",
+          "encouragement": "冉遗鱼的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地风升，感情需用心经营，如冉遗鱼般真诚。",
+          "encouragement": "以冉遗鱼之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地风升启示，灵感源于内心，冉遗鱼为你指引方向。",
+          "encouragement": "冉遗鱼带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地风升，你拥有冉遗鱼般的能量。",
+          "encouragement": "相信自己，冉遗鱼与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "kun_zhen",
+      "name": "地雷复",
+      "symbol": "朱厌",
+      "nature": "柔顺与震动",
+      "concept": "地上雷下",
+      "source": "《山海经》",
+      "description": "地雷复，朱厌猿形白首赤足见则兵戈起，复卦一阳来复，朱厌主复兴更迭",
+      "rationale": "朱厌猿形白首赤足见则兵戈起，复卦一阳来复，朱厌主复兴更迭",
+      "moods": {
+        "work": {
+          "interpretation": "地雷复之象，事业当顺其自然，以朱厌之德为鉴。",
+          "encouragement": "朱厌的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "地雷复，感情需用心经营，如朱厌般真诚。",
+          "encouragement": "以朱厌之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "地雷复启示，灵感源于内心，朱厌为你指引方向。",
+          "encouragement": "朱厌带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "地雷复，你拥有朱厌般的能量。",
+          "encouragement": "相信自己，朱厌与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "li_dui",
+      "name": "火泽睽",
+      "symbol": "陆吾",
+      "nature": "光明与喜悦",
+      "concept": "火上泽下",
+      "source": "《山海经》",
+      "description": "火泽睽，陆吾虎身人面司天帝下都，睽卦乖离，陆吾主分离裁决",
+      "rationale": "陆吾虎身人面司天帝下都，睽卦乖离，陆吾主分离裁决",
+      "moods": {
+        "work": {
+          "interpretation": "火泽睽之象，事业当顺其自然，以陆吾之德为鉴。",
+          "encouragement": "陆吾的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火泽睽，感情需用心经营，如陆吾般真诚。",
+          "encouragement": "以陆吾之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火泽睽启示，灵感源于内心，陆吾为你指引方向。",
+          "encouragement": "陆吾带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火泽睽，你拥有陆吾般的能量。",
+          "encouragement": "相信自己，陆吾与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "li_gen",
+      "name": "火山旅",
+      "symbol": "青鸟",
+      "nature": "光明与停止",
+      "concept": "火上山下",
+      "source": "《山海经》",
+      "description": "火山旅，青鸟西王母使者，旅卦行旅在外，青鸟主信使远行",
+      "rationale": "青鸟西王母使者，旅卦行旅在外，青鸟主信使远行",
+      "moods": {
+        "work": {
+          "interpretation": "火山旅之象，事业当顺其自然，以青鸟之德为鉴。",
+          "encouragement": "青鸟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火山旅，感情需用心经营，如青鸟般真诚。",
+          "encouragement": "以青鸟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火山旅启示，灵感源于内心，青鸟为你指引方向。",
+          "encouragement": "青鸟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火山旅，你拥有青鸟般的能量。",
+          "encouragement": "相信自己，青鸟与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "li_kan",
+      "name": "火水未济",
+      "symbol": "精卫",
+      "nature": "光明与险陷",
+      "concept": "火上水下",
+      "source": "《山海经》",
+      "description": "火水未济，精卫填海矢志不渝，未济事未成需坚持，精卫不屈契合未济",
+      "rationale": "精卫填海矢志不渝，未济事未成需坚持，精卫不屈契合未济",
+      "moods": {
+        "work": {
+          "interpretation": "火水未济之象，事业当顺其自然，以精卫之德为鉴。",
+          "encouragement": "精卫的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火水未济，感情需用心经营，如精卫般真诚。",
+          "encouragement": "以精卫之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火水未济启示，灵感源于内心，精卫为你指引方向。",
+          "encouragement": "精卫带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火水未济，你拥有精卫般的能量。",
+          "encouragement": "相信自己，精卫与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "li_kun",
+      "name": "火地晋",
+      "symbol": "赤骥",
+      "nature": "光明与柔顺",
+      "concept": "火上地下",
+      "source": "《山海经》",
+      "description": "火地晋，赤骥神骏日行千里，晋卦日出地上晋升，赤骥主进取",
+      "rationale": "赤骥神骏日行千里，晋卦日出地上晋升，赤骥主进取",
+      "moods": {
+        "work": {
+          "interpretation": "火地晋之象，事业当顺其自然，以赤骥之德为鉴。",
+          "encouragement": "赤骥的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火地晋，感情需用心经营，如赤骥般真诚。",
+          "encouragement": "以赤骥之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火地晋启示，灵感源于内心，赤骥为你指引方向。",
+          "encouragement": "赤骥带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火地晋，你拥有赤骥般的能量。",
+          "encouragement": "相信自己，赤骥与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "li_li",
+      "name": "离为火",
+      "symbol": "三足金乌",
+      "nature": "光明与光明",
+      "concept": "火上火下",
+      "source": "《山海经》",
+      "description": "离为火，金乌日之精负日飞行，离为火为日，金乌为离之本象",
+      "rationale": "金乌日之精负日飞行，离为火为日，金乌为离之本象",
+      "moods": {
+        "work": {
+          "interpretation": "离为火之象，事业当顺其自然，以三足金乌之德为鉴。",
+          "encouragement": "三足金乌的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "离为火，感情需用心经营，如三足金乌般真诚。",
+          "encouragement": "以三足金乌之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "离为火启示，灵感源于内心，三足金乌为你指引方向。",
+          "encouragement": "三足金乌带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "离为火，你拥有三足金乌般的能量。",
+          "encouragement": "相信自己，三足金乌与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "li_qian",
+      "name": "火天大有",
+      "symbol": "凤凰",
+      "nature": "光明与刚健",
+      "concept": "火上天下",
+      "source": "《山海经》",
+      "description": "火天大有，凤凰百鸟之王，大有光明盛大，凤凰配大有之象",
+      "rationale": "凤凰百鸟之王，大有光明盛大，凤凰配大有之象",
+      "moods": {
+        "work": {
+          "interpretation": "火天大有之象，事业当顺其自然，以凤凰之德为鉴。",
+          "encouragement": "凤凰的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火天大有，感情需用心经营，如凤凰般真诚。",
+          "encouragement": "以凤凰之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火天大有启示，灵感源于内心，凤凰为你指引方向。",
+          "encouragement": "凤凰带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火天大有，你拥有凤凰般的能量。",
+          "encouragement": "相信自己，凤凰与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "li_xun",
+      "name": "火风鼎",
+      "symbol": "毕方",
+      "nature": "光明与顺从",
+      "concept": "火上风下",
+      "source": "《山海经》",
+      "description": "火风鼎，毕方独足火之精，鼎卦烹饪成新，毕方主火与变革",
+      "rationale": "毕方独足火之精，鼎卦烹饪成新，毕方主火与变革",
+      "moods": {
+        "work": {
+          "interpretation": "火风鼎之象，事业当顺其自然，以毕方之德为鉴。",
+          "encouragement": "毕方的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火风鼎，感情需用心经营，如毕方般真诚。",
+          "encouragement": "以毕方之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火风鼎启示，灵感源于内心，毕方为你指引方向。",
+          "encouragement": "毕方带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火风鼎，你拥有毕方般的能量。",
+          "encouragement": "相信自己，毕方与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "li_zhen",
+      "name": "火雷噬嗑",
+      "symbol": "穷奇",
+      "nature": "光明与震动",
+      "concept": "火上雷下",
+      "source": "《山海经》",
+      "description": "火雷噬嗑，穷奇主刑罚，噬嗑咬合决断，穷奇惩恶主刑狱",
+      "rationale": "穷奇主刑罚，噬嗑咬合决断，穷奇惩恶主刑狱",
+      "moods": {
+        "work": {
+          "interpretation": "火雷噬嗑之象，事业当顺其自然，以穷奇之德为鉴。",
+          "encouragement": "穷奇的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "火雷噬嗑，感情需用心经营，如穷奇般真诚。",
+          "encouragement": "以穷奇之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "火雷噬嗑启示，灵感源于内心，穷奇为你指引方向。",
+          "encouragement": "穷奇带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "火雷噬嗑，你拥有穷奇般的能量。",
+          "encouragement": "相信自己，穷奇与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "qian_dui",
+      "name": "天泽履",
+      "symbol": "白虎",
+      "nature": "刚健与喜悦",
+      "concept": "天上泽下",
+      "source": "四象",
+      "description": "天泽履，履卦「履虎尾不咥人」，白虎主杀伐可驯服，契合履卦小心而行",
+      "rationale": "履卦「履虎尾不咥人」，白虎主杀伐可驯服，契合履卦小心而行",
+      "moods": {
+        "work": {
+          "interpretation": "天泽履之象，事业当顺其自然，以白虎之德为鉴。",
+          "encouragement": "白虎的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天泽履，感情需用心经营，如白虎般真诚。",
+          "encouragement": "以白虎之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天泽履启示，灵感源于内心，白虎为你指引方向。",
+          "encouragement": "白虎带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天泽履，你拥有白虎般的能量。",
+          "encouragement": "相信自己，白虎与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "qian_gen",
+      "name": "天山遯",
+      "symbol": "鸾鸟",
+      "nature": "刚健与停止",
+      "concept": "天上山下",
+      "source": "《山海经》",
+      "description": "天山遯，鸾鸟见太平则飞乱世则隐，遯卦退避，鸾鸟知进退",
+      "rationale": "鸾鸟见太平则飞乱世则隐，遯卦退避，鸾鸟知进退",
+      "moods": {
+        "work": {
+          "interpretation": "天山遯之象，事业当顺其自然，以鸾鸟之德为鉴。",
+          "encouragement": "鸾鸟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天山遯，感情需用心经营，如鸾鸟般真诚。",
+          "encouragement": "以鸾鸟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天山遯启示，灵感源于内心，鸾鸟为你指引方向。",
+          "encouragement": "鸾鸟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天山遯，你拥有鸾鸟般的能量。",
+          "encouragement": "相信自己，鸾鸟与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "qian_kan",
+      "name": "天水讼",
+      "symbol": "獬豸",
+      "nature": "刚健与险陷",
+      "concept": "天上水下",
+      "source": "《山海经》",
+      "description": "天水讼，獬豸辨是非曲直，讼卦主争端，獬豸主公正裁决",
+      "rationale": "獬豸辨是非曲直，讼卦主争端，獬豸主公正裁决",
+      "moods": {
+        "work": {
+          "interpretation": "天水讼之象，事业当顺其自然，以獬豸之德为鉴。",
+          "encouragement": "獬豸的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天水讼，感情需用心经营，如獬豸般真诚。",
+          "encouragement": "以獬豸之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天水讼启示，灵感源于内心，獬豸为你指引方向。",
+          "encouragement": "獬豸带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天水讼，你拥有獬豸般的能量。",
+          "encouragement": "相信自己，獬豸与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "qian_kun",
+      "name": "天地否",
+      "symbol": "饕餮",
+      "nature": "刚健与柔顺",
+      "concept": "天上地下",
+      "source": "《山海经》",
+      "description": "天地否，饕餮贪婪终致自噬，否卦天地不交，饕餮警示否塞之祸",
+      "rationale": "饕餮贪婪终致自噬，否卦天地不交，饕餮警示否塞之祸",
+      "moods": {
+        "work": {
+          "interpretation": "天地否之象，事业当顺其自然，以饕餮之德为鉴。",
+          "encouragement": "饕餮的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天地否，感情需用心经营，如饕餮般真诚。",
+          "encouragement": "以饕餮之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天地否启示，灵感源于内心，饕餮为你指引方向。",
+          "encouragement": "饕餮带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天地否，你拥有饕餮般的能量。",
+          "encouragement": "相信自己，饕餮与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "qian_li",
+      "name": "天火同人",
+      "symbol": "重明鸟",
+      "nature": "刚健与光明",
+      "concept": "天上火下",
+      "source": "《拾遗记》",
+      "description": "天火同人，重明鸟双目重瞳能辟邪，天火同人聚众，重明鸟为光明之使",
+      "rationale": "重明鸟双目重瞳能辟邪，天火同人聚众，重明鸟为光明之使",
+      "moods": {
+        "work": {
+          "interpretation": "天火同人之象，事业当顺其自然，以重明鸟之德为鉴。",
+          "encouragement": "重明鸟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天火同人，感情需用心经营，如重明鸟般真诚。",
+          "encouragement": "以重明鸟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天火同人启示，灵感源于内心，重明鸟为你指引方向。",
+          "encouragement": "重明鸟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天火同人，你拥有重明鸟般的能量。",
+          "encouragement": "相信自己，重明鸟与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "qian_qian",
+      "name": "乾为天",
+      "symbol": "应龙",
+      "nature": "刚健与刚健",
+      "concept": "天上天下",
+      "source": "《山海经》《楚辞》",
+      "description": "乾为天，应龙为龙中之长翼能飞天，乾为天纯阳至健，应龙配之",
+      "rationale": "应龙为龙中之长翼能飞天，乾为天纯阳至健，应龙配之",
+      "moods": {
+        "work": {
+          "interpretation": "乾为天之象，事业当顺其自然，以应龙之德为鉴。",
+          "encouragement": "应龙的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "乾为天，感情需用心经营，如应龙般真诚。",
+          "encouragement": "以应龙之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "乾为天启示，灵感源于内心，应龙为你指引方向。",
+          "encouragement": "应龙带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "乾为天，你拥有应龙般的能量。",
+          "encouragement": "相信自己，应龙与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "qian_xun",
+      "name": "天风姤",
+      "symbol": "比翼鸟",
+      "nature": "刚健与顺从",
+      "concept": "天上风下",
+      "source": "《山海经》",
+      "description": "天风姤，比翼鸟一目一翼成对飞翔，姤卦阴阳相遇，比翼鸟象征相遇相依",
+      "rationale": "比翼鸟一目一翼成对飞翔，姤卦阴阳相遇，比翼鸟象征相遇相依",
+      "moods": {
+        "work": {
+          "interpretation": "天风姤之象，事业当顺其自然，以比翼鸟之德为鉴。",
+          "encouragement": "比翼鸟的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天风姤，感情需用心经营，如比翼鸟般真诚。",
+          "encouragement": "以比翼鸟之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天风姤启示，灵感源于内心，比翼鸟为你指引方向。",
+          "encouragement": "比翼鸟带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天风姤，你拥有比翼鸟般的能量。",
+          "encouragement": "相信自己，比翼鸟与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "qian_zhen",
+      "name": "天雷无妄",
+      "symbol": "狴犴",
+      "nature": "刚健与震动",
+      "concept": "天上雷下",
+      "source": "龙生九子",
+      "description": "天雷无妄，狴犴好讼仗义，无妄主诚信，狴犴主公道",
+      "rationale": "狴犴好讼仗义，无妄主诚信，狴犴主公道",
+      "moods": {
+        "work": {
+          "interpretation": "天雷无妄之象，事业当顺其自然，以狴犴之德为鉴。",
+          "encouragement": "狴犴的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "天雷无妄，感情需用心经营，如狴犴般真诚。",
+          "encouragement": "以狴犴之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "天雷无妄启示，灵感源于内心，狴犴为你指引方向。",
+          "encouragement": "狴犴带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "天雷无妄，你拥有狴犴般的能量。",
+          "encouragement": "相信自己，狴犴与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "xun_dui",
+      "name": "风泽中孚",
+      "symbol": "角端",
+      "nature": "顺从与喜悦",
+      "concept": "风上泽下",
+      "source": "《说苑》",
+      "description": "风泽中孚，角端日行万里通四方语言，中孚信实于中，角端契合诚信",
+      "rationale": "角端日行万里通四方语言，中孚信实于中，角端契合诚信",
+      "moods": {
+        "work": {
+          "interpretation": "风泽中孚之象，事业当顺其自然，以角端之德为鉴。",
+          "encouragement": "角端的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风泽中孚，感情需用心经营，如角端般真诚。",
+          "encouragement": "以角端之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风泽中孚启示，灵感源于内心，角端为你指引方向。",
+          "encouragement": "角端带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风泽中孚，你拥有角端般的能量。",
+          "encouragement": "相信自己，角端与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "xun_gen",
+      "name": "风山渐",
+      "symbol": "鸿鹄",
+      "nature": "顺从与停止",
+      "concept": "风上山下",
+      "source": "《山海经》",
+      "description": "风山渐，鸿鹄高飞循序渐进，渐卦渐进有序，鸿鹄象征志向高远",
+      "rationale": "鸿鹄高飞循序渐进，渐卦渐进有序，鸿鹄象征志向高远",
+      "moods": {
+        "work": {
+          "interpretation": "风山渐之象，事业当顺其自然，以鸿鹄之德为鉴。",
+          "encouragement": "鸿鹄的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风山渐，感情需用心经营，如鸿鹄般真诚。",
+          "encouragement": "以鸿鹄之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风山渐启示，灵感源于内心，鸿鹄为你指引方向。",
+          "encouragement": "鸿鹄带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风山渐，你拥有鸿鹄般的能量。",
+          "encouragement": "相信自己，鸿鹄与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "xun_kan",
+      "name": "风水涣",
+      "symbol": "天马",
+      "nature": "顺从与险陷",
+      "concept": "风上水下",
+      "source": "《山海经》",
+      "description": "风水涣，天马能飞行主远行，涣卦风行水上涣散，天马主远行流动",
+      "rationale": "天马能飞行主远行，涣卦风行水上涣散，天马主远行流动",
+      "moods": {
+        "work": {
+          "interpretation": "风水涣之象，事业当顺其自然，以天马之德为鉴。",
+          "encouragement": "天马的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风水涣，感情需用心经营，如天马般真诚。",
+          "encouragement": "以天马之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风水涣启示，灵感源于内心，天马为你指引方向。",
+          "encouragement": "天马带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风水涣，你拥有天马般的能量。",
+          "encouragement": "相信自己，天马与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "xun_kun",
+      "name": "风地观",
+      "symbol": "英招",
+      "nature": "顺从与柔顺",
+      "concept": "风上地下",
+      "source": "《山海经》",
+      "description": "风地观，英招马身人面巡游四海，观卦观察，英招主巡视观察",
+      "rationale": "英招马身人面巡游四海，观卦观察，英招主巡视观察",
+      "moods": {
+        "work": {
+          "interpretation": "风地观之象，事业当顺其自然，以英招之德为鉴。",
+          "encouragement": "英招的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风地观，感情需用心经营，如英招般真诚。",
+          "encouragement": "以英招之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风地观启示，灵感源于内心，英招为你指引方向。",
+          "encouragement": "英招带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风地观，你拥有英招般的能量。",
+          "encouragement": "相信自己，英招与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "xun_li",
+      "name": "风火家人",
+      "symbol": "青鸾",
+      "nature": "顺从与光明",
+      "concept": "风上火下",
+      "source": "《山海经》",
+      "description": "风火家人，青鸾凤凰属雌雄和鸣，家人家庭和睦，青鸾主姻缘和谐",
+      "rationale": "青鸾凤凰属雌雄和鸣，家人家庭和睦，青鸾主姻缘和谐",
+      "moods": {
+        "work": {
+          "interpretation": "风火家人之象，事业当顺其自然，以青鸾之德为鉴。",
+          "encouragement": "青鸾的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风火家人，感情需用心经营，如青鸾般真诚。",
+          "encouragement": "以青鸾之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风火家人启示，灵感源于内心，青鸾为你指引方向。",
+          "encouragement": "青鸾带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风火家人，你拥有青鸾般的能量。",
+          "encouragement": "相信自己，青鸾与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "xun_qian",
+      "name": "风天小畜",
+      "symbol": "飞廉",
+      "nature": "顺从与刚健",
+      "concept": "风上天下",
+      "source": "《山海经》",
+      "description": "风天小畜，飞廉风神鸟身鹿头，小畜密云不雨蓄积，飞廉主风与积蓄",
+      "rationale": "飞廉风神鸟身鹿头，小畜密云不雨蓄积，飞廉主风与积蓄",
+      "moods": {
+        "work": {
+          "interpretation": "风天小畜之象，事业当顺其自然，以飞廉之德为鉴。",
+          "encouragement": "飞廉的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风天小畜，感情需用心经营，如飞廉般真诚。",
+          "encouragement": "以飞廉之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风天小畜启示，灵感源于内心，飞廉为你指引方向。",
+          "encouragement": "飞廉带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风天小畜，你拥有飞廉般的能量。",
+          "encouragement": "相信自己，飞廉与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "xun_xun",
+      "name": "巽为风",
+      "symbol": "飞马",
+      "nature": "顺从与顺从",
+      "concept": "风上风下",
+      "source": "《山海经》",
+      "description": "巽为风，飞马天马行空乘风而行，巽为风为顺，飞马主自由顺势",
+      "rationale": "飞马天马行空乘风而行，巽为风为顺，飞马主自由顺势",
+      "moods": {
+        "work": {
+          "interpretation": "巽为风之象，事业当顺其自然，以飞马之德为鉴。",
+          "encouragement": "飞马的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "巽为风，感情需用心经营，如飞马般真诚。",
+          "encouragement": "以飞马之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "巽为风启示，灵感源于内心，飞马为你指引方向。",
+          "encouragement": "飞马带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "巽为风，你拥有飞马般的能量。",
+          "encouragement": "相信自己，飞马与你同在。"
+        }
+      },
+      "category": "神马类"
+    },
+    {
+      "id": "xun_zhen",
+      "name": "风雷益",
+      "symbol": "鲲鹏",
+      "nature": "顺从与震动",
+      "concept": "风上雷下",
+      "source": "《庄子》",
+      "description": "风雷益，鲲鹏变化扶摇九万里，益卦增益进取，鲲鹏象征不断超越",
+      "rationale": "鲲鹏变化扶摇九万里，益卦增益进取，鲲鹏象征不断超越",
+      "moods": {
+        "work": {
+          "interpretation": "风雷益之象，事业当顺其自然，以鲲鹏之德为鉴。",
+          "encouragement": "鲲鹏的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "风雷益，感情需用心经营，如鲲鹏般真诚。",
+          "encouragement": "以鲲鹏之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "风雷益启示，灵感源于内心，鲲鹏为你指引方向。",
+          "encouragement": "鲲鹏带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "风雷益，你拥有鲲鹏般的能量。",
+          "encouragement": "相信自己，鲲鹏与你同在。"
+        }
+      },
+      "category": "鸟类"
+    },
+    {
+      "id": "zhen_dui",
+      "name": "雷泽归妹",
+      "symbol": "文鳐",
+      "nature": "震动与喜悦",
+      "concept": "雷上泽下",
+      "source": "《山海经》",
+      "description": "雷泽归妹，文鳐夜飞似鸟非鸟，归妹女子出嫁，文鳐主变化归属",
+      "rationale": "文鳐夜飞似鸟非鸟，归妹女子出嫁，文鳐主变化归属",
+      "moods": {
+        "work": {
+          "interpretation": "雷泽归妹之象，事业当顺其自然，以文鳐之德为鉴。",
+          "encouragement": "文鳐的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷泽归妹，感情需用心经营，如文鳐般真诚。",
+          "encouragement": "以文鳐之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷泽归妹启示，灵感源于内心，文鳐为你指引方向。",
+          "encouragement": "文鳐带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷泽归妹，你拥有文鳐般的能量。",
+          "encouragement": "相信自己，文鳐与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "zhen_gen",
+      "name": "雷山小过",
+      "symbol": "蛊雕",
+      "nature": "震动与停止",
+      "concept": "雷上山下",
+      "source": "《山海经》",
+      "description": "雷山小过，蛊雕似鸟非鸟能食人，小过小有过失，蛊雕警示勿因小失大",
+      "rationale": "蛊雕似鸟非鸟能食人，小过小有过失，蛊雕警示勿因小失大",
+      "moods": {
+        "work": {
+          "interpretation": "雷山小过之象，事业当顺其自然，以蛊雕之德为鉴。",
+          "encouragement": "蛊雕的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷山小过，感情需用心经营，如蛊雕般真诚。",
+          "encouragement": "以蛊雕之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷山小过启示，灵感源于内心，蛊雕为你指引方向。",
+          "encouragement": "蛊雕带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷山小过，你拥有蛊雕般的能量。",
+          "encouragement": "相信自己，蛊雕与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "zhen_kan",
+      "name": "雷水解",
+      "symbol": "开明兽",
+      "nature": "震动与险陷",
+      "concept": "雷上水下",
+      "source": "《山海经》",
+      "description": "雷水解，开明兽守昆仑洞察一切，解卦险难解除，开明兽主明察解困",
+      "rationale": "开明兽守昆仑洞察一切，解卦险难解除，开明兽主明察解困",
+      "moods": {
+        "work": {
+          "interpretation": "雷水解之象，事业当顺其自然，以开明兽之德为鉴。",
+          "encouragement": "开明兽的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷水解，感情需用心经营，如开明兽般真诚。",
+          "encouragement": "以开明兽之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷水解启示，灵感源于内心，开明兽为你指引方向。",
+          "encouragement": "开明兽带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷水解，你拥有开明兽般的能量。",
+          "encouragement": "相信自己，开明兽与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "zhen_kun",
+      "name": "雷地豫",
+      "symbol": "白泽",
+      "nature": "震动与柔顺",
+      "concept": "雷上地下",
+      "source": "《云笈七签》",
+      "description": "雷地豫，白泽通万物之情，豫卦悦乐预备，白泽主智慧先知",
+      "rationale": "白泽通万物之情，豫卦悦乐预备，白泽主智慧先知",
+      "moods": {
+        "work": {
+          "interpretation": "雷地豫之象，事业当顺其自然，以白泽之德为鉴。",
+          "encouragement": "白泽的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷地豫，感情需用心经营，如白泽般真诚。",
+          "encouragement": "以白泽之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷地豫启示，灵感源于内心，白泽为你指引方向。",
+          "encouragement": "白泽带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷地豫，你拥有白泽般的能量。",
+          "encouragement": "相信自己，白泽与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "zhen_li",
+      "name": "雷火丰",
+      "symbol": "雷电兽",
+      "nature": "震动与光明",
+      "concept": "雷上火下",
+      "source": "《山海经》",
+      "description": "雷火丰，雷电兽声如雷光如火，丰卦盛大光明，雷电兽主雷火",
+      "rationale": "雷电兽声如雷光如火，丰卦盛大光明，雷电兽主雷火",
+      "moods": {
+        "work": {
+          "interpretation": "雷火丰之象，事业当顺其自然，以雷电兽之德为鉴。",
+          "encouragement": "雷电兽的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷火丰，感情需用心经营，如雷电兽般真诚。",
+          "encouragement": "以雷电兽之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷火丰启示，灵感源于内心，雷电兽为你指引方向。",
+          "encouragement": "雷电兽带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷火丰，你拥有雷电兽般的能量。",
+          "encouragement": "相信自己，雷电兽与你同在。"
+        }
+      },
+      "category": "其他"
+    },
+    {
+      "id": "zhen_qian",
+      "name": "雷天大壮",
+      "symbol": "狻猊",
+      "nature": "震动与刚健",
+      "concept": "雷上天下",
+      "source": "龙生九子",
+      "description": "雷天大壮，狻猊喜静好坐形如狮，大壮刚健，狻猊威猛稳重",
+      "rationale": "狻猊喜静好坐形如狮，大壮刚健，狻猊威猛稳重",
+      "moods": {
+        "work": {
+          "interpretation": "雷天大壮之象，事业当顺其自然，以狻猊之德为鉴。",
+          "encouragement": "狻猊的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷天大壮，感情需用心经营，如狻猊般真诚。",
+          "encouragement": "以狻猊之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷天大壮启示，灵感源于内心，狻猊为你指引方向。",
+          "encouragement": "狻猊带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷天大壮，你拥有狻猊般的能量。",
+          "encouragement": "相信自己，狻猊与你同在。"
+        }
+      },
+      "category": "兽类"
+    },
+    {
+      "id": "zhen_xun",
+      "name": "雷风恒",
+      "symbol": "青龙",
+      "nature": "震动与顺从",
+      "concept": "雷上风下",
+      "source": "四象",
+      "description": "雷风恒，青龙东方神兽主生发，恒卦长久，青龙主生生不息",
+      "rationale": "青龙东方神兽主生发，恒卦长久，青龙主生生不息",
+      "moods": {
+        "work": {
+          "interpretation": "雷风恒之象，事业当顺其自然，以青龙之德为鉴。",
+          "encouragement": "青龙的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "雷风恒，感情需用心经营，如青龙般真诚。",
+          "encouragement": "以青龙之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "雷风恒启示，灵感源于内心，青龙为你指引方向。",
+          "encouragement": "青龙带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "雷风恒，你拥有青龙般的能量。",
+          "encouragement": "相信自己，青龙与你同在。"
+        }
+      },
+      "category": "龙类"
+    },
+    {
+      "id": "zhen_zhen",
+      "name": "震为雷",
+      "symbol": "雷神",
+      "nature": "震动与震动",
+      "concept": "雷上雷下",
+      "source": "《山海经》",
+      "description": "震为雷，雷神龙身人面击腹则雷，震为雷为动，雷神为震之本象",
+      "rationale": "雷神龙身人面击腹则雷，震为雷为动，雷神为震之本象",
+      "moods": {
+        "work": {
+          "interpretation": "震为雷之象，事业当顺其自然，以雷神之德为鉴。",
+          "encouragement": "雷神的精神值得学习。"
+        },
+        "emotion": {
+          "interpretation": "震为雷，感情需用心经营，如雷神般真诚。",
+          "encouragement": "以雷神之心对待感情，你会收获美好。"
+        },
+        "inspiration": {
+          "interpretation": "震为雷启示，灵感源于内心，雷神为你指引方向。",
+          "encouragement": "雷神带来的启示，值得细细品味。"
+        },
+        "encouragement": {
+          "interpretation": "震为雷，你拥有雷神般的能量。",
+          "encouragement": "相信自己，雷神与你同在。"
+        }
+      },
+      "category": "其他"
+    }
+  ]
+}
