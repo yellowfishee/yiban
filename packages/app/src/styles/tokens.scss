@@ -15,6 +15,11 @@
   --color-border: rgba(26, 43, 60, 0.1);
   --color-glow: rgba(199, 62, 58, 0.3);
   
+  /* 危险操作颜色 */
+  --color-danger: #ef4444;
+  --color-danger-light: rgba(239, 68, 68, 0.2);
+  --color-danger-muted: rgba(239, 68, 68, 0.6);
+  
   /* 字体 */
   --font-serif: 'STSong', 'SimSun', serif;
   --font-sans: system-ui, -apple-system, sans-serif;
