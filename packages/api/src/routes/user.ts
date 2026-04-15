@@ -65,4 +65,80 @@ router.get('/profile', authMiddleware, async (c) => {
   }
 });
 
+/**
+ * PUT /api/user/profile - 更新用户资料
+ */
+router.put('/profile', authMiddleware, async (c) => {
+  try {
+    const userId = getUserId(c);
+    const body = await c.req.json<{ nickname?: string; avatar?: string }>();
+
+    // 验证参数
+    if (!body.nickname && !body.avatar) {
+      return c.json<ApiErrorResponse>(
+        {
+          error: '至少需要提供 nickname 或 avatar',
+          code: 400,
+        },
+        400
+      );
+    }
+
+    // 构建更新数据
+    const updateData: Record<string, any> = {};
+    if (body.nickname) {
+      if (body.nickname.length < 2 || body.nickname.length > 20) {
+        return c.json<ApiErrorResponse>(
+          {
+            error: '昵称长度需要在 2-20 个字符之间',
+            code: 400,
+          },
+          400
+        );
+      }
+      updateData.nickname = body.nickname;
+    }
+    if (body.avatar) {
+      updateData.avatar = body.avatar;
+    }
+
+    // 更新用户
+    const updated = await db
+      .update(users)
+      .set(updateData)
+      .where(eq(users.id, userId))
+      .returning();
+
+    if (updated.length === 0) {
+      return c.json<ApiErrorResponse>(
+        {
+          error: '用户不存在',
+          code: 404,
+        },
+        404
+      );
+    }
+
+    const user = updated[0];
+
+    return c.json({
+      user: {
+        id: user.id,
+        nickname: user.nickname,
+        avatar: user.avatar,
+        isPremium: user.isPremium,
+      },
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return c.json<ApiErrorResponse>(
+      {
+        error: '更新失败：' + message,
+        code: 500,
+      },
+      500
+    );
+  }
+});
+
 export default router;
