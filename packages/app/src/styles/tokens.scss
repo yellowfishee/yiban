@@ -1,6 +1,8 @@
 /* 易伴·卦象神兽 - 设计 Token */
 
-:root {
+/* H5 使用 :root，小程序使用 page */
+:root,
+page {
   /* 玄青主题 - 默认 */
   --color-primary: #C73E3A;
   --color-primary-light: rgba(199, 62, 58, 0.1);
@@ -43,7 +45,7 @@
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
-/* 黛蓝主题 */
+/* 黛蓝主题 - H5 */
 [data-theme="dailan"] {
   --color-primary: #D4A5A5;
   --color-primary-light: rgba(212, 165, 165, 0.15);
@@ -59,8 +61,39 @@
   --color-glow: rgba(212, 165, 165, 0.4);
 }
 
-/* 墨金主题 */
+/* 墨金主题 - H5 */
 [data-theme="mojin"] {
+  --color-primary: #C9A84C;
+  --color-primary-light: rgba(201, 168, 76, 0.15);
+  --color-primary-dark: #A88A2E;
+  --color-secondary: #8B7355;
+  --color-text: #1C1C1C;
+  --color-text-secondary: rgba(28, 28, 28, 0.6);
+  --color-text-hint: rgba(28, 28, 28, 0.35);
+  --color-bg: #EDE8DC;
+  --color-bg-light: #F5F2EA;
+  --color-bg-card: #FAF8F3;
+  --color-border: rgba(28, 28, 28, 0.1);
+  --color-glow: rgba(201, 168, 76, 0.4);
+}
+
+/* 小程序主题切换 - 使用 .app 容器 */
+.app[data-theme="dailan"] {
+  --color-primary: #D4A5A5;
+  --color-primary-light: rgba(212, 165, 165, 0.15);
+  --color-primary-dark: #B88A8A;
+  --color-secondary: #7BA3B8;
+  --color-text: #3D5A73;
+  --color-text-secondary: rgba(61, 90, 115, 0.6);
+  --color-text-hint: rgba(61, 90, 115, 0.35);
+  --color-bg: #FAF8F5;
+  --color-bg-light: #FDFCFA;
+  --color-bg-card: #FFFFFF;
+  --color-border: rgba(61, 90, 115, 0.1);
+  --color-glow: rgba(212, 165, 165, 0.4);
+}
+
+.app[data-theme="mojin"] {
   --color-primary: #C9A84C;
   --color-primary-light: rgba(201, 168, 76, 0.15);
   --color-primary-dark: #A88A2E;
