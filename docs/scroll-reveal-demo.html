@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神兽签到动画 - 极简版</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* 背景星空 */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: #fff;
+      opacity: 0.3;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    /* 主容器 */
+    .scene {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 核心光圈 */
+    .core-glow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
+      opacity: 0;
+    }
+
+    .core-glow.active {
+      animation: glowPulse 1.8s ease-out forwards;
+    }
+
+    @keyframes glowPulse {
+      0% { width: 0; height: 0; opacity: 0; }
+      40% { width: 280px; height: 280px; opacity: 1; }
+      100% { width: 320px; height: 320px; opacity: 0.6; }
+    }
+
+    /* 神兽容器 */
+    .beast-orb {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .beast-orb.visible {
+      animation: orbAppear 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .beast-orb.breathing {
+      animation: breathe 2.5s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.05) translateY(-4px); }
+    }
+
+    @keyframes orbAppear {
+      0% { opacity: 0; transform: scale(0); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* 神兽切换 - 内圈 */
+    .beast-switch {
+      font-size: 48px;
+      color: rgba(218, 165, 32, 0.9);
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+      transform-origin: center;
+    }
+
+    .beast-switch.switching {
+      animation: quickSwitch 0.08s ease-out;
+    }
+
+    @keyframes quickSwitch {
+      0% { transform: scale(0.7); opacity: 0.3; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 最终神兽名称 */
+    .beast-final {
+      position: absolute;
+      top: 50%;
+      margin-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(10px);
+      z-index: 20;
+    }
+
+    .beast-final.visible {
+      animation: nameFadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes nameFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .beast-name {
+      font-family: 'STSong', 'SimSun', serif;
+      font-size: 32px;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      letter-spacing: 4px;
+    }
+
+    .beast-sub {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 8px;
+      letter-spacing: 8px;
+    }
+
+    /* 环绕粒子 */
+    .orbit-particles {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+    }
+
+    .orbit-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(218, 165, 32, 0.8);
+      border-radius: 50%;
+      animation: orbit 3s linear infinite;
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+    }
+
+    /* 建议区域 */
+    .advice-area {
+      position: fixed;
+      bottom: 80px;
+      width: 90%;
+      max-width: 340px;
+      opacity: 0;
+      transform: translateY(20px);
+      z-index: 30;
+    }
+
+    .advice-area.visible {
+      animation: slideUp 0.4s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .advice-toggle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 12px;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .advice-content {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .advice-area.expanded .advice-content {
+      max-height: 140px;
+    }
+
+    .advice-item {
+      margin-bottom: 10px;
+    }
+
+    .advice-item:last-child { margin-bottom: 0; }
+
+    .advice-label {
+      font-size: 10px;
+      color: rgba(218, 165, 32, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .advice-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* 按钮 */
+    .btn-start {
+      position: fixed;
+      bottom: 36px;
+      padding: 14px 40px;
+      background: linear-gradient(135deg, #B8860B 0%, #8B6914 100%);
+      border: none;
+      border-radius: 24px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(184, 134, 11, 0.3);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(184, 134, 11, 0.4);
+    }
+
+    .btn-start.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+    }
+
+    .btn-reset {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 11px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 100;
+    }
+
+    .btn-reset.visible { opacity: 1; }
+
+    /* 页面标题 */
+    .page-title {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'STSong', 'SimSun', serif;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 6px;
+    }
+
+    /* 进度条 */
+    .progress-ring {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(218, 165, 32, 0.1);
+      opacity: 0;
+    }
+
+    .progress-ring.active {
+      animation: ringExpand 0.6s ease-out forwards;
+    }
+
+    @keyframes ringExpand {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="page-title">易伴</div>
+
+  <button class="btn-reset" id="btnReset" onclick="reset()">重新演示</button>
+
+  <div class="scene" id="scene">
+    <div class="core-glow" id="coreGlow"></div>
+
+    <div class="beast-orb" id="beastOrb">
+      <div class="beast-switch" id="beastSwitch"></div>
+    </div>
+
+    <div class="progress-ring" id="progressRing"></div>
+
+    <div class="beast-final" id="beastFinal">
+      <div class="beast-name">乾为天</div>
+      <div class="beast-sub">应龙 · 乾为天</div>
+    </div>
+
+    <div class="orbit-particles" id="orbitParticles"></div>
+  </div>
+
+  <div class="advice-area" id="adviceArea">
+    <div class="advice-toggle" onclick="toggleAdvice()">▼ 展开今日指引</div>
+    <div class="advice-content">
+      <div class="advice-item">
+        <div class="advice-label">处事建议</div>
+        <div class="advice-text">保持谦逊专注，今日宜静心思考，以柔克刚。</div>
+      </div>
+      <div class="advice-item">
+        <div class="advice-label">情绪陪同</div>
+        <div class="advice-text">情绪平稳，适合独处冥想，若感焦虑可深呼吸。</div>
+      </div>
+      <div class="advice-item">
+        <div class="advice-label">工作发展</div>
+        <div class="advice-text">事业运势平稳，宜稳扎稳打，处理细节为佳。</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-start" id="btnStart" onclick="start()">梅花起卦 · 打卡领养</button>
+
+  <script>
+    const BEASTS = ['龙','虎','雀','龟','凤','麟','蛇','鹤','鹿','鲤','狐','鹏','蛟','鸾','应'];
+    const TARGET = { symbol: '应龙', name: '乾为天' };
+
+    let coreGlow, beastOrb, beastSwitch, progressRing, beastFinal;
+    let adviceArea, btnStart, btnReset, orbitParticles;
+    let timer = null;
+
+    function init() {
+      coreGlow = document.getElementById('coreGlow');
+      beastOrb = document.getElementById('beastOrb');
+      beastSwitch = document.getElementById('beastSwitch');
+      progressRing = document.getElementById('progressRing');
+      beastFinal = document.getElementById('beastFinal');
+      adviceArea = document.getElementById('adviceArea');
+      btnStart = document.getElementById('btnStart');
+      btnReset = document.getElementById('btnReset');
+      orbitParticles = document.getElementById('orbitParticles');
+
+      createStars();
+      createOrbitParticles();
+    }
+
+    function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 40; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(star);
+      }
+    }
+
+    function createOrbitParticles() {
+      for (let i = 0; i < 3; i++) {
+        const p = document.createElement('div');
+        p.className = 'orbit-particle';
+        p.style.animationDelay = i * 1 + 's';
+        p.style.opacity = 0.6 - i * 0.15;
+        orbitParticles.appendChild(p);
+      }
+    }
+
+    function start() {
+      reset();
+      setTimeout(() => {
+        btnStart.classList.add('hidden');
+
+        // 阶段1: 光晕出现
+        coreGlow.classList.add('active');
+
+        // 阶段2: 神兽球出现
+        setTimeout(() => {
+          beastOrb.classList.add('visible');
+          progressRing.classList.add('active');
+
+          // 阶段3: 神兽切换
+          setTimeout(() => {
+            switchBeasts();
+          }, 400);
+
+        }, 600);
+
+      }, 50);
+    }
+
+    function switchBeasts() {
+      // 构建切换序列，最后一个是目标神兽
+      const sequence = [...BEASTS.slice(0, -1), TARGET.symbol];
+
+      let idx = 0;
+      let speed = 100;
+
+      function doSwitch() {
+        beastSwitch.textContent = sequence[idx];
+        beastSwitch.classList.remove('switching');
+        void beastSwitch.offsetWidth; // 触发重绘
+        beastSwitch.classList.add('switching');
+
+        idx++;
+        // 最后4次逐渐减速
+        if (idx > sequence.length - 4) speed += 30;
+
+        if (idx < sequence.length) {
+          timer = setTimeout(doSwitch, speed);
+        } else {
+          // 切换完成，显示名称
+          setTimeout(showFinal, 200);
+        }
+      }
+
+      doSwitch();
+    }
+
+    function showFinal() {
+      // 神兽已经是目标神兽，只需放大
+      beastSwitch.style.fontSize = '64px';
+      beastSwitch.style.transition = 'font-size 0.4s ease-out';
+
+      // 添加呼吸动画
+      beastOrb.classList.add('breathing');
+
+      // 显示名称
+      setTimeout(() => {
+        beastFinal.classList.add('visible');
+
+        // 显示建议
+        setTimeout(() => {
+          adviceArea.classList.add('visible');
+          btnReset.classList.add('visible');
+        }, 400);
+      }, 400);
+    }
+
+    function reset() {
+      if (timer) { clearTimeout(timer); timer = null; }
+
+      coreGlow.classList.remove('active');
+      beastOrb.classList.remove('visible', 'breathing');
+      beastOrb.style.opacity = '';
+      beastSwitch.textContent = '';
+      beastSwitch.style.fontSize = '';
+      beastSwitch.style.transition = '';
+      beastSwitch.classList.remove('switching');
+      progressRing.classList.remove('active');
+      beastFinal.classList.remove('visible');
+      adviceArea.classList.remove('visible', 'expanded');
+      btnStart.classList.remove('hidden');
+      btnReset.classList.remove('visible');
+    }
+
+    function toggleAdvice() {
+      adviceArea.classList.toggle('expanded');
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

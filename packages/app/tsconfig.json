@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "target": "ES2017",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@yiban/core": ["../core/src"],
+      "@yiban/core/*": ["../core/src/*"]
+    },
+    "types": ["node"]
+  },
+  "include": ["src/**/*", "../core/src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

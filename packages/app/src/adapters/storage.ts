@@ -61,6 +61,8 @@ export const STORAGE_KEYS = {
   USER_ID: 'yiban_user_id',
   // 用户协议
   AGREEMENT_ACCEPTED: 'yiban_agreement_accepted',
+  // 字体大小
+  FONT_SIZE: 'yiban_font_size',
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

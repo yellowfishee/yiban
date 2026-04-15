@@ -5,10 +5,12 @@ import { post, get } from './client';
 import type { AgentScene } from '@yiban/core';
 
 export interface GenerateResponse {
-  content: string;
-  cached: boolean;
-  beastName: string;
+  content?: string;
+  cached?: boolean;
+  beastName?: string;
   scene: AgentScene;
+  requiresAd?: boolean;
+  message?: string;
 }
 
 export interface AgentContent {
@@ -30,7 +32,7 @@ export const agentApi = {
    * @param scene - 场景类型
    */
   generate: (checkinId: string, scene: AgentScene) =>
-    post<GenerateResponse>('/api/agent/generate', { checkinId, scene }, true),
+    post<GenerateResponse>('/api/agent/generate', { checkinId, scene }, true, 30000),
 
   /**
    * 获取指定打卡的所有 AI 内容
