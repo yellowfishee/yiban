@@ -211,10 +211,17 @@ export default function HomePage() {
       {/* 内容区 */}
       <View className="home-page__content">
         {(generatingScene === activeScene && !currentSceneContent) ? (
-          <View className="home-page__skeleton">
-            <View className="home-page__skeleton-line" style={{ width: '80%' }} />
-            <View className="home-page__skeleton-line" style={{ width: '60%' }} />
-            <View className="home-page__skeleton-line" style={{ width: '70%' }} />
+          <View className="home-page__loading">
+            <View className="home-page__loading-beast">
+              <Text className="home-page__loading-symbol">{currentHexagram?.symbol || '☯'}</Text>
+              <View className="home-page__loading-ring" />
+            </View>
+            <Text className="home-page__loading-text">神兽正在为你解读卦象...</Text>
+            <View className="home-page__loading-dots">
+              <View className="home-page__loading-dot" />
+              <View className="home-page__loading-dot" />
+              <View className="home-page__loading-dot" />
+            </View>
           </View>
         ) : currentSceneContent ? (
           <View className="home-page__scene">
