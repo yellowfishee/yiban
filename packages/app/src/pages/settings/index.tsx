@@ -124,7 +124,7 @@ export default function SettingsPage() {
       ) : isLoggedIn && user && (
         <View className="settings-page__card">
           <View className="settings-page__user" onClick={handleEditProfile}>
-            {user.avatar && user.avatar.startsWith('data:') ? (
+            {user.avatar ? (
               <Image className="settings-page__user-avatar-img" src={user.avatar} mode="aspectFill" />
             ) : (
               <View className="settings-page__user-avatar" style={{ background: currentTheme.colors.primary }}>
