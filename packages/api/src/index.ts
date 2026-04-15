@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
+import { serveStatic } from '@hono/node-server/serve-static';
 import { cors } from 'hono/cors';
 import { checkJwtConfig } from './middleware/auth';
 import { checkWechatConfig } from './services/wechat';
@@ -9,7 +10,7 @@ import checkinRoutes from './routes/checkin';
 import collectionRoutes from './routes/collection';
 import hexagramRoutes from './routes/hexagram';
 import userRoutes from './routes/user';
-
+import uploadRoutes from './routes/upload';
 import agentRoutes from './routes/agent';
 
 const app = new Hono();
@@ -36,13 +37,17 @@ app.get('/health', (c) => {
   return c.json({ status: 'ok' });
 });
 
+// Static files for uploaded avatars
+app.use('/uploads/*', serveStatic({ root: './' }));
+
 // API routes
 app.route('/api/auth', authRoutes);
 app.route('/api/checkin', checkinRoutes);
 app.route('/api/collection', collectionRoutes);
 app.route('/api/hexagram', hexagramRoutes);
-app.route('/api/hexagrams', hexagramRoutes);  // 复用同一路由
+app.route('/api/hexagrams', hexagramRoutes);
 app.route('/api/user', userRoutes);
+app.route('/api/upload', uploadRoutes);
 app.route('/api/agent', agentRoutes);
 
 const port = parseInt(process.env.PORT || '3000');

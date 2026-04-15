@@ -2,9 +2,17 @@ import { View, Text, Image, Input, Button } from '@tarojs/components';
 import { useState, useEffect } from 'react';
 import Taro from '@tarojs/taro';
 import { useAuth } from '../../context/AuthContext';
+import { uploadApi } from '../../api/upload';
 import './index.scss';
 
 const DEFAULT_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNGNUYwRUI4Ii8+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMjAiIGZpbGw9IiNENUE1QTYiLz48cGF0aCBkPSJNNTAsMzBjMTYuNTc3LDkuMjY3LDI2LjQ2NywyMCwyNi40NjcsNDBzLTkuODksMzAuNzMzLTI2LjQ2NywzMEMzMy40MjMsNjkuNzMzLDIzLjUzMyw2MCw1MCw2MHMxNi41NzctOS4yNjcsMjYuNDY3LTIwLTI2LjQ2Ny0zMHptMCwzMGMyNS41NzMsMTUuMjY3LDQxLjQ2NywyNS41NzMsNDEuNDY3LDQwcy0xNS44OSwyNC43MzMtNDEuNDY3LDQwYy0yNS41NzMtMTUuMjY3LTQxLjQ2Ny0yNS41NzMtNDEuNDY3LTQwUzI0LjQyNyw2NC43MzMsNTAsNzBzMjUuNTczLTE1LjI2NywyNi40NjctNDBTMzMuNDIzLDQ1LjI2Nyw1MCw1MHoiIGZpbGw9InVybCgjY29sb3IxKSIvPjx1cmwgaWQ9ImNvbG9yMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0Q1QTVBNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0U2NjY2NiIvPjwvdXJsPjwvc3ZnPg==';
+
+function getFullAvatarUrl(avatar: string): string {
+  if (!avatar) return DEFAULT_AVATAR;
+  if (avatar.startsWith('http') || avatar.startsWith('data:') || avatar.startsWith('wxfile:')) return avatar;
+  const baseUrl = typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : 'http://localhost:3000';
+  return baseUrl + avatar;
+}
 
 export default function AuthorizePage() {
   const { loginWithWeapp, updateProfile, isLoggedIn, hasProfile } = useAuth();
@@ -36,8 +44,19 @@ export default function AuthorizePage() {
         await loginWithWeapp();
       }
       
-      const finalNickname = nickname.trim() || `易友${Math.floor(Math.random() * 10000)}`;
-      const finalAvatar = avatar;
+      const finalNickname = nickname.trim() || '易友' + Math.floor(Math.random() * 10000);
+      let finalAvatar = avatar;
+      
+      // 如果是临时文件，需要先上传
+      if (avatar.startsWith('http://tmp') || avatar.startsWith('wxfile://')) {
+        try {
+          const uploadResult = await uploadApi.avatar(avatar);
+          finalAvatar = uploadResult.url;
+        } catch (e) {
+          console.warn('Avatar upload failed, using default:', e);
+          finalAvatar = DEFAULT_AVATAR;
+        }
+      }
       
       await updateProfile(finalNickname, finalAvatar);
       
@@ -57,7 +76,7 @@ export default function AuthorizePage() {
         await loginWithWeapp();
       }
       
-      const randomNickname = `易友${Math.floor(Math.random() * 10000)}`;
+      const randomNickname = '易友' + Math.floor(Math.random() * 10000);
       await updateProfile(randomNickname, DEFAULT_AVATAR);
       
       Taro.switchTab({ url: '/pages/home/index' });
@@ -81,7 +100,7 @@ export default function AuthorizePage() {
           openType="chooseAvatar"
           onChooseAvatar={handleChooseAvatar}
         >
-          <Image className="authorize-page__avatar" src={avatar} mode="aspectFill" />
+          <Image className="authorize-page__avatar" src={getFullAvatarUrl(avatar)} mode="aspectFill" />
           <Text className="authorize-page__avatar-hint">点击选择头像</Text>
         </Button>
 

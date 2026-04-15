@@ -7,6 +7,7 @@ import type { ThemeMode } from '../../context/SettingsContext';
 import Skeleton from '../../components/skeleton/Skeleton';
 import AnimatedModal from '../../components/modal/AnimatedModal';
 import { haptic } from '../../utils/haptic';
+import { uploadApi } from '../../api/upload';
 import './index.scss';
 
 const THEMES: { id: ThemeMode; name: string; colors: { primary: string; text: string; bg: string } }[] = [
@@ -20,6 +21,13 @@ const FONT_SIZES = [
   { id: 'medium', name: '中', scale: 1 },
   { id: 'large', name: '大', scale: 1.1 },
 ];
+
+function getFullAvatarUrl(avatar: string | undefined): string {
+  if (!avatar) return '';
+  if (avatar.startsWith('http') || avatar.startsWith('data:')) return avatar;
+  const baseUrl = typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : 'http://localhost:3000';
+  return baseUrl + avatar;
+}
 
 export default function SettingsPage() {
   const { theme, simplified, fontSize, setTheme, toggleSimplified, setFontSize } = useSettings();
@@ -62,8 +70,23 @@ export default function SettingsPage() {
   const handleSaveProfile = async () => {
     try {
       setSaving(true);
-      const finalNickname = editNickname.trim() || `易友${Math.floor(Math.random() * 10000)}`;
-      await updateProfile(finalNickname, editAvatar);
+      const finalNickname = editNickname.trim() || '易友' + Math.floor(Math.random() * 10000);
+      let finalAvatar = editAvatar;
+      
+      // 如果是临时文件，需要先上传
+      if (editAvatar.startsWith('http://tmp') || editAvatar.startsWith('wxfile://')) {
+        try {
+          const uploadResult = await uploadApi.avatar(editAvatar);
+          finalAvatar = uploadResult.url;
+        } catch (e) {
+          console.warn('Avatar upload failed:', e);
+          Taro.showToast({ title: '头像上传失败', icon: 'none' });
+          setSaving(false);
+          return;
+        }
+      }
+      
+      await updateProfile(finalNickname, finalAvatar);
       setEditModalOpen(false);
       Taro.showToast({ title: '保存成功', icon: 'success' });
     } catch (error) {
@@ -125,7 +148,7 @@ export default function SettingsPage() {
         <View className="settings-page__card">
           <View className="settings-page__user" onClick={handleEditProfile}>
             {user.avatar ? (
-              <Image className="settings-page__user-avatar-img" src={user.avatar} mode="aspectFill" />
+              <Image className="settings-page__user-avatar-img" src={getFullAvatarUrl(user.avatar)} mode="aspectFill" />
             ) : (
               <View className="settings-page__user-avatar" style={{ background: currentTheme.colors.primary }}>
                 <Text className="settings-page__user-avatar-text">{user.nickname?.charAt(0) || '易'}</Text>
@@ -277,7 +300,7 @@ export default function SettingsPage() {
             openType="chooseAvatar"
             onChooseAvatar={handleChooseAvatar}
           >
-            <Image className="settings-page__edit-avatar" src={editAvatar} mode="aspectFill" />
+            <Image className="settings-page__edit-avatar" src={getFullAvatarUrl(editAvatar)} mode="aspectFill" />
             <Text className="settings-page__edit-avatar-hint">点击更换头像</Text>
           </Button>
 
