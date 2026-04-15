@@ -1,9 +1,11 @@
-import { View, Text } from '@tarojs/components';
+import { View, Text, Image, Button, Input } from '@tarojs/components';
+import { useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useSettings } from '../../context/SettingsContext';
 import { useAuth } from '../../context/AuthContext';
 import type { ThemeMode } from '../../context/SettingsContext';
 import Skeleton from '../../components/skeleton/Skeleton';
+import AnimatedModal from '../../components/modal/AnimatedModal';
 import { haptic } from '../../utils/haptic';
 import './index.scss';
 
@@ -21,7 +23,11 @@ const FONT_SIZES = [
 
 export default function SettingsPage() {
   const { theme, simplified, fontSize, setTheme, toggleSimplified, setFontSize } = useSettings();
-  const { isLoggedIn, user, logout, isLoading } = useAuth();
+  const { isLoggedIn, user, logout, isLoading, updateProfile } = useAuth();
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editAvatar, setEditAvatar] = useState('');
+  const [editNickname, setEditNickname] = useState('');
+  const [saving, setSaving] = useState(false);
 
   const handleLogout = () => {
     haptic.heavy();
@@ -35,6 +41,36 @@ export default function SettingsPage() {
         }
       },
     });
+  };
+
+  const handleEditProfile = () => {
+    if (!user) return;
+    setEditAvatar(user.avatar || '');
+    setEditNickname(user.nickname || '');
+    setEditModalOpen(true);
+  };
+
+  const handleChooseAvatar = (e: any) => {
+    const { avatarUrl } = e.detail;
+    setEditAvatar(avatarUrl);
+  };
+
+  const handleNicknameInput = (e: any) => {
+    setEditNickname(e.detail.value);
+  };
+
+  const handleSaveProfile = async () => {
+    try {
+      setSaving(true);
+      const finalNickname = editNickname.trim() || `易友${Math.floor(Math.random() * 10000)}`;
+      await updateProfile(finalNickname, editAvatar);
+      setEditModalOpen(false);
+      Taro.showToast({ title: '保存成功', icon: 'success' });
+    } catch (error) {
+      Taro.showToast({ title: '保存失败', icon: 'error' });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleClearCache = () => {
@@ -87,14 +123,19 @@ export default function SettingsPage() {
         </View>
       ) : isLoggedIn && user && (
         <View className="settings-page__card">
-          <View className="settings-page__user">
-            <View className="settings-page__user-avatar" style={{ background: currentTheme.colors.primary }}>
-              <Text className="settings-page__user-avatar-text">{user.nickname?.charAt(0) || '易'}</Text>
-            </View>
+          <View className="settings-page__user" onClick={handleEditProfile}>
+            {user.avatar && user.avatar.startsWith('data:') ? (
+              <Image className="settings-page__user-avatar-img" src={user.avatar} mode="aspectFill" />
+            ) : (
+              <View className="settings-page__user-avatar" style={{ background: currentTheme.colors.primary }}>
+                <Text className="settings-page__user-avatar-text">{user.nickname?.charAt(0) || '易'}</Text>
+              </View>
+            )}
             <View className="settings-page__user-info">
               <Text className="settings-page__user-name">{user.nickname || '易伴用户'}</Text>
               <Text className="settings-page__user-id">ID: {user.id.slice(0, 8)}</Text>
             </View>
+            <Text className="settings-page__user-edit">编辑</Text>
           </View>
         </View>
       )}
@@ -225,6 +266,46 @@ export default function SettingsPage() {
         </Text>
         <Text className="settings-page__version">v1.0.0</Text>
       </View>
+
+      {/* 编辑资料弹窗 */}
+      <AnimatedModal visible={editModalOpen} onClose={() => setEditModalOpen(false)}>
+        <View className="settings-page__edit-modal">
+          <Text className="settings-page__edit-title">编辑资料</Text>
+          
+          <Button
+            className="settings-page__edit-avatar-btn"
+            openType="chooseAvatar"
+            onChooseAvatar={handleChooseAvatar}
+          >
+            <Image className="settings-page__edit-avatar" src={editAvatar} mode="aspectFill" />
+            <Text className="settings-page__edit-avatar-hint">点击更换头像</Text>
+          </Button>
+
+          <Input
+            className="settings-page__edit-input"
+            type="nickname"
+            placeholder="请输入昵称"
+            value={editNickname}
+            onInput={handleNicknameInput}
+            maxlength={20}
+          />
+
+          <View className="settings-page__edit-actions">
+            <View
+              className="settings-page__edit-btn settings-page__edit-btn--cancel"
+              onClick={() => setEditModalOpen(false)}
+            >
+              <Text className="settings-page__edit-btn-text">取消</Text>
+            </View>
+            <View
+              className={`settings-page__edit-btn settings-page__edit-btn--save ${saving ? 'settings-page__edit-btn--disabled' : ''}`}
+              onClick={saving ? undefined : handleSaveProfile}
+            >
+              <Text className="settings-page__edit-btn-text">保存</Text>
+            </View>
+          </View>
+        </View>
+      </AnimatedModal>
     </View>
   );
 }
