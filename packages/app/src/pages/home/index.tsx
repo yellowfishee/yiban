@@ -46,7 +46,7 @@ export default function HomePage() {
     generateAgentContent,
   } = useInspiration();
   const { reload } = useCollection();
-  const { isLoggedIn, isLoading: authLoading, loginWithWeapp } = useAuth();
+  const { isLoggedIn, isLoading: authLoading, loginWithWeapp, hasProfile } = useAuth();
   const [showDrawLot, setShowDrawLot] = useState(false);
   const [activeScene, setActiveScene] = useState<AgentScene>('suitable_for');
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
@@ -58,6 +58,12 @@ export default function HomePage() {
   useEffect(() => {
     loadToday();
   }, [loadToday]);
+
+  useEffect(() => {
+    if (!authLoading && (!isLoggedIn || !hasProfile)) {
+      Taro.redirectTo({ url: '/pages/authorize/index' });
+    }
+  }, [authLoading, isLoggedIn, hasProfile]);
 
   useEffect(() => {
     if (process.env.TARO_ENV === 'weapp') {
