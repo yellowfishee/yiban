@@ -70,7 +70,7 @@
   padding: 0 32px;
   font-size: 32px;
   color: var(--color-text);
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   box-sizing: border-box;
 
   &::placeholder {
@@ -80,6 +80,12 @@
   &:focus {
     border-color: var(--color-primary);
   }
+}
+
+.authorize-page__agreement {
+  width: 100%;
+  margin-bottom: 32px;
+  padding: 0 16px;
 }
 
 .authorize-page__actions {
