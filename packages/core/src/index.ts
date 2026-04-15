@@ -33,7 +33,9 @@ export { GUA_NAMES as GUA_NAMES_ARRAY } from './constants/gua';
 
 // 数据
 import hexagramsData from './data/hexagrams.json';
-export const hexagrams = hexagramsData.hexagrams;
+import type { RawHexagram } from './types/hexagram';
+const typedHexagrams = hexagramsData.hexagrams as RawHexagram[];
+export const hexagrams = typedHexagrams;
 
 // AI Agent 提示词 - 显式导出以确保兼容性
 export {
@@ -45,7 +47,6 @@ export {
 } from './prompts';
 
 // 卦象查询工具
-import type { RawHexagram } from './types/hexagram';
 export function getHexagramById(id: string): RawHexagram | undefined {
-  return hexagrams.find((h) => h.id === id);
+  return typedHexagrams.find((h) => h.id === id);
 }
