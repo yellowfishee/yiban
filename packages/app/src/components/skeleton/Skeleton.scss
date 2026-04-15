@@ -1,0 +1,24 @@
+.skeleton {
+  background: linear-gradient(90deg, 
+    var(--color-bg-light) 25%, 
+    var(--color-bg-card) 50%, 
+    var(--color-bg-light) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+
+  &--circle {
+    border-radius: 50%;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

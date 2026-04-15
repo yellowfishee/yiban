@@ -1,0 +1,49 @@
+.animated-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+
+  &__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s ease;
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding: var(--spacing-lg);
+    max-height: 70vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  &--visible {
+    .animated-modal__mask {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .animated-modal__content {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-modal__mask,
+  .animated-modal__content {
+    transition: none;
+  }
+}
