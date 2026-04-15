@@ -128,7 +128,7 @@ export default function AuthorizePage() {
           <Image className="authorize-page__avatar" src={getFullAvatarUrl(avatar)} mode="aspectFill" />
           <Text className="authorize-page__avatar-hint">点击选择头像</Text>
         </Button>
- 
+
         <Input
           className="authorize-page__input"
           type="nickname"
@@ -137,10 +137,6 @@ export default function AuthorizePage() {
           onInput={handleNicknameInput}
           maxlength={20}
         />
-      </View>
-
-      <View className="authorize-page__agreement">
-        <AgreementCheckbox checked={agreementChecked} onChange={setAgreementChecked} />
       </View>
 
       <View className="authorize-page__actions">
@@ -158,6 +154,10 @@ export default function AuthorizePage() {
         >
           跳过
         </Button>
+      </View>
+
+      <View className="authorize-page__agreement">
+        <AgreementCheckbox checked={agreementChecked} onChange={setAgreementChecked} />
       </View>
     </View>
   );
