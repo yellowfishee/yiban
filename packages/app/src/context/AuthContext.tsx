@@ -274,7 +274,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const updateProfile = useCallback(async (nickname?: string, avatar?: string) => {
-    if (!isLoggedIn) return;
+    const token = storage.get<string>(STORAGE_KEYS.AUTH_TOKEN);
+    if (!token) {
+      throw new Error('未登录，请先登录');
+    }
     
     try {
       const response = await userApi.updateProfile({ nickname, avatar });
@@ -290,7 +293,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error('Update profile failed:', error);
       throw error;
     }
-  }, [isLoggedIn]);
+  }, []);
 
   const value: AuthContextValue = {
     isLoggedIn,
