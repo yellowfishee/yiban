@@ -433,6 +433,25 @@ API 已返回 `adoptedAt` 字段，无需修改后端。
 
 ## 八、实现计划
 
+### 阶段 0：前置修复（Settings 页面 CSS）
+
+settings/index.scss 存在硬编码颜色，需迁移到 CSS 变量：
+
+```scss
+// tokens.scss 新增
+:root {
+  --color-danger: #ef4444;
+  --color-danger-light: rgba(239, 68, 68, 0.2);
+  --color-danger-muted: rgba(239, 68, 68, 0.6);
+}
+```
+
+需要替换的位置：
+- 第 25 行: `rgba(239, 68, 68, 0.2)` → `var(--color-danger-light)`
+- 第 115 行: `#ef4444` → `var(--color-danger)`
+- 第 126 行: `rgba(239, 68, 68, 0.6)` → `var(--color-danger-muted)`
+- 第 147 行: `#ef4444` → `var(--color-danger)`
+
 ### 阶段 1：数据扩展
 
 1. 为 `hexagrams.json` 添加 `category` 字段
