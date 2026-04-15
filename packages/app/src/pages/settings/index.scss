@@ -263,3 +263,13 @@
     margin-top: var(--spacing-md);
   }
 }
+
+// === 响应式：大屏/平板 ===
+
+@media (min-width: 768px) {
+  .settings-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 48px;
+  }
+}

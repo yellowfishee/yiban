@@ -152,3 +152,27 @@
     line-height: 1.6;
   }
 }
+
+// === 响应式：大屏/平板 ===
+
+@media (min-width: 768px) {
+  .collection-page {
+    max-width: 800px;
+    margin: 0 auto;
+
+    &__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-md);
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .collection-page {
+    max-width: 1000px;
+
+    &__grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}

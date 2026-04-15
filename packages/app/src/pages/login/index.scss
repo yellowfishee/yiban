@@ -182,3 +182,13 @@
   padding: 0 20px;
   margin-bottom: 16px;
 }
+
+// === 响应式：大屏/平板 ===
+
+@media (min-width: 768px) {
+  .login-page {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 15vh;
+  }
+}
