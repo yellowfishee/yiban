@@ -39,6 +39,16 @@
     color: var(--color-text-hint);
   }
 
+  &__skeleton-item {
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  &__skeleton {
+    border-radius: var(--radius-md);
+  }
+
   &__empty {
     display: flex;
     flex-direction: column;
@@ -64,34 +74,9 @@
     color: var(--color-text-hint);
   }
 
-  &__modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  &__modal-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
   &__modal-content {
     position: relative;
     width: 100%;
-    background: var(--color-bg-card);
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    padding: var(--spacing-lg);
-    max-height: 70vh;
-    overflow-y: auto;
   }
 
   &__modal-header {

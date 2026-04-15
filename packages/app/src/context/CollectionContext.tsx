@@ -14,6 +14,7 @@ interface CollectionContextValue {
   isLoading: boolean;
   error: string | null;
   reload: () => Promise<void>;
+  remove: (hexagramId: string) => Promise<void>;
 }
 
 const CollectionContext = createContext<CollectionContextValue | null>(null);
@@ -68,6 +69,17 @@ export function CollectionProvider({ children }: { children: ReactNode }) {
     await loadCollection();
   }, [loadCollection]);
 
+  const remove = useCallback(async (hexagramId: string) => {
+    await collectionApi.remove(hexagramId);
+    setAdoptedIds((prev) => prev.filter((id) => id !== hexagramId));
+    setAdoptedHexagrams((prev) => prev.filter((h) => h.id !== hexagramId));
+    setAdoptedAtMap((prev) => {
+      const next = { ...prev };
+      delete next[hexagramId];
+      return next;
+    });
+  }, []);
+
   const value: CollectionContextValue = {
     adoptedIds,
     adoptedHexagrams,
@@ -75,6 +87,7 @@ export function CollectionProvider({ children }: { children: ReactNode }) {
     isLoading,
     error,
     reload,
+    remove,
   };
 
   return <CollectionContext.Provider value={value}>{children}</CollectionContext.Provider>;

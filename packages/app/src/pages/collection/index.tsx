@@ -1,8 +1,13 @@
 import { View, Text } from '@tarojs/components';
 import { useState, useMemo } from 'react';
+import Taro from '@tarojs/taro';
 import { useCollection } from '../../context/CollectionContext';
 import HexagramGridItem from '../../components/hexagram/HexagramGridItem';
 import HexagramSymbol from '../../components/hexagram/HexagramSymbol';
+import Skeleton from '../../components/skeleton/Skeleton';
+import AnimatedModal from '../../components/modal/AnimatedModal';
+import SwipeableItem from '../../components/swipeable/SwipeableItem';
+import { haptic } from '../../utils/haptic';
 import SearchBar from './components/SearchBar';
 import CategoryTabs from './components/CategoryTabs';
 import FilterBar from './components/FilterBar';
@@ -10,7 +15,7 @@ import type { RawHexagram, BeastCategory } from '@yiban/core';
 import './index.scss';
 
 export default function CollectionPage() {
-  const { adoptedHexagrams, adoptedAtMap } = useCollection();
+  const { adoptedHexagrams, adoptedAtMap, isLoading, remove } = useCollection();
   const [selected, setSelected] = useState<RawHexagram | null>(null);
   const [searchText, setSearchText] = useState('');
   const [activeCategory, setActiveCategory] = useState<BeastCategory | 'all'>('all');
@@ -59,6 +64,66 @@ export default function CollectionPage() {
       });
   }, [adoptedHexagrams, adoptedAtMap, searchText, activeCategory, selectedSource, sortBy]);
 
+  const handleCategoryChange = (category: BeastCategory | 'all') => {
+    haptic.light();
+    setActiveCategory(category);
+  };
+
+  const handleSourceChange = (source: string) => {
+    haptic.light();
+    setSelectedSource(source);
+  };
+
+  const handleSortChange = (sort: 'newest' | 'oldest' | 'name') => {
+    haptic.light();
+    setSortBy(sort);
+  };
+
+  const handleOpenModal = (hex: RawHexagram) => {
+    haptic.light();
+    setSelected(hex);
+  };
+
+  const handleCloseModal = () => {
+    haptic.light();
+    setSelected(null);
+  };
+
+  const handleLongPress = (hex: RawHexagram) => {
+    haptic.medium();
+    Taro.showActionSheet({
+      itemList: ['分享', '移除'],
+      success: (res) => {
+        if (res.tapIndex === 0) {
+          Taro.showShareMenu({
+            withShareTicket: true,
+          });
+        } else if (res.tapIndex === 1) {
+          handleRemove(hex.id);
+        }
+      },
+    });
+  };
+
+  const handleRemove = async (hexagramId: string) => {
+    try {
+      await remove(hexagramId);
+      Taro.showToast({ title: '已移除', icon: 'success' });
+    } catch (e) {
+      Taro.showToast({ title: '移除失败', icon: 'error' });
+    }
+  };
+
+  const renderSkeletonGrid = () => (
+    <View className="collection-page__grid">
+      {Array.from({ length: 9 }).map((_, i) => (
+        <View key={i} className="collection-page__skeleton-item">
+          <Skeleton width="100%" height="100%" className="collection-page__skeleton" />
+        </View>
+      ))}
+    </View>
+  );
+
   return (
     <View className="collection-page">
       <View className="collection-page__header">
@@ -67,16 +132,18 @@ export default function CollectionPage() {
       </View>
 
       <SearchBar value={searchText} onChange={setSearchText} />
-      <CategoryTabs active={activeCategory} onChange={setActiveCategory} />
+      <CategoryTabs active={activeCategory} onChange={handleCategoryChange} />
       <FilterBar
         sources={uniqueSources}
         selectedSource={selectedSource}
-        onSourceChange={setSelectedSource}
+        onSourceChange={handleSourceChange}
         sortBy={sortBy}
-        onSortChange={setSortBy}
+        onSortChange={handleSortChange}
       />
 
-      {filteredHexagrams.length === 0 ? (
+      {isLoading ? (
+        renderSkeletonGrid()
+      ) : filteredHexagrams.length === 0 ? (
         <View className="collection-page__empty">
           {adoptedHexagrams.length === 0 ? (
             <>
@@ -96,11 +163,13 @@ export default function CollectionPage() {
         <>
           <View className="collection-page__grid">
             {filteredHexagrams.map((hex) => (
-              <HexagramGridItem
-                key={hex.id}
-                hexagram={hex}
-                onClick={() => setSelected(hex)}
-              />
+              <SwipeableItem key={hex.id} onDelete={() => handleRemove(hex.id)}>
+                <HexagramGridItem
+                  hexagram={hex}
+                  onClick={() => handleOpenModal(hex)}
+                  onLongPress={() => handleLongPress(hex)}
+                />
+              </SwipeableItem>
             ))}
           </View>
           <View className="collection-page__footer">
@@ -109,9 +178,8 @@ export default function CollectionPage() {
         </>
       )}
 
-      {selected && (
-        <View className="collection-page__modal">
-          <View className="collection-page__modal-mask" onClick={() => setSelected(null)} />
+      <AnimatedModal visible={selected !== null} onClose={handleCloseModal}>
+        {selected && (
           <View className="collection-page__modal-content">
             <View className="collection-page__modal-header">
               <View className="collection-page__modal-icon">
@@ -123,7 +191,7 @@ export default function CollectionPage() {
                   {selected.symbol} · {selected.nature}
                 </Text>
               </View>
-              <View className="collection-page__modal-close" onClick={() => setSelected(null)}>
+              <View className="collection-page__modal-close" onClick={handleCloseModal}>
                 <Text className="collection-page__modal-close-text">×</Text>
               </View>
             </View>
@@ -145,8 +213,8 @@ export default function CollectionPage() {
               </Text>
             </View>
           </View>
-        </View>
-      )}
+        )}
+      </AnimatedModal>
     </View>
   );
 }
