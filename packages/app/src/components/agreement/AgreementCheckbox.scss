@@ -1,0 +1,40 @@
+.agreement-checkbox {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  cursor: pointer;
+
+  &__box {
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(26, 43, 60, 0.3);
+    border-radius: 3px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+
+    &--checked {
+      background: #C73E3A;
+      border-color: #C73E3A;
+    }
+  }
+
+  &__check {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  &__text {
+    font-size: 13px;
+    color: rgba(26, 43, 60, 0.7);
+    line-height: 1.5;
+  }
+
+  &__link {
+    color: #C73E3A;
+  }
+}

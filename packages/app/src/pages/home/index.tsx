@@ -8,6 +8,8 @@ import HexagramSymbol from '../../components/hexagram/HexagramSymbol';
 import InspirationText from '../../components/inspiration/InspirationText';
 import ShareButton from '../../components/share/ShareButton';
 import DrawLotAnimation from '../../components/hexagram/DrawLotAnimation';
+import { AgreementModal } from '../../components/agreement';
+import { storage, STORAGE_KEYS } from '../../adapters/storage';
 import { GUA_NAME_MAP } from '@yiban/core';
 import type { AgentScene } from '@yiban/core';
 import './index.scss';
@@ -33,16 +35,19 @@ export default function HomePage() {
     checkedInToday,
     meihuaResult,
     agentContents,
-    agentLoading,
+    generatingScene,
+    currentCheckinId,
     error,
     loadToday,
     handleCheckIn,
+    generateAgentContent,
   } = useInspiration();
   const { reload } = useCollection();
   const { isLoggedIn, isLoading: authLoading, loginWithWeapp } = useAuth();
   const [showDrawLot, setShowDrawLot] = useState(false);
   const [activeScene, setActiveScene] = useState<AgentScene>('suitable_for');
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
+  const [showAgreementModal, setShowAgreementModal] = useState(false);
 
   useEffect(() => {
     loadToday();
@@ -61,7 +66,25 @@ export default function HomePage() {
     return { title: `易伴·${currentHexagram.symbol}今日指引`, path: '/pages/home/index' };
   });
 
+  const checkAgreement = useCallback((): boolean => {
+    const agreement = storage.get<{ accepted: boolean }>(STORAGE_KEYS.AGREEMENT_ACCEPTED);
+    return agreement?.accepted === true;
+  }, []);
+
+  const handleAgreementConfirm = useCallback(() => {
+    storage.set(STORAGE_KEYS.AGREEMENT_ACCEPTED, {
+      accepted: true,
+      acceptedAt: new Date().toISOString(),
+    });
+    setShowAgreementModal(false);
+  }, []);
+
   const onCheckIn = useCallback(async () => {
+    if (!checkAgreement()) {
+      setShowAgreementModal(true);
+      return;
+    }
+
     try {
       if (!isLoggedIn) {
         await loginWithWeapp();
@@ -74,11 +97,21 @@ export default function HomePage() {
       setShowDrawLot(false);
       Taro.showToast({ title: '操作失败', icon: 'none' });
     }
-  }, [isLoggedIn, loginWithWeapp, handleCheckIn, reload]);
+  }, [isLoggedIn, loginWithWeapp, handleCheckIn, reload, checkAgreement]);
 
   const onDrawLotComplete = useCallback(() => {
     setShowDrawLot(false);
   }, []);
+
+  // Tab 切换时按需加载：如果当前场景没有内容且不在生成中，触发请求
+  useEffect(() => {
+    if (!checkedInToday || !currentCheckinId) return;
+    const hasContent = agentContents.some((c) => c.scene === activeScene && c.content);
+    const isGenerating = generatingScene === activeScene;
+    if (!hasContent && !isGenerating) {
+      generateAgentContent(currentCheckinId, activeScene);
+    }
+  }, [activeScene, checkedInToday, currentCheckinId, agentContents, generatingScene, generateAgentContent]);
 
   const meihuaSummary = meihuaResult
     ? `上${GUA_NAME_MAP[meihuaResult.upperGua] || '?'}下${GUA_NAME_MAP[meihuaResult.lowerGua] || '?'} · 动爻${MOVING_LINE_NAMES[meihuaResult.movingLine - 1] || meihuaResult.movingLine}`
@@ -133,6 +166,10 @@ export default function HomePage() {
           <Text className="home-page__btn-text">梅花起卦 · 打卡领养</Text>
         </View>
         {drawLotOverlay}
+        <AgreementModal
+          visible={showAgreementModal}
+          onConfirm={handleAgreementConfirm}
+        />
       </View>
     );
   }
@@ -173,7 +210,7 @@ export default function HomePage() {
 
       {/* 内容区 */}
       <View className="home-page__content">
-        {agentLoading && !currentSceneContent ? (
+        {(generatingScene === activeScene && !currentSceneContent) ? (
           <View className="home-page__skeleton">
             <View className="home-page__skeleton-line" style={{ width: '80%' }} />
             <View className="home-page__skeleton-line" style={{ width: '60%' }} />
@@ -189,10 +226,12 @@ export default function HomePage() {
           </View>
         ) : (
           <View className="home-page__empty-scene">
-            <Text className="home-page__empty-scene-text">神兽暂时沉默，请稍后再试</Text>
-            <View className="home-page__empty-scene-btn" onClick={() => loadToday()}>
-              <Text className="home-page__empty-scene-btn-text">重试</Text>
-            </View>
+            <Text className="home-page__empty-scene-text">神兽正在思考，请稍候...</Text>
+            {currentCheckinId && (
+              <View className="home-page__empty-scene-btn" onClick={() => generateAgentContent(currentCheckinId, activeScene)}>
+                <Text className="home-page__empty-scene-btn-text">请求神兽</Text>
+              </View>
+            )}
           </View>
         )}
       </View>

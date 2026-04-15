@@ -2,10 +2,10 @@
  * 灵感上下文 - 处理每日打卡和卦象灵感
  * 改造后使用 API 替代本地存储
  */
-import { createContext, useContext, useReducer, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useReducer, useCallback, useRef, type ReactNode } from 'react';
 import Taro from '@tarojs/taro';
 import { checkinApi, type CheckinRecord } from '../api/checkin';
-import { agentApi, type GenerateResponse } from '../api/agent';
+import { agentApi } from '../api/agent';
 import { useAuth } from './AuthContext';
 import type { Mood, Inspiration, RawHexagram } from '@yiban/core';
 import type { AgentScene } from '@yiban/core';
@@ -35,7 +35,7 @@ interface InspirationState {
   checkedInToday: boolean;
   meihuaResult: MeihuaResult | null;
   agentContents: AgentContent[];
-  agentLoading: boolean;
+  generatingScene: AgentScene | null;  // 当前正在生成的场景（null = 无）
   error: string | null;
   currentCheckinId: string | null;
 }
@@ -45,8 +45,9 @@ type InspirationAction =
   | { type: 'SELECT_MOOD'; payload: { mood: Mood; inspiration: Inspiration } }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'SET_AGENT_LOADING'; payload: boolean }
   | { type: 'SET_AGENT_CONTENTS'; payload: AgentContent[] }
+  | { type: 'ADD_AGENT_CONTENT'; payload: AgentContent }
+  | { type: 'SET_GENERATING_SCENE'; payload: AgentScene | null }
   | { type: 'RESET' }
   | { type: 'SET_CHECKIN_ID'; payload: string | null };
 
@@ -59,7 +60,7 @@ const initialState: InspirationState = {
   checkedInToday: false,
   meihuaResult: null,
   agentContents: [],
-  agentLoading: false,
+  generatingScene: null,
   error: null,
   currentCheckinId: null,
 };
@@ -89,10 +90,21 @@ function inspirationReducer(state: InspirationState, action: InspirationAction):
       return { ...state, isLoading: action.payload };
     case 'SET_ERROR':
       return { ...state, error: action.payload, isLoading: false };
-    case 'SET_AGENT_LOADING':
-      return { ...state, agentLoading: action.payload };
     case 'SET_AGENT_CONTENTS':
-      return { ...state, agentContents: action.payload, agentLoading: false };
+      return { ...state, agentContents: action.payload, generatingScene: null };
+    case 'ADD_AGENT_CONTENT': {
+      const newContents = state.agentContents.filter(
+        (c) => c.scene !== action.payload.scene
+      );
+      newContents.push(action.payload);
+      return {
+        ...state,
+        agentContents: newContents,
+        generatingScene: null,
+      };
+    }
+    case 'SET_GENERATING_SCENE':
+      return { ...state, generatingScene: action.payload };
     case 'RESET':
       return {
         ...initialState,
@@ -133,7 +145,7 @@ interface InspirationContextValue extends InspirationState {
   selectMood: (mood: Mood) => void;
   handleCheckIn: (mood?: string) => Promise<void>;
   resetCheckIn: () => void;
-  generateAgentContents: (checkinId: string) => Promise<void>;
+  generateAgentContent: (checkinId: string, scene: AgentScene) => Promise<void>;
   showRewardedVideoAd: (scene: AgentScene, checkinId: string) => void;
   handleAdviceClick: (scene: AgentScene) => void;
 }
@@ -142,6 +154,8 @@ const InspirationContext = createContext<InspirationContextValue | null>(null);
 
 export function InspirationProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(inspirationReducer, initialState);
+  const stateRef = useRef(state);
+  stateRef.current = state;
   const { isLoggedIn, user } = useAuth();
 
   /**
@@ -151,7 +165,6 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'SET_LOADING', payload: true });
 
     try {
-      // 未登录时不加载
       if (!isLoggedIn) {
         dispatch({ type: 'SET_LOADING', payload: false });
         return;
@@ -175,7 +188,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
           },
         });
 
-        // 加载该打卡的已有 AI 内容
+        // 加载该打卡的已有 AI 内容（从缓存读取，不触发新生成）
         try {
           const contentsResponse = await agentApi.getContents(checkin.id);
           if (contentsResponse.contents && contentsResponse.contents.length > 0) {
@@ -191,7 +204,6 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
           console.error('Failed to load agent contents:', err);
         }
       } else {
-        // 今日未打卡
         dispatch({ type: 'SET_LOADING', payload: false });
       }
     } catch (error: any) {
@@ -201,35 +213,41 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
   }, [isLoggedIn]);
 
   /**
-   * 生成 AI 建议内容
+   * 生成单个场景的 AI 建议（按需调用，一次只请求一个场景）
    */
-  const generateAgentContents = useCallback(async (checkinId: string) => {
-    dispatch({ type: 'SET_AGENT_LOADING', payload: true });
+  const generateAgentContent = useCallback(async (checkinId: string, scene: AgentScene) => {
+    const currentState = stateRef.current;
+
+    if (currentState.agentContents.some((c) => c.scene === scene && c.content)) {
+      return;
+    }
+    if (currentState.generatingScene === scene) {
+      return;
+    }
+
+    dispatch({ type: 'SET_GENERATING_SCENE', payload: scene });
 
     try {
-      const scenes: AgentScene[] = ['suitable_for', 'advice', 'companionship'];
-      const results = await Promise.all(
-        scenes.map((scene) =>
-          agentApi.generate(checkinId, scene).catch((err) => {
-            console.error(`Failed to generate ${scene}:`, err);
-            return null;
-          })
-        )
-      );
+      const result = await agentApi.generate(checkinId, scene);
 
-      const contents: AgentContent[] = results
-        .filter((r): r is GenerateResponse => r !== null)
-        .map((r) => ({
-          scene: r.scene,
-          content: r.content,
-          beastName: r.beastName,
-          cached: r.cached,
-        }));
+      if (!result.content) {
+        Taro.showToast({ title: result.message || '今日已领取，请明天再来', icon: 'none' });
+        dispatch({ type: 'SET_GENERATING_SCENE', payload: null });
+        return;
+      }
 
-      dispatch({ type: 'SET_AGENT_CONTENTS', payload: contents });
-    } catch (error: any) {
-      console.error('Generate agent contents failed:', error);
-      dispatch({ type: 'SET_AGENT_LOADING', payload: false });
+      dispatch({
+        type: 'ADD_AGENT_CONTENT',
+        payload: {
+          scene: result.scene,
+          content: result.content!,
+          beastName: result.beastName || '',
+          cached: result.cached ?? false,
+        },
+      });
+    } catch (err) {
+      console.error(`Failed to generate ${scene}:`, err);
+      dispatch({ type: 'SET_GENERATING_SCENE', payload: null });
     }
   }, []);
 
@@ -237,21 +255,18 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
    * 显示激励视频广告
    */
   const showRewardedVideoAd = useCallback((scene: AgentScene, checkinId: string) => {
-    // 微信小程序激励视频
     if (process.env.TARO_ENV === 'weapp') {
       const rewardedAd = Taro.createRewardedVideoAd({
-        adUnitId: 'your_ad_unit_id',  // TODO: 替换为实际广告单元ID
+        adUnitId: 'your_ad_unit_id',
       });
 
       rewardedAd.onClose((res: { isEnded: boolean }) => {
         if (res.isEnded) {
-          // 用户完整观看，调用上报
           const userId = user?.id || '';
           const signature = Buffer.from(`${userId}${checkinId}${scene}`).toString('base64');
           agentApi.reportAdWatched(checkinId, scene, signature)
             .then(() => {
-              // 重新获取建议
-              generateAgentContents(checkinId);
+              generateAgentContent(checkinId, scene);
             });
         }
       });
@@ -260,10 +275,9 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
         Taro.showToast({ title: '广告加载失败，请重试', icon: 'none' });
       });
     } else {
-      // H5 环境
       Taro.showToast({ title: '仅小程序支持广告解锁', icon: 'none' });
     }
-  }, [generateAgentContents]);
+  }, [generateAgentContent, user]);
 
   /**
    * 解锁场景建议（通过激励视频广告）
@@ -273,7 +287,6 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
       Taro.showToast({ title: '请先打卡', icon: 'none' });
       return;
     }
-    // 广告单元 ID 未配置时提示
     if (process.env.TARO_ENV === 'weapp') {
       Taro.showToast({ title: '该功能即将上线', icon: 'none' });
     }
@@ -287,7 +300,6 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'SET_ERROR', payload: null });
 
     try {
-      // 不在这里检查登录状态，由 API 调用失败来触发错误
       const result = await checkinApi.create(mood);
       const checkin = result.checkin;
       const actualMood = (checkin.mood as Mood) || 'work';
@@ -304,27 +316,21 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
         },
       });
 
-      // 打卡成功后并行生成 AI 内容
-      generateAgentContents(checkin.id);
+      // 打卡成功后只加载第一个场景（suitable_for），其余按需
+      generateAgentContent(checkin.id, 'suitable_for');
     } catch (error: any) {
       console.error('Checkin failed:', error);
       dispatch({ type: 'SET_ERROR', payload: error.message || '打卡失败' });
       throw error;
     }
-  }, [isLoggedIn, generateAgentContents]);
+  }, [isLoggedIn, generateAgentContent]);
 
-  /**
-   * 选择心情
-   */
   const selectMood = useCallback((mood: Mood) => {
     if (!state.currentHexagram) return;
     const inspiration = createInspiration(state.currentHexagram, mood);
     dispatch({ type: 'SELECT_MOOD', payload: { mood, inspiration } });
   }, [state.currentHexagram]);
 
-  /**
-   * 重置打卡状态（开发模式使用）
-   */
   const resetCheckIn = useCallback(() => {
     dispatch({ type: 'RESET' });
   }, []);
@@ -335,12 +341,12 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
     selectMood,
     handleCheckIn,
     resetCheckIn,
-    generateAgentContents,
+    generateAgentContent,
     showRewardedVideoAd,
     handleAdviceClick,
   };
 
-  return <InspirationContext.Provider value={value}>{children}</InspirationContext.Provider>;
+  return <InspirationContext.Provider value={value}>{children}</InspirationContext.Provider>
 }
 
 export function useInspiration(): InspirationContextValue {

@@ -2,6 +2,7 @@ import { View, Text, Input, Button } from '@tarojs/components';
 import { useState, useEffect, useRef } from 'react';
 import Taro, { useRouter } from '@tarojs/taro';
 import { useAuth } from '../../context/AuthContext';
+import { AgreementCheckbox } from '../../components/agreement';
 import './index.scss';
 
 /**
@@ -35,6 +36,7 @@ export default function LoginPage() {
   const [code, setCode] = useState('');
   const [countdown, setCountdown] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [agreementChecked, setAgreementChecked] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   
   const showWechatLogin = isWechatBrowser() && !isMiniProgram();
@@ -206,7 +208,7 @@ export default function LoginPage() {
           <Button
             className="login-page__btn login-page__btn--wechat"
             onClick={handleWechatLogin}
-            disabled={loading}
+            disabled={loading || !agreementChecked}
           >
             微信登录
           </Button>
@@ -221,6 +223,11 @@ export default function LoginPage() {
           <View className="login-page__divider-line" />
         </View>
       )}
+
+      {/* 协议勾选 */}
+      <View className="login-page__agreement">
+        <AgreementCheckbox checked={agreementChecked} onChange={setAgreementChecked} />
+      </View>
 
       {/* 手机号登录 */}
       <View className="login-page__form">
@@ -256,7 +263,7 @@ export default function LoginPage() {
         <Button
           className="login-page__btn login-page__btn--primary"
           onClick={handlePhoneLogin}
-          disabled={loading}
+          disabled={loading || !agreementChecked}
         >
           登录
         </Button>
