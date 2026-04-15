@@ -3,6 +3,8 @@ import Taro from '@tarojs/taro';
 import { useSettings } from '../../context/SettingsContext';
 import { useAuth } from '../../context/AuthContext';
 import type { ThemeMode } from '../../context/SettingsContext';
+import Skeleton from '../../components/skeleton/Skeleton';
+import { haptic } from '../../utils/haptic';
 import './index.scss';
 
 const THEMES: { id: ThemeMode; name: string; colors: { primary: string; text: string; bg: string } }[] = [
@@ -19,9 +21,10 @@ const FONT_SIZES = [
 
 export default function SettingsPage() {
   const { theme, simplified, fontSize, setTheme, toggleSimplified, setFontSize } = useSettings();
-  const { isLoggedIn, user, logout } = useAuth();
+  const { isLoggedIn, user, logout, isLoading } = useAuth();
 
   const handleLogout = () => {
+    haptic.heavy();
     Taro.showModal({
       title: '退出登录',
       content: '确定要退出登录吗？',
@@ -72,7 +75,17 @@ export default function SettingsPage() {
       </View>
 
       {/* 用户信息 */}
-      {isLoggedIn && user && (
+      {isLoading ? (
+        <View className="settings-page__card">
+          <View className="settings-page__user">
+            <Skeleton width="96px" height="96px" circle />
+            <View className="settings-page__user-info">
+              <Skeleton width="180px" height="36px" className="settings-page__skeleton-name" />
+              <Skeleton width="120px" height="24px" className="settings-page__skeleton-id" />
+            </View>
+          </View>
+        </View>
+      ) : isLoggedIn && user && (
         <View className="settings-page__card">
           <View className="settings-page__user">
             <View className="settings-page__user-avatar" style={{ background: currentTheme.colors.primary }}>
@@ -96,7 +109,10 @@ export default function SettingsPage() {
               <View
                 key={t.id}
                 className={`settings-page__theme-item ${isSelected ? 'settings-page__theme-item--active' : ''}`}
-                onClick={() => setTheme(t.id)}
+                onClick={() => {
+                  haptic.light();
+                  setTheme(t.id);
+                }}
               >
                 <View
                   className="settings-page__theme-preview"
@@ -129,7 +145,10 @@ export default function SettingsPage() {
           </View>
           <View
             className={`settings-page__toggle ${simplified ? 'settings-page__toggle--on' : ''}`}
-            onClick={toggleSimplified}
+            onClick={() => {
+              haptic.light();
+              toggleSimplified();
+            }}
           >
             <View className={`settings-page__toggle-knob ${simplified ? 'settings-page__toggle-knob--on' : ''}`} />
           </View>
@@ -146,7 +165,10 @@ export default function SettingsPage() {
                 <View
                   key={fs.id}
                   className={`settings-page__font-size ${isSelected ? 'settings-page__font-size--active' : ''}`}
-                  onClick={() => setFontSize(fs.id as 'small' | 'medium' | 'large')}
+                  onClick={() => {
+                    haptic.light();
+                    setFontSize(fs.id as 'small' | 'medium' | 'large');
+                  }}
                 >
                   <Text className="settings-page__font-size-text">{fs.name}</Text>
                 </View>

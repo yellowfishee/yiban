@@ -73,6 +73,14 @@
     color: var(--color-text-hint);
   }
 
+  &__skeleton-name {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &__skeleton-id {
+    margin-top: var(--spacing-xs);
+  }
+
   &__themes {
     display: flex;
     gap: 32px;
