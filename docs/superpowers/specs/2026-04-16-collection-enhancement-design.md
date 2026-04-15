@@ -433,9 +433,11 @@ API 已返回 `adoptedAt` 字段，无需修改后端。
 
 ## 八、实现计划
 
-### 阶段 0：前置修复（Settings 页面 CSS）
+### 阶段 0：前置修复（Settings 页面 CSS 重写）
 
-settings/index.scss 存在硬编码颜色，需迁移到 CSS 变量：
+settings/index.tsx 使用了新的类名，但 index.scss 是旧版本，缺少大量样式。
+
+#### 0.1 新增 danger 颜色变量
 
 ```scss
 // tokens.scss 新增
@@ -446,11 +448,37 @@ settings/index.scss 存在硬编码颜色，需迁移到 CSS 变量：
 }
 ```
 
-需要替换的位置：
-- 第 25 行: `rgba(239, 68, 68, 0.2)` → `var(--color-danger-light)`
-- 第 115 行: `#ef4444` → `var(--color-danger)`
-- 第 126 行: `rgba(239, 68, 68, 0.6)` → `var(--color-danger-muted)`
-- 第 147 行: `#ef4444` → `var(--color-danger)`
+#### 0.2 缺失的样式类
+
+TSX 使用但 SCSS 缺少的类名：
+
+| 类名 | 用途 |
+|------|------|
+| `settings-page__card` | 卡片容器（替代旧的 section） |
+| `settings-page__card--danger` | 危险操作卡片 |
+| `settings-page__card-title` | 卡片标题 |
+| `settings-page__user-avatar` | 用户头像 |
+| `settings-page__user-avatar-text` | 头像文字 |
+| `settings-page__user-info` | 用户信息容器 |
+| `settings-page__theme-preview-header` | 主题预览头部 |
+| `settings-page__theme-preview-body` | 主题预览主体 |
+| `settings-page__theme-preview-text` | 主题预览文字线 |
+| `settings-page__theme-check` | 主题选中勾选 |
+| `settings-page__item-left` | 设置项左侧容器 |
+| `settings-page__item-hint` | 设置项提示文字 |
+| `settings-page__font-sizes` | 字体大小选择器容器 |
+| `settings-page__font-size` | 字体大小选项 |
+| `settings-page__font-size--active` | 字体大小选中态 |
+| `settings-page__font-size-text` | 字体大小文字 |
+| `settings-page__item-arrow` | 设置项箭头 |
+| `settings-page__item-label--danger` | 危险操作标签 |
+
+#### 0.3 重写 index.scss
+
+需要重写整个 settings/index.scss 以匹配新的 TSX 结构，确保：
+- 所有颜色使用 CSS 变量
+- 新类名有对应样式
+- 删除不再使用的旧类名（`__section`、`__section-title`、`__footer` 等）
 
 ### 阶段 1：数据扩展
 
