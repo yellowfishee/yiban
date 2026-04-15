@@ -30,6 +30,35 @@
     animation: spin 1s linear infinite;
   }
 
+  &__skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px;
+  }
+
+  &__skeleton-icon {
+    margin-bottom: 8px;
+  }
+
+  &__skeleton-name {
+    margin-top: 8px;
+  }
+
+  &__skeleton-nature {
+    margin-top: 4px;
+  }
+
+  &__skeleton-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    width: 100%;
+  }
+
   &__loading-text {
     margin-top: 20px;
     font-size: 24px;
@@ -425,6 +454,51 @@
     padding: 12px 16px;
     text-align: center;
   }
+
+  // === Detail Modal ===
+
+  &__detail-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 32px;
+    gap: 16px;
+  }
+
+  &__detail-symbol {
+    font-size: 80px;
+    color: var(--color-primary);
+  }
+
+  &__detail-name {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  &__detail-nature {
+    font-size: 24px;
+    color: var(--color-text-secondary);
+  }
+
+  &__detail-meihua {
+    font-size: 20px;
+    color: var(--color-text-hint);
+    font-family: var(--font-serif);
+  }
+
+  &__detail-close {
+    margin-top: 24px;
+    padding: 16px 48px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+  }
+
+  &__detail-close-text {
+    font-size: 24px;
+    color: var(--color-text-secondary);
+  }
 }
 
 // === 动画定义 ===
@@ -533,6 +607,12 @@
   .home-page__loading-ring,
   .home-page__loading-dot {
     animation: none;
+  }
+
+  .home-page__skeleton {
+    .skeleton {
+      animation: none;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from '@tarojs/components';
 import Taro, { useShareAppMessage } from '@tarojs/taro';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useInspiration } from '../../context/InspirationContext';
 import { useCollection } from '../../context/CollectionContext';
 import { useAuth } from '../../context/AuthContext';
@@ -9,6 +9,9 @@ import InspirationText from '../../components/inspiration/InspirationText';
 import ShareButton from '../../components/share/ShareButton';
 import DrawLotAnimation from '../../components/hexagram/DrawLotAnimation';
 import { AgreementModal } from '../../components/agreement';
+import Skeleton from '../../components/skeleton/Skeleton';
+import AnimatedModal from '../../components/modal/AnimatedModal';
+import { haptic } from '../../utils/haptic';
 import { storage, STORAGE_KEYS } from '../../adapters/storage';
 import { GUA_NAME_MAP } from '@yiban/core';
 import type { AgentScene } from '@yiban/core';
@@ -48,6 +51,9 @@ export default function HomePage() {
   const [activeScene, setActiveScene] = useState<AgentScene>('suitable_for');
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
   const [showAgreementModal, setShowAgreementModal] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const lastTapRef = useRef(0);
 
   useEffect(() => {
     loadToday();
@@ -85,6 +91,8 @@ export default function HomePage() {
       return;
     }
 
+    haptic.medium();
+
     try {
       if (!isLoggedIn) {
         await loginWithWeapp();
@@ -101,6 +109,25 @@ export default function HomePage() {
 
   const onDrawLotComplete = useCallback(() => {
     setShowDrawLot(false);
+  }, []);
+
+  const handleSceneChange = useCallback((scene: AgentScene) => {
+    haptic.light();
+    setActiveScene(scene);
+  }, []);
+
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadToday();
+    setRefreshing(false);
+  }, [loadToday]);
+
+  const handleBeastTap = useCallback(() => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) {
+      setShowDetailModal(true);
+    }
+    lastTapRef.current = now;
   }, []);
 
   // Tab 切换时按需加载：如果当前场景没有内容且不在生成中，触发请求
@@ -123,7 +150,16 @@ export default function HomePage() {
   if ((isLoading || authLoading) && !checkedInToday) {
     return (
       <View className="home-page home-page--loading">
-        <View className="home-page__spinner" />
+        <View className="home-page__skeleton">
+          <Skeleton width="180px" height="180px" circle className="home-page__skeleton-icon" />
+          <Skeleton width="120px" height="36px" className="home-page__skeleton-name" />
+          <Skeleton width="200px" height="24px" className="home-page__skeleton-nature" />
+          <View className="home-page__skeleton-lines">
+            <Skeleton width="80%" height="20px" />
+            <Skeleton width="70%" height="20px" />
+            <Skeleton width="60%" height="20px" />
+          </View>
+        </View>
         <Text className="home-page__loading-text">正在遇见神兽...</Text>
       </View>
     );
@@ -176,10 +212,16 @@ export default function HomePage() {
 
   // Checked in — main view
   return (
-    <View className="home-page">
+    <ScrollView
+      className="home-page"
+      scrollY
+      refresherEnabled
+      refresherTriggered={refreshing}
+      onRefresherRefresh={handleRefresh}
+    >
       {/* 沉浸区 */}
       <View className="home-page__immersive">
-        <View className="home-page__beast-glow">
+        <View className="home-page__beast-glow" onClick={handleBeastTap}>
           <HexagramSymbol symbol={currentHexagram!.symbol} size="lg" />
         </View>
         <Text className="home-page__hexagram-name">{currentHexagram!.name}</Text>
@@ -201,7 +243,7 @@ export default function HomePage() {
           <View
             key={scene.key}
             className={`home-page__tab ${activeScene === scene.key ? 'home-page__tab--active' : ''}`}
-            onClick={() => setActiveScene(scene.key)}
+            onClick={() => handleSceneChange(scene.key)}
           >
             <Text className="home-page__tab-text">{scene.label}</Text>
           </View>
@@ -261,6 +303,21 @@ export default function HomePage() {
           <Text className="home-page__disclaimer-text">{DISCLAIMER_TEXT}</Text>
         )}
       </View>
-    </View>
+
+      {/* Detail modal */}
+      <AnimatedModal visible={showDetailModal} onClose={() => setShowDetailModal(false)}>
+        <View className="home-page__detail-modal">
+          <Text className="home-page__detail-symbol">{currentHexagram?.symbol}</Text>
+          <Text className="home-page__detail-name">{currentHexagram?.name}</Text>
+          <Text className="home-page__detail-nature">{currentHexagram?.nature}</Text>
+          {meihuaSummary && (
+            <Text className="home-page__detail-meihua">{meihuaSummary}</Text>
+          )}
+          <View className="home-page__detail-close" onClick={() => setShowDetailModal(false)}>
+            <Text className="home-page__detail-close-text">关闭</Text>
+          </View>
+        </View>
+      </AnimatedModal>
+    </ScrollView>
   );
 }
