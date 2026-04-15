@@ -26,6 +26,7 @@ export interface AuthContextValue {
   isLoading: boolean;
   user: User | null;
   token: string | null;
+  hasProfile: boolean;
   
   // 登录方法
   loginWithWeapp: () => Promise<void>;               // 小程序微信一键登录
@@ -38,6 +39,7 @@ export interface AuthContextValue {
   
   // 辅助方法
   sendPhoneCode: (phone: string) => Promise<void>;     // 发送验证码
+  updateProfile: (nickname?: string, avatar?: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -50,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [hasProfile, setHasProfile] = useState(false);
 
   // 初始化检查登录状态
   useEffect(() => {
@@ -86,6 +89,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(userData);
       setToken(savedToken);
       setIsLoggedIn(true);
+      const isDefaultNickname = /^易友\d{4}$/.test(profile.user.nickname);
+      setHasProfile(!isDefaultNickname);
     } catch (error: any) {
       // Token 无效或网络错误，清除认证信息
       console.error('Auth check failed:', error);
@@ -265,13 +270,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
     setToken(null);
     setIsLoggedIn(false);
+    setHasProfile(false);
   }, []);
+
+  const updateProfile = useCallback(async (nickname?: string, avatar?: string) => {
+    if (!isLoggedIn) return;
+    
+    try {
+      const response = await userApi.updateProfile({ nickname, avatar });
+      const userData: User = {
+        id: response.user.id,
+        nickname: response.user.nickname,
+        avatar: response.user.avatar,
+        isPremium: response.user.isPremium,
+      };
+      setUser(userData);
+      setHasProfile(true);
+    } catch (error) {
+      console.error('Update profile failed:', error);
+      throw error;
+    }
+  }, [isLoggedIn]);
 
   const value: AuthContextValue = {
     isLoggedIn,
     isLoading,
     user,
     token,
+    hasProfile,
     loginWithWeapp,
     login,
     loginWithWechatH5,
@@ -280,6 +306,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     logout,
     checkAuth,
     sendPhoneCode,
+    updateProfile,
   };
 
   return (
