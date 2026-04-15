@@ -1,13 +1,12 @@
 .login-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #F5F0E8 0%, #FFF 100%);
+  background: linear-gradient(180deg, var(--color-bg) 0%, #FFF 100%);
   padding: 120px 48px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* 品牌区域 */
 .login-page__brand {
   text-align: center;
   margin-bottom: 80px;
@@ -15,26 +14,24 @@
 
 .login-page__logo {
   display: block;
-  font-family: 'STSong', 'SimSun', serif;
+  font-family: var(--font-serif);
   font-size: 56px;
   font-weight: bold;
-  color: #C73E3A;
+  color: var(--color-primary);
   margin-bottom: 24px;
 }
 
 .login-page__tagline {
   display: block;
   font-size: 32px;
-  color: rgba(26, 43, 60, 0.6);
+  color: var(--color-text-secondary);
 }
 
-/* 微信登录 */
 .login-page__wechat {
   width: 100%;
   margin-bottom: 32px;
 }
 
-/* 分隔线 */
 .login-page__divider {
   display: flex;
   align-items: center;
@@ -45,16 +42,15 @@
 .login-page__divider-line {
   flex: 1;
   height: 2px;
-  background: rgba(26, 43, 60, 0.1);
+  background: var(--color-border);
 }
 
 .login-page__divider-text {
   margin: 0 24px;
   font-size: 28px;
-  color: rgba(26, 43, 60, 0.4);
+  color: var(--color-text-hint);
 }
 
-/* 表单区域 */
 .login-page__form {
   width: 100%;
 }
@@ -63,7 +59,7 @@
   display: block;
   font-size: 32px;
   font-weight: bold;
-  color: #1A2B3C;
+  color: var(--color-text);
   margin-bottom: 32px;
 }
 
@@ -71,20 +67,20 @@
   width: 100%;
   height: 96px;
   background: #FFF;
-  border: 2px solid rgba(26, 43, 60, 0.1);
+  border: 2px solid var(--color-border);
   border-radius: 24px;
   padding: 0 32px;
   font-size: 32px;
-  color: #1A2B3C;
+  color: var(--color-text);
   margin-bottom: 24px;
   box-sizing: border-box;
 
   &::placeholder {
-    color: rgba(26, 43, 60, 0.3);
+    color: var(--color-text-hint);
   }
 
   &:focus {
-    border-color: #C73E3A;
+    border-color: var(--color-primary);
   }
 }
 
@@ -100,7 +96,6 @@
   margin-bottom: 0;
 }
 
-/* 按钮样式 */
 .login-page__btn {
   width: 100%;
   height: 96px;
@@ -136,28 +131,28 @@
     width: 200px;
     height: 96px;
     background: transparent;
-    color: #C73E3A;
-    border: 2px solid #C73E3A;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
     font-size: 28px;
 
     &:active {
-      background: rgba(199, 62, 58, 0.05);
+      background: var(--color-primary-light);
     }
 
     &[disabled] {
-      background: rgba(26, 43, 60, 0.05);
-      color: rgba(26, 43, 60, 0.3);
-      border-color: rgba(26, 43, 60, 0.1);
+      background: var(--color-primary-light);
+      color: var(--color-text-hint);
+      border-color: var(--color-border);
     }
   }
 
   &--primary {
-    background: #C73E3A;
+    background: var(--color-primary);
     color: #FFF;
-    box-shadow: 0 8px 24px rgba(199, 62, 58, 0.3);
+    box-shadow: 0 8px 24px var(--color-glow);
 
     &:active {
-      background: #A8322F;
+      background: var(--color-primary-dark);
     }
 
     &[disabled] {
@@ -167,7 +162,6 @@
   }
 }
 
-/* 游客模式 */
 .login-page__guest {
   margin-top: 48px;
   text-align: center;
@@ -175,12 +169,12 @@
 
 .login-page__guest-text {
   font-size: 28px;
-  color: rgba(26, 43, 60, 0.4);
+  color: var(--color-text-hint);
   text-decoration: underline;
   padding: 16px;
 
   &:active {
-    color: #C73E3A;
+    color: var(--color-primary);
   }
 }
 

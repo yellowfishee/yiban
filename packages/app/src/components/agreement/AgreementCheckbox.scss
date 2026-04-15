@@ -7,7 +7,7 @@
   &__box {
     width: 18px;
     height: 18px;
-    border: 1px solid rgba(26, 43, 60, 0.3);
+    border: 1px solid var(--color-border);
     border-radius: 3px;
     margin-right: 8px;
     display: flex;
@@ -17,8 +17,8 @@
     margin-top: 2px;
 
     &--checked {
-      background: #C73E3A;
-      border-color: #C73E3A;
+      background: var(--color-primary);
+      border-color: var(--color-primary);
     }
   }
 
@@ -30,11 +30,11 @@
 
   &__text {
     font-size: 13px;
-    color: rgba(26, 43, 60, 0.7);
+    color: var(--color-text-secondary);
     line-height: 1.5;
   }
 
   &__link {
-    color: #C73E3A;
+    color: var(--color-primary);
   }
 }

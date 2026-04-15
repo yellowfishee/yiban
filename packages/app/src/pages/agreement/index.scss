@@ -1,13 +1,13 @@
 .agreement-page {
   min-height: 100vh;
   padding: 20px 16px 40px;
-  background: #FDFCF9;
+  background: var(--color-bg-light);
 
   &__title {
     display: block;
     font-size: 20px;
     font-weight: bold;
-    color: #1A2B3C;
+    color: var(--color-text);
     text-align: center;
     margin-bottom: 8px;
   }
@@ -15,7 +15,7 @@
   &__update {
     display: block;
     font-size: 12px;
-    color: rgba(26, 43, 60, 0.5);
+    color: var(--color-text-hint);
     text-align: center;
     margin-bottom: 24px;
   }
@@ -28,14 +28,14 @@
     display: block;
     font-size: 16px;
     font-weight: 500;
-    color: #1A2B3C;
+    color: var(--color-text);
     margin-bottom: 8px;
   }
 
   &__section-content {
     display: block;
     font-size: 14px;
-    color: rgba(26, 43, 60, 0.8);
+    color: var(--color-text-secondary);
     line-height: 1.8;
     white-space: pre-wrap;
   }

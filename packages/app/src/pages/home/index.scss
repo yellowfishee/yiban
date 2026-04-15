@@ -1,16 +1,9 @@
 /* 首页样式 - 沉浸开签 + 标签卡组 */
-$color-primary: #C73E3A;
-$color-gold: #D4AF37;
-$color-text: #1A2B3C;
-$color-text-secondary: rgba(26, 43, 60, 0.6);
-$color-text-hint: rgba(26, 43, 60, 0.35);
-$color-bg: #F5F0E8;
-$color-bg-light: #FDFCF9;
 
 .home-page {
   min-height: 100vh;
   padding: 24px 24px 48px;
-  background: linear-gradient(135deg, $color-bg 0%, $color-bg-light 100%);
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-light) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,9 +14,9 @@ $color-bg-light: #FDFCF9;
   }
 
   &__app-name {
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
     font-size: 20px;
-    color: $color-text-hint;
+    color: var(--color-text-hint);
     margin-top: 16px;
     letter-spacing: 4px;
   }
@@ -31,8 +24,8 @@ $color-bg-light: #FDFCF9;
   &__spinner {
     width: 64px;
     height: 64px;
-    border: 3px solid rgba($color-text, 0.1);
-    border-top-color: $color-primary;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -40,17 +33,17 @@ $color-bg-light: #FDFCF9;
   &__loading-text {
     margin-top: 20px;
     font-size: 24px;
-    color: $color-text-hint;
-    font-family: 'STSong', 'SimSun', serif;
+    color: var(--color-text-hint);
+    font-family: var(--font-serif);
   }
 
   &__error-text {
     font-size: 26px;
-    color: $color-text;
+    color: var(--color-text);
     margin-bottom: 24px;
     text-align: center;
     padding: 0 32px;
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
   }
 
   // === 未打卡态 ===
@@ -70,16 +63,16 @@ $color-bg-light: #FDFCF9;
   }
 
   &__subtitle {
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 700;
-    color: $color-primary;
+    color: var(--color-primary);
     opacity: 0.85;
   }
 
   &__desc {
     font-size: 20px;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     text-align: center;
     line-height: 1.6;
   }
@@ -100,13 +93,13 @@ $color-bg-light: #FDFCF9;
     }
 
     &--primary {
-      background: linear-gradient(135deg, $color-primary 0%, #E64843 100%);
-      box-shadow: 0 6px 20px rgba($color-primary, 0.3);
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      box-shadow: 0 6px 20px var(--color-glow);
     }
 
     &--secondary {
       background: transparent;
-      border: 1px solid rgba($color-text, 0.1);
+      border: 1px solid var(--color-border);
     }
   }
 
@@ -114,13 +107,13 @@ $color-bg-light: #FDFCF9;
     font-size: 28px;
     font-weight: 600;
     color: #fff;
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
     letter-spacing: 1px;
 
     &--secondary {
       font-size: 24px;
       font-weight: 500;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
   }
 
@@ -133,45 +126,101 @@ $color-bg-light: #FDFCF9;
     align-items: center;
     padding: 32px 0 24px;
     min-height: 45vh;
+    position: relative;
+    overflow: hidden;
+
+    // 水墨晕染背景
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    &::before {
+      width: 300px;
+      height: 300px;
+      top: -50px;
+      left: -80px;
+      background: radial-gradient(circle, var(--color-text) 0%, transparent 70%);
+      opacity: 0.03;
+      animation: ink-float 20s ease-in-out infinite;
+    }
+
+    &::after {
+      width: 250px;
+      height: 250px;
+      bottom: -30px;
+      right: -60px;
+      background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+      opacity: 0.05;
+      animation: ink-float 25s ease-in-out infinite reverse;
+    }
   }
 
   &__beast-glow {
     position: relative;
     margin-bottom: 16px;
     border-radius: 50%;
-    box-shadow: 0 0 40px rgba($color-primary, 0.12), 0 0 80px rgba($color-primary, 0.06);
+    z-index: 1;
+
+    // 光晕效果
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--color-glow) 0%, transparent 70%);
+      animation: glow-pulse 4s ease-in-out infinite;
+      z-index: -1;
+    }
 
     .hexagram-symbol {
-      border: 2px solid rgba($color-gold, 0.3);
-      background-color: rgba(255, 255, 255, 0.6);
+      border: 2px solid var(--color-border);
+      background-color: var(--color-bg-card);
+      animation: symbol-breathe 6s ease-in-out infinite;
     }
   }
 
   &__hexagram-name {
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
     font-size: 36px;
     font-weight: 700;
-    color: $color-primary;
+    color: var(--color-primary);
+    animation: fade-in-up 0.5s ease-out;
+    position: relative;
+    z-index: 1;
   }
 
   &__hexagram-nature {
     font-size: 20px;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     margin-top: 4px;
+    position: relative;
+    z-index: 1;
   }
 
   &__meihua-line {
     font-size: 18px;
-    color: $color-text-hint;
+    color: var(--color-text-hint);
     margin-top: 8px;
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
+    position: relative;
+    z-index: 1;
   }
 
   &__divider {
     width: 60%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba($color-gold, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
     margin: 20px 0 16px;
+    position: relative;
+    z-index: 1;
   }
 
   // === 标签栏 ===
@@ -184,7 +233,7 @@ $color-bg-light: #FDFCF9;
     padding: 0 8px;
     gap: 0;
     margin-top: 8px;
-    border-bottom: 1px solid rgba($color-text, 0.06);
+    border-bottom: 1px solid var(--color-border);
 
     &::-webkit-scrollbar {
       display: none;
@@ -199,7 +248,7 @@ $color-bg-light: #FDFCF9;
 
     &--active {
       .home-page__tab-text {
-        color: $color-primary;
+        color: var(--color-primary);
         font-weight: 600;
       }
 
@@ -210,7 +259,7 @@ $color-bg-light: #FDFCF9;
         left: 0;
         right: 0;
         height: 4px;
-        background: $color-primary;
+        background: var(--color-primary);
         border-radius: 2px;
       }
     }
@@ -218,7 +267,7 @@ $color-bg-light: #FDFCF9;
 
   &__tab-text {
     font-size: 22px;
-    color: $color-text-hint;
+    color: var(--color-text-hint);
     white-space: nowrap;
     transition: color 0.2s ease;
   }
@@ -238,21 +287,21 @@ $color-bg-light: #FDFCF9;
 
   &__scene-label {
     font-size: 20px;
-    color: $color-gold;
+    color: var(--color-secondary);
     font-weight: 600;
-    font-family: 'STSong', 'SimSun', serif;
+    font-family: var(--font-serif);
     letter-spacing: 2px;
   }
 
   &__scene-divider {
     height: 1px;
-    background: rgba($color-gold, 0.3);
+    background: var(--color-border);
     margin: 12px 0 16px;
   }
 
   &__scene-text {
     font-size: 24px;
-    color: $color-text;
+    color: var(--color-text);
     line-height: 1.8;
   }
 
@@ -266,7 +315,7 @@ $color-bg-light: #FDFCF9;
 
   &__skeleton-line {
     height: 20px;
-    background: linear-gradient(90deg, rgba($color-gold, 0.08) 25%, rgba($color-gold, 0.15) 50%, rgba($color-gold, 0.08) 75%);
+    background: linear-gradient(90deg, var(--color-primary-light) 25%, var(--color-border) 50%, var(--color-primary-light) 75%);
     background-size: 200% 100%;
     border-radius: 4px;
     animation: shimmer 1.5s ease-in-out infinite;
@@ -283,18 +332,18 @@ $color-bg-light: #FDFCF9;
 
   &__empty-scene-text {
     font-size: 22px;
-    color: $color-text-hint;
+    color: var(--color-text-hint);
   }
 
   &__empty-scene-btn {
     padding: 12px 32px;
-    border: 1px solid rgba($color-text, 0.1);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
   }
 
   &__empty-scene-btn-text {
     font-size: 20px;
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   // === 底部操作区 ===
@@ -315,17 +364,19 @@ $color-bg-light: #FDFCF9;
 
   &__disclaimer-toggle {
     font-size: 20px;
-    color: $color-text-hint;
+    color: var(--color-text-hint);
   }
 
   &__disclaimer-text {
     font-size: 18px;
-    color: $color-text-hint;
+    color: var(--color-text-hint);
     line-height: 1.6;
     padding: 12px 16px;
     text-align: center;
   }
 }
+
+// === 动画定义 ===
 
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -337,7 +388,66 @@ $color-bg-light: #FDFCF9;
   100% { background-position: -200% 0; }
 }
 
-/* 响应式：小屏手机 */
+@keyframes ink-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -15px) scale(1.05);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes symbol-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// === 减弱动效支持 ===
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page__immersive::before,
+  .home-page__immersive::after {
+    animation: none;
+  }
+  
+  .home-page__beast-glow::before,
+  .home-page__beast-glow .hexagram-symbol {
+    animation: none;
+  }
+  
+  .home-page__hexagram-name {
+    animation: none;
+  }
+}
+
+// === 响应式：小屏手机 ===
+
 @media (max-width: 375px) {
   .home-page {
     &__immersive {
@@ -365,7 +475,8 @@ $color-bg-light: #FDFCF9;
   }
 }
 
-/* 响应式：大屏/平板 */
+// === 响应式：大屏/平板 ===
+
 @media (min-width: 768px) {
   .home-page {
     max-width: 600px;
