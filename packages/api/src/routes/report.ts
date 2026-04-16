@@ -63,7 +63,7 @@ router.post('/generate', authMiddleware, async (c) => {
     // }
 
     const report = await generateMonthlyReport(userId, yearMonth);
-    return c.json(report);
+    return c.json({ report });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return c.json<ApiErrorResponse>({ error: '生成报告失败：' + message, code: 500 }, 500);
