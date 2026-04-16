@@ -340,7 +340,8 @@ export async function generateAgentContent(
   hexagram: RawHexagram,
   mood: string,
   meihuaData: { upperGua: string; lowerGua: string; movingLine: number },
-  isPremium: boolean = false
+  isPremium: boolean = false,
+  customPrompts?: { customPrompt?: string; systemPrompt?: string }
 ): Promise<{
   content?: string;
   cached?: boolean;
@@ -378,7 +379,17 @@ export async function generateAgentContent(
   }
 
   // 3. 构建提示词
-  const { system, user } = buildPrompt(hexagram, scene, mood, meihuaData);
+  let system: string;
+  let user: string;
+
+  if (customPrompts?.customPrompt) {
+    system = customPrompts.systemPrompt || '你是一位智慧的神兽伙伴。';
+    user = customPrompts.customPrompt;
+  } else {
+    const prompts = buildPrompt(hexagram, scene, mood, meihuaData);
+    system = prompts.system;
+    user = prompts.user;
+  }
 
   // 4. 调用 GLM API
   const rawContent = await callGLMAPI(system, user);
