@@ -240,6 +240,7 @@ export async function generateMonthlyReport(
     topScenes: string[];
   };
   storyContent: string;
+  createdAt: string;
 }> {
   const existing = await db
     .select()
@@ -258,6 +259,7 @@ export async function generateMonthlyReport(
       yearMonth: existing[0].yearMonth,
       summaryData: existing[0].summaryData,
       storyContent: existing[0].storyContent || '',
+      createdAt: existing[0].createdAt.toISOString(),
     };
   }
 
@@ -332,6 +334,7 @@ export async function generateMonthlyReport(
     yearMonth: report.yearMonth,
     summaryData: report.summaryData,
     storyContent: report.storyContent || '',
+    createdAt: report.createdAt.toISOString(),
   };
 }
 
@@ -340,7 +343,7 @@ export async function getReportList(userId: string): Promise<
     id: string;
     yearMonth: string;
     checkinDays: number;
-    createdAt: Date;
+    createdAt: string;
   }>
 > {
   const reports = await db
@@ -358,7 +361,7 @@ export async function getReportList(userId: string): Promise<
     id: r.id,
     yearMonth: r.yearMonth,
     checkinDays: r.summaryData.checkinDays,
-    createdAt: r.createdAt,
+    createdAt: r.createdAt.toISOString(),
   }));
 }
 
@@ -376,7 +379,7 @@ export async function getReportDetail(
     topScenes: string[];
   };
   storyContent: string;
-  createdAt: Date;
+  createdAt: string;
 } | null> {
   const reports = await db
     .select()
@@ -399,6 +402,6 @@ export async function getReportDetail(
     yearMonth: report.yearMonth,
     summaryData: report.summaryData,
     storyContent: report.storyContent || '',
-    createdAt: report.createdAt,
+    createdAt: report.createdAt.toISOString(),
   };
 }
