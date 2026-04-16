@@ -51,12 +51,10 @@ router.get('/:yearMonth', authMiddleware, async (c) => {
 router.post('/generate', authMiddleware, async (c) => {
   try {
     const userId = getUserId(c);
-    const body = await c.req.json().catch(() => ({}));
-    const yearMonth = body.yearMonth as string;
-
-    if (!yearMonth || !/^\d{4}-\d{2}$/.test(yearMonth)) {
-      return c.json<ApiErrorResponse>({ error: '请提供有效的年月格式 (YYYY-MM)', code: 400 }, 400);
-    }
+    
+    // 自动使用当前月份
+    const now = new Date();
+    const yearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
     // TODO: 付费上线后启用此检查
     // const user = await db.select().from(users).where(eq(users.id, userId)).limit(1);
