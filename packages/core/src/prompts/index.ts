@@ -4,7 +4,7 @@
  */
 import type { RawHexagram } from '../types/hexagram';
 
-export type AgentScene = 'suitable_for' | 'advice' | 'companionship' | 'career' | 'emotion' | 'fortune';
+export type AgentScene = 'suitable_for' | 'advice' | 'companionship' | 'career' | 'emotion' | 'fortune' | 'monthly_report';
 
 /**
  * 构建系统提示词（神兽人设）
@@ -74,10 +74,17 @@ const SCENE_PROMPTS: Record<AgentScene, string> = {
 - 强调"建议"而非"决定"`,
 
   fortune: `财运参考建议
-- 给予今日财运方面的参考提示
-- 可以涉及理财态度、消费观念、财富积累等
-- 用神兽口吻，结合典故
-- 强调"参考"，不承诺收益`,
+ - 给予今日财运方面的参考提示
+ - 可以涉及理财态度、消费观念、财富积累等
+ - 用神兽口吻，结合典故
+ - 强调"参考"，不承诺收益`,
+ 
+  monthly_report: `月度相伴故事
+ - 回顾用户本月的成长历程
+ - 提及用户遇到的卦象（如有数据）
+ - 给予鼓励和祝福
+ - 用古风语言，以"吾"自称，"汝"称呼用户
+ - 温暖陪伴，强调"参考"而非"预测"`,
 };
 
 /**
@@ -87,9 +94,30 @@ export function buildUserPrompt(
   scene: AgentScene,
   hexagram: RawHexagram,
   mood: string,
-  meihuaData: { upperGua: string; lowerGua: string; movingLine: number }
+  meihuaData: { upperGua: string; lowerGua: string; movingLine: number },
+  extraData?: { 
+    nickname?: string; 
+    checkinDays?: number; 
+    consecutiveDays?: number;
+    hexagramNames?: string;
+    topScenes?: string;
+    yearMonth?: string;
+  }
 ): string {
   const scenePrompt = SCENE_PROMPTS[scene];
+
+  if (scene === 'monthly_report') {
+    return `【报告月份】${extraData?.yearMonth || '本月'}
+【用户昵称】${extraData?.nickname || '道友'}
+【打卡天数】${extraData?.checkinDays || 0}天
+【连续打卡】${extraData?.consecutiveDays || 0}天
+【遇到的卦象】${extraData?.hexagramNames || '无'}
+【常问的话题】${extraData?.topScenes || '无'}
+
+【任务】${scenePrompt}
+
+请用神兽的口吻，直接给出150-200字的月度相伴故事。将最终回答放在【回答】和【/回答】之间。`;
+  }
 
   return `【今日卦象】${hexagram.name}
 【神兽】${hexagram.symbol}
@@ -150,13 +178,21 @@ export function buildPrompt(
   hexagram: RawHexagram,
   scene: AgentScene,
   mood: string,
-  meihuaData: { upperGua: string; lowerGua: string; movingLine: number }
+  meihuaData: { upperGua: string; lowerGua: string; movingLine: number },
+  extraData?: { 
+    nickname?: string; 
+    checkinDays?: number; 
+    consecutiveDays?: number;
+    hexagramNames?: string;
+    topScenes?: string;
+    yearMonth?: string;
+  }
 ): {
   system: string;
   user: string;
 } {
   return {
     system: buildSystemPrompt(hexagram),
-    user: buildUserPrompt(scene, hexagram, mood, meihuaData),
+    user: buildUserPrompt(scene, hexagram, mood, meihuaData, extraData),
   };
 }

@@ -4,11 +4,51 @@
 import { db } from '../db/index';
 import { checkins, agentContents, monthlyReports, users } from '../db/schema';
 import { eq, and, gte, lte, sql, desc } from 'drizzle-orm';
-import { hexagrams } from '@yiban/core';
-import { generateAgentContent } from './agent';
+import { hexagrams, buildPrompt, filterCompliance } from '@yiban/core';
+
+const API_URL = 'https://api.edgefn.net/v1/chat/completions';
+const MODEL = 'DeepSeek-V3.2';
 
 function findHexagramById(id: string) {
   return hexagrams.find((h) => h.id === id);
+}
+
+/**
+ * 调用 GLM API 生成内容
+ */
+async function callGLMAPI(
+  systemPrompt: string,
+  userPrompt: string
+): Promise<string> {
+  const apiKey = process.env.AI_API_KEY || '';
+
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.7,
+      max_tokens: 2048,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`GLM API error: ${response.status} - ${error}`);
+  }
+
+  const data = await response.json() as {
+    choices: Array<{ message: { content: string } }>;
+  };
+
+  return data.choices[0]?.message?.content || '';
 }
 
 function getMonthRange(yearMonth: string): { start: Date; end: Date } {
@@ -243,41 +283,39 @@ export async function generateMonthlyReport(
     suitable_for: '宜忌',
     advice: '建议',
     companionship: '陪伴',
+    career: '事业',
+    emotion: '情感',
+    fortune: '财运',
   };
   const topSceneNames = summaryData.topScenes
     .map((s) => sceneNameMap[s] || s)
     .join('、');
 
-  const customPrompt = `你是用户的专属神兽伙伴，用温暖、古风、鼓励的语气，为用户撰写本月的相伴故事。
+  // 使用坤卦作为月度报告的神兽（象征包容、厚德载物）
+  const defaultHexagram = hexagrams.find((h) => h.id === 'kun') || hexagrams[0];
 
-用户本月数据：
-- 打卡天数：${summaryData.checkinDays}天
-- 连续打卡：${summaryData.consecutiveDays}天
-- 遇到的卦象：${hexagramNames || '无'}
-- 常问的话题：${topSceneNames || '无'}
-
-用户昵称：${nickname}
-
-请写一段150-200字的月度相伴故事，包含以下元素：
-1. 回顾用户本月的成长历程
-2. 提及用户遇到的卦象（如有）
-3. 给予鼓励和祝福
-4. 使用古风语言，以"吾"自称，"汝"称呼用户`;
-
-  const systemPrompt = '你是一位温暖的神兽伙伴，擅长用古风语言讲述故事，给人鼓励和力量。';
-
-  const result = await generateAgentContent(
-    `report-${yearMonth}`,
-    userId,
-    'companionship',
-    { id: 'monthly-report', name: '月度报告', upper: '坤', lower: '乾', text: '' } as any,
-    'report',
-    { upperGua: '坤', lowerGua: '乾', movingLine: 1 },
-    true,
-    { customPrompt, systemPrompt }
+  // 构建提示词
+  const prompts = buildPrompt(
+    defaultHexagram,
+    'monthly_report',
+    'default',
+    { upperGua: '坤', lowerGua: '坤', movingLine: 1 },
+    {
+      nickname,
+      checkinDays: summaryData.checkinDays,
+      consecutiveDays: summaryData.consecutiveDays,
+      hexagramNames,
+      topScenes: topSceneNames,
+      yearMonth,
+    }
   );
 
-  const storyContent = result.content || '';
+  // 调用 GLM API
+  const rawContent = await callGLMAPI(prompts.system, prompts.user);
+
+  // 合规检查
+  const compliance = filterCompliance(rawContent);
+  const storyContent = compliance.filtered;
 
   const [report] = await db
     .insert(monthlyReports)
