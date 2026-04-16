@@ -2,7 +2,6 @@ export default {
   pages: [
     'pages/authorize/index',
     'pages/home/index',
-    'pages/login/index',
     'pages/collection/index',
     'pages/study/index',
     'pages/settings/index',
