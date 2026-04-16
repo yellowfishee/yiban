@@ -54,3 +54,19 @@ export const dailyFreeUsage = sqliteTable('daily_free_usage', {
   usedAt: integer('used_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
 });
+
+// 月度报告
+export const monthlyReports = sqliteTable('monthly_reports', {
+  id: text('id').primaryKey().$defaultFn(() => uuidv4()),
+  userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  yearMonth: text('year_month').notNull(),  // "2026-04" 格式
+  summaryData: text('summary_data', { mode: 'json' }).notNull().$type<{
+    checkinDays: number;
+    consecutiveDays: number;
+    checkinRate: number;
+    hexagramDistribution: Record<string, number>;
+    topScenes: string[];
+  }>(),
+  storyContent: text('story_content'),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
+});
