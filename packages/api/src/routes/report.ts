@@ -41,7 +41,7 @@ router.get('/:yearMonth', authMiddleware, async (c) => {
       return c.json<ApiErrorResponse>({ error: '报告不存在', code: 404 }, 404);
     }
 
-    return c.json(report);
+    return c.json({ report });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return c.json<ApiErrorResponse>({ error: '获取报告详情失败：' + message, code: 500 }, 500);
