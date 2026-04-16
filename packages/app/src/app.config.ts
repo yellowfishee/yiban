@@ -8,6 +8,8 @@ export default {
     'pages/settings/index',
     'pages/agreement/index',
     'pages/privacy/index',
+    'pages/report/index',
+    'pages/report/detail',
   ],
   window: {
     backgroundTextStyle: 'light',
