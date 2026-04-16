@@ -8,9 +8,32 @@ import './index.scss';
 
 const MONTH_NAMES = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
 
+const SCENE_NAMES: Record<string, string> = {
+  suitable_for: '今日适合',
+  advice: '处事建议',
+  companionship: '情绪陪同',
+  career: '事业发展',
+  emotion: '情感沟通',
+  fortune: '财运参考',
+};
+
 function formatMonthLabel(yearMonth: string): string {
   const [year, month] = yearMonth.split('-');
   return `${year}年${MONTH_NAMES[parseInt(month, 10) - 1]}`;
+}
+
+function getHexagramName(id: string): string {
+  const guaMap: Record<string, string> = {
+    qian: '乾', kun: '坤', zhen: '震', xun: '巽',
+    kan: '坎', li: '离', gen: '艮', dui: '兑',
+  };
+  const parts = id.split('_');
+  if (parts.length === 2) {
+    const upper = guaMap[parts[0]] || parts[0];
+    const lower = guaMap[parts[1]] || parts[1];
+    return `${upper}${lower}`;
+  }
+  return id;
 }
 
 export default function ReportDetailPage() {
@@ -114,9 +137,9 @@ export default function ReportDetailPage() {
         <View className="report-detail__section">
           <Text className="report-detail__section-title">卦象分布</Text>
           <View className="report-detail__hexagrams">
-            {hexagramEntries.map(([name, count]) => (
-              <View key={name} className="report-detail__hexagram">
-                <Text className="report-detail__hexagram-name">{name}</Text>
+            {hexagramEntries.map(([id, count]) => (
+              <View key={id} className="report-detail__hexagram">
+                <Text className="report-detail__hexagram-name">{getHexagramName(id)}</Text>
                 <Text className="report-detail__hexagram-count">{count} 次</Text>
               </View>
             ))}
@@ -131,7 +154,7 @@ export default function ReportDetailPage() {
             {summaryData.topScenes.map((scene, i) => (
               <View key={scene} className="report-detail__scene">
                 <Text className="report-detail__scene-index">{i + 1}</Text>
-                <Text className="report-detail__scene-name">{scene}</Text>
+                <Text className="report-detail__scene-name">{SCENE_NAMES[scene] || scene}</Text>
               </View>
             ))}
           </View>
