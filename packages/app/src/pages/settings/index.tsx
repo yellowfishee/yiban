@@ -1,5 +1,5 @@
 import { View, Text, Image, Button, Input } from '@tarojs/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Taro from '@tarojs/taro';
 import { useSettings } from '../../context/SettingsContext';
 import { useAuth } from '../../context/AuthContext';
@@ -8,6 +8,7 @@ import Skeleton from '../../components/skeleton/Skeleton';
 import AnimatedModal from '../../components/modal/AnimatedModal';
 import { haptic } from '../../utils/haptic';
 import { uploadApi } from '../../api/upload';
+import { reportApi, type UserStats } from '../../api/report';
 import './index.scss';
 
 const THEMES: { id: ThemeMode; name: string; colors: { primary: string; text: string; bg: string } }[] = [
@@ -36,6 +37,22 @@ export default function SettingsPage() {
   const [editAvatar, setEditAvatar] = useState('');
   const [editNickname, setEditNickname] = useState('');
   const [saving, setSaving] = useState(false);
+  const [stats, setStats] = useState<UserStats | null>(null);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      loadStats();
+    }
+  }, [isLoggedIn]);
+
+  const loadStats = async () => {
+    try {
+      const response = await reportApi.getStats();
+      setStats(response.stats);
+    } catch (error) {
+      console.error('Load stats failed:', error);
+    }
+  };
 
   const handleLogout = () => {
     haptic.heavy();
@@ -159,6 +176,36 @@ export default function SettingsPage() {
               <Text className="settings-page__user-id">ID: {user.id.slice(0, 8)}</Text>
             </View>
             <Text className="settings-page__user-edit">编辑</Text>
+          </View>
+          {stats && (
+            <View className="settings-page__stats">
+              <View className="settings-page__stat">
+                <Text className="settings-page__stat-value">{stats.totalCheckins}</Text>
+                <Text className="settings-page__stat-label">累计打卡</Text>
+              </View>
+              <View className="settings-page__stat">
+                <Text className="settings-page__stat-value">{stats.monthCheckins}</Text>
+                <Text className="settings-page__stat-label">本月打卡</Text>
+              </View>
+              <View className="settings-page__stat">
+                <Text className="settings-page__stat-value">{stats.currentConsecutive}</Text>
+                <Text className="settings-page__stat-label">连续打卡</Text>
+              </View>
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* 我的记录 */}
+      {isLoggedIn && (
+        <View className="settings-page__card">
+          <Text className="settings-page__card-title">我的记录</Text>
+          <View
+            className="settings-page__item settings-page__item--clickable"
+            onClick={() => Taro.navigateTo({ url: '/pages/report/index' })}
+          >
+            <Text className="settings-page__item-label">月度报告</Text>
+            <Text className="settings-page__item-arrow">›</Text>
           </View>
         </View>
       )}

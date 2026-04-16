@@ -87,6 +87,30 @@
     border-radius: var(--radius-sm);
   }
 
+  &__stats {
+    display: flex;
+    justify-content: space-around;
+    padding-top: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__stat {
+    text-align: center;
+  }
+
+  &__stat-value {
+    display: block;
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  &__stat-label {
+    font-size: 22px;
+    color: var(--color-text-secondary);
+  }
+
   &__skeleton-name {
     margin-bottom: var(--spacing-sm);
   }
