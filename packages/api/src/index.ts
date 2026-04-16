@@ -12,6 +12,7 @@ import hexagramRoutes from './routes/hexagram';
 import userRoutes from './routes/user';
 import uploadRoutes from './routes/upload';
 import agentRoutes from './routes/agent';
+import reportRoutes from './routes/report';
 
 const app = new Hono();
 
@@ -49,6 +50,7 @@ app.route('/api/hexagrams', hexagramRoutes);
 app.route('/api/user', userRoutes);
 app.route('/api/upload', uploadRoutes);
 app.route('/api/agent', agentRoutes);
+app.route('/api/report', reportRoutes);
 
 const port = parseInt(process.env.PORT || '3000');
 
