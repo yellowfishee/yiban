@@ -4,6 +4,7 @@ import Taro, { useRouter } from '@tarojs/taro';
 import { reportApi, type ReportDetail } from '../../api/report';
 import Skeleton from '../../components/skeleton/Skeleton';
 import { haptic } from '../../utils/haptic';
+import { hexagrams } from '@yiban/core';
 import './index.scss';
 
 const MONTH_NAMES = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
@@ -23,17 +24,8 @@ function formatMonthLabel(yearMonth: string): string {
 }
 
 function getHexagramName(id: string): string {
-  const guaMap: Record<string, string> = {
-    qian: '乾', kun: '坤', zhen: '震', xun: '巽',
-    kan: '坎', li: '离', gen: '艮', dui: '兑',
-  };
-  const parts = id.split('_');
-  if (parts.length === 2) {
-    const upper = guaMap[parts[0]] || parts[0];
-    const lower = guaMap[parts[1]] || parts[1];
-    return `${upper}${lower}`;
-  }
-  return id;
+  const hex = hexagrams.find((h) => h.id === id);
+  return hex?.name || id;
 }
 
 export default function ReportDetailPage() {
