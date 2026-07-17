@@ -40,15 +40,4 @@ export const agentApi = {
    */
   getContents: (checkinId: string) =>
     get<ContentsResponse>(`/api/agent/contents/${checkinId}`, true),
-
-  /**
-   * 上报广告观看完成
-   */
-  reportAdWatched: (checkinId: string, scene: AgentScene, signature: string) =>
-    post<{ success: boolean; remainingQuota: number }>('/api/agent/ad-rewarded', {
-      checkinId,
-      scene,
-      rewarded: true,
-      signature,
-    }, true),
 };

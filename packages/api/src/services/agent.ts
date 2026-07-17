@@ -1,6 +1,6 @@
 /**
  * AI Agent 服务
- * 调用 GLM-4.7 API 生成神兽建议
+ * 调用 DeepSeek-V3.2 API 生成神兽建议
  */
 import { db } from '../db/index';
 import { agentContents, dailyFreeUsage } from '../db/schema';
@@ -275,7 +275,7 @@ function extractFinalAnswer(reasoning: string): string {
 // ─── API call ────────────────────────────────────────────────────────
 
 /**
- * 调用 GLM API 生成内容
+ * 调用 AI API 生成内容
  */
 async function callGLMAPI(
   systemPrompt: string,

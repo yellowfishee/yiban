@@ -29,7 +29,7 @@ export interface ReportDetail {
 }
 
 export const reportApi = {
-  getStats: () => get<{ stats: UserStats }>('/api/report/stats', true),
+  getStats: () => get<UserStats>('/api/report/stats', true),
 
   getList: () => get<{ reports: ReportListItem[] }>('/api/report/list', true),
 

@@ -48,7 +48,7 @@ export default function SettingsPage() {
   const loadStats = async () => {
     try {
       const response = await reportApi.getStats();
-      setStats(response.stats);
+      setStats(response);
     } catch (error) {
       console.error('Load stats failed:', error);
     }

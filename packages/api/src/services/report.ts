@@ -14,7 +14,7 @@ function findHexagramById(id: string) {
 }
 
 /**
- * 调用 GLM API 生成内容
+ * 调用 AI API 生成内容
  */
 async function callGLMAPI(
   systemPrompt: string,
@@ -312,7 +312,7 @@ export async function generateMonthlyReport(
     }
   );
 
-  // 调用 GLM API
+  // 调用 AI API
   const rawContent = await callGLMAPI(prompts.system, prompts.user);
 
   // 合规检查

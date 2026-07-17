@@ -23,8 +23,14 @@ uploadRoutes.post('/avatar', authMiddleware, async (c) => {
       return c.json({ error: '请选择头像文件', code: 400 }, 400);
     }
 
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    if (!allowedTypes.includes(avatarFile.type)) {
+    const extensionsByMimeType: Record<string, string> = {
+      'image/jpeg': 'jpg',
+      'image/png': 'png',
+      'image/gif': 'gif',
+      'image/webp': 'webp',
+    };
+    const ext = extensionsByMimeType[avatarFile.type];
+    if (!ext) {
       return c.json({ error: '不支持的图片格式', code: 400 }, 400);
     }
 
@@ -32,7 +38,6 @@ uploadRoutes.post('/avatar', authMiddleware, async (c) => {
       return c.json({ error: '图片大小不能超过2MB', code: 400 }, 400);
     }
 
-    const ext = avatarFile.type.split('.')[1] || 'jpg';
     const filename = userId + '.' + ext;
     const filepath = join(UPLOAD_DIR, filename);
 

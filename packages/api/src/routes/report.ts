@@ -56,12 +56,6 @@ router.post('/generate', authMiddleware, async (c) => {
     const now = new Date();
     const yearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
-    // TODO: 付费上线后启用此检查
-    // const user = await db.select().from(users).where(eq(users.id, userId)).limit(1);
-    // if (!user[0]?.isPremium) {
-    //   return c.json<ApiErrorResponse>({ error: '请升级为付费用户', code: 403 }, 403);
-    // }
-
     const report = await generateMonthlyReport(userId, yearMonth);
     return c.json({ report });
   } catch (error) {

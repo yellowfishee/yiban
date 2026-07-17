@@ -146,8 +146,6 @@ interface InspirationContextValue extends InspirationState {
   handleCheckIn: (mood?: string) => Promise<void>;
   resetCheckIn: () => void;
   generateAgentContent: (checkinId: string, scene: AgentScene) => Promise<void>;
-  showRewardedVideoAd: (scene: AgentScene, checkinId: string) => void;
-  handleAdviceClick: (scene: AgentScene) => void;
 }
 
 const InspirationContext = createContext<InspirationContextValue | null>(null);
@@ -156,7 +154,7 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(inspirationReducer, initialState);
   const stateRef = useRef(state);
   stateRef.current = state;
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   /**
    * 加载今日打卡状态
@@ -252,47 +250,6 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
-   * 显示激励视频广告
-   */
-  const showRewardedVideoAd = useCallback((scene: AgentScene, checkinId: string) => {
-    if (process.env.TARO_ENV === 'weapp') {
-      const rewardedAd = Taro.createRewardedVideoAd({
-        adUnitId: 'your_ad_unit_id',
-      });
-
-      rewardedAd.onClose((res: { isEnded: boolean }) => {
-        if (res.isEnded) {
-          const userId = user?.id || '';
-          const signature = Buffer.from(`${userId}${checkinId}${scene}`).toString('base64');
-          agentApi.reportAdWatched(checkinId, scene, signature)
-            .then(() => {
-              generateAgentContent(checkinId, scene);
-            });
-        }
-      });
-
-      rewardedAd.show().catch(() => {
-        Taro.showToast({ title: '广告加载失败，请重试', icon: 'none' });
-      });
-    } else {
-      Taro.showToast({ title: '仅小程序支持广告解锁', icon: 'none' });
-    }
-  }, [generateAgentContent, user]);
-
-  /**
-   * 解锁场景建议（通过激励视频广告）
-   */
-  const handleAdviceClick = useCallback((_scene: AgentScene) => {
-    if (!state.currentCheckinId) {
-      Taro.showToast({ title: '请先打卡', icon: 'none' });
-      return;
-    }
-    if (process.env.TARO_ENV === 'weapp') {
-      Taro.showToast({ title: '该功能即将上线', icon: 'none' });
-    }
-  }, [state.currentCheckinId]);
-
-  /**
    * 打卡 - 直接调用 API 完成
    */
   const handleCheckIn = useCallback(async (mood?: string) => {
@@ -342,8 +299,6 @@ export function InspirationProvider({ children }: { children: ReactNode }) {
     handleCheckIn,
     resetCheckIn,
     generateAgentContent,
-    showRewardedVideoAd,
-    handleAdviceClick,
   };
 
   return <InspirationContext.Provider value={value}>{children}</InspirationContext.Provider>
