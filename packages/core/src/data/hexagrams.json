@@ -27,7 +27,8 @@
           "encouragement": "相信自己，当康与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/dui_dui.jpg"
     },
     {
       "id": "dui_gen",
@@ -56,7 +57,8 @@
           "encouragement": "相信自己，九尾狐与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/dui_gen.jpg"
     },
     {
       "id": "dui_kan",
@@ -85,7 +87,8 @@
           "encouragement": "相信自己，屏翳与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/dui_kan.jpg"
     },
     {
       "id": "dui_kun",
@@ -114,7 +117,8 @@
           "encouragement": "相信自己，乘黄与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/dui_kun.jpg"
     },
     {
       "id": "dui_li",
@@ -143,7 +147,8 @@
           "encouragement": "相信自己，朱雀与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/dui_li.jpg"
     },
     {
       "id": "dui_qian",
@@ -172,7 +177,8 @@
           "encouragement": "相信自己，麒麟与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/dui_qian.jpg"
     },
     {
       "id": "dui_xun",
@@ -201,7 +207,8 @@
           "encouragement": "相信自己，傲因与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/dui_xun.jpg"
     },
     {
       "id": "dui_zhen",
@@ -230,7 +237,8 @@
           "encouragement": "相信自己，騊駼与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/dui_zhen.jpg"
     },
     {
       "id": "gen_dui",
@@ -259,7 +267,8 @@
           "encouragement": "相信自己，梼杌与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/gen_dui.jpg"
     },
     {
       "id": "gen_gen",
@@ -288,7 +297,8 @@
           "encouragement": "相信自己，犼与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/gen_gen.jpg"
     },
     {
       "id": "gen_kan",
@@ -317,7 +327,8 @@
           "encouragement": "相信自己，鸱吻与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/gen_kan.jpg"
     },
     {
       "id": "gen_kun",
@@ -346,7 +357,8 @@
           "encouragement": "相信自己，驺虞与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/gen_kun.jpg"
     },
     {
       "id": "gen_li",
@@ -375,7 +387,8 @@
           "encouragement": "相信自己，驺吾与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/gen_li.jpg"
     },
     {
       "id": "gen_qian",
@@ -404,7 +417,8 @@
           "encouragement": "相信自己，谛听与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/gen_qian.jpg"
     },
     {
       "id": "gen_xun",
@@ -433,7 +447,8 @@
           "encouragement": "相信自己，化蛇与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/gen_xun.jpg"
     },
     {
       "id": "gen_zhen",
@@ -462,7 +477,8 @@
           "encouragement": "相信自己，灵龟与你同在。"
         }
       },
-      "category": "龟类"
+      "category": "龟类",
+      "image": "@/assets/beasts/gen_zhen.jpg"
     },
     {
       "id": "kan_dui",
@@ -491,7 +507,8 @@
           "encouragement": "相信自己，霸下与你同在。"
         }
       },
-      "category": "龟类"
+      "category": "龟类",
+      "image": "@/assets/beasts/kan_dui.jpg"
     },
     {
       "id": "kan_gen",
@@ -520,7 +537,8 @@
           "encouragement": "相信自己，玄龟与你同在。"
         }
       },
-      "category": "龟类"
+      "category": "龟类",
+      "image": "@/assets/beasts/kan_gen.jpg"
     },
     {
       "id": "kan_kan",
@@ -549,7 +567,8 @@
           "encouragement": "相信自己，蛟龙与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/kan_kan.jpg"
     },
     {
       "id": "kan_kun",
@@ -578,7 +597,8 @@
           "encouragement": "相信自己，貔貅与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/kan_kun.jpg"
     },
     {
       "id": "kan_li",
@@ -607,7 +627,8 @@
           "encouragement": "相信自己，螭吻与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/kan_li.jpg"
     },
     {
       "id": "kan_qian",
@@ -636,7 +657,8 @@
           "encouragement": "相信自己，玄武与你同在。"
         }
       },
-      "category": "龟类"
+      "category": "龟类",
+      "image": "@/assets/beasts/kan_qian.jpg"
     },
     {
       "id": "kan_xun",
@@ -665,7 +687,8 @@
           "encouragement": "相信自己，赑屃与你同在。"
         }
       },
-      "category": "龟类"
+      "category": "龟类",
+      "image": "@/assets/beasts/kan_xun.jpg"
     },
     {
       "id": "kan_zhen",
@@ -694,7 +717,8 @@
           "encouragement": "相信自己，夔牛与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/kan_zhen.jpg"
     },
     {
       "id": "kun_dui",
@@ -723,7 +747,8 @@
           "encouragement": "相信自己，辟邪与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/kun_dui.jpg"
     },
     {
       "id": "kun_gen",
@@ -752,7 +777,8 @@
           "encouragement": "相信自己，解豸与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/kun_gen.jpg"
     },
     {
       "id": "kun_kan",
@@ -781,7 +807,8 @@
           "encouragement": "相信自己，皋陶与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/kun_kan.jpg"
     },
     {
       "id": "kun_kun",
@@ -810,7 +837,8 @@
           "encouragement": "相信自己，腾蛇与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/kun_kun.jpg"
     },
     {
       "id": "kun_li",
@@ -839,7 +867,8 @@
           "encouragement": "相信自己，烛龙与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/kun_li.jpg"
     },
     {
       "id": "kun_qian",
@@ -868,7 +897,8 @@
           "encouragement": "相信自己，麒鳞与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/kun_qian.jpg"
     },
     {
       "id": "kun_xun",
@@ -897,7 +927,8 @@
           "encouragement": "相信自己，冉遗鱼与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/kun_xun.jpg"
     },
     {
       "id": "kun_zhen",
@@ -926,7 +957,8 @@
           "encouragement": "相信自己，朱厌与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/kun_zhen.jpg"
     },
     {
       "id": "li_dui",
@@ -955,7 +987,8 @@
           "encouragement": "相信自己，陆吾与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/li_dui.jpg"
     },
     {
       "id": "li_gen",
@@ -984,7 +1017,8 @@
           "encouragement": "相信自己，青鸟与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/li_gen.jpg"
     },
     {
       "id": "li_kan",
@@ -1013,7 +1047,8 @@
           "encouragement": "相信自己，精卫与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/li_kan.jpg"
     },
     {
       "id": "li_kun",
@@ -1042,7 +1077,8 @@
           "encouragement": "相信自己，赤骥与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/li_kun.jpg"
     },
     {
       "id": "li_li",
@@ -1071,7 +1107,8 @@
           "encouragement": "相信自己，三足金乌与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/li_li.jpg"
     },
     {
       "id": "li_qian",
@@ -1100,7 +1137,8 @@
           "encouragement": "相信自己，凤凰与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/li_qian.jpg"
     },
     {
       "id": "li_xun",
@@ -1129,7 +1167,8 @@
           "encouragement": "相信自己，毕方与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/li_xun.jpg"
     },
     {
       "id": "li_zhen",
@@ -1158,7 +1197,8 @@
           "encouragement": "相信自己，穷奇与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/li_zhen.jpg"
     },
     {
       "id": "qian_dui",
@@ -1187,7 +1227,8 @@
           "encouragement": "相信自己，白虎与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/qian_dui.jpg"
     },
     {
       "id": "qian_gen",
@@ -1216,7 +1257,8 @@
           "encouragement": "相信自己，鸾鸟与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/qian_gen.jpg"
     },
     {
       "id": "qian_kan",
@@ -1245,7 +1287,8 @@
           "encouragement": "相信自己，獬豸与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/qian_kan.jpg"
     },
     {
       "id": "qian_kun",
@@ -1274,7 +1317,8 @@
           "encouragement": "相信自己，饕餮与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/qian_kun.jpg"
     },
     {
       "id": "qian_li",
@@ -1303,7 +1347,8 @@
           "encouragement": "相信自己，重明鸟与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/qian_li.jpg"
     },
     {
       "id": "qian_qian",
@@ -1332,7 +1377,8 @@
           "encouragement": "相信自己，应龙与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/qian_qian.jpg"
     },
     {
       "id": "qian_xun",
@@ -1361,7 +1407,8 @@
           "encouragement": "相信自己，比翼鸟与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/qian_xun.jpg"
     },
     {
       "id": "qian_zhen",
@@ -1390,7 +1437,8 @@
           "encouragement": "相信自己，狴犴与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/qian_zhen.jpg"
     },
     {
       "id": "xun_dui",
@@ -1419,7 +1467,8 @@
           "encouragement": "相信自己，角端与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/xun_dui.jpg"
     },
     {
       "id": "xun_gen",
@@ -1448,7 +1497,8 @@
           "encouragement": "相信自己，鸿鹄与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/xun_gen.jpg"
     },
     {
       "id": "xun_kan",
@@ -1477,7 +1527,8 @@
           "encouragement": "相信自己，天马与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/xun_kan.jpg"
     },
     {
       "id": "xun_kun",
@@ -1506,7 +1557,8 @@
           "encouragement": "相信自己，英招与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/xun_kun.jpg"
     },
     {
       "id": "xun_li",
@@ -1535,7 +1587,8 @@
           "encouragement": "相信自己，青鸾与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/xun_li.jpg"
     },
     {
       "id": "xun_qian",
@@ -1564,7 +1617,8 @@
           "encouragement": "相信自己，飞廉与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/xun_qian.jpg"
     },
     {
       "id": "xun_xun",
@@ -1593,7 +1647,8 @@
           "encouragement": "相信自己，飞马与你同在。"
         }
       },
-      "category": "神马类"
+      "category": "神马类",
+      "image": "@/assets/beasts/xun_xun.jpg"
     },
     {
       "id": "xun_zhen",
@@ -1622,7 +1677,8 @@
           "encouragement": "相信自己，鲲鹏与你同在。"
         }
       },
-      "category": "鸟类"
+      "category": "鸟类",
+      "image": "@/assets/beasts/xun_zhen.jpg"
     },
     {
       "id": "zhen_dui",
@@ -1651,7 +1707,8 @@
           "encouragement": "相信自己，文鳐与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/zhen_dui.jpg"
     },
     {
       "id": "zhen_gen",
@@ -1680,7 +1737,8 @@
           "encouragement": "相信自己，蛊雕与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/zhen_gen.jpg"
     },
     {
       "id": "zhen_kan",
@@ -1709,7 +1767,8 @@
           "encouragement": "相信自己，开明兽与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/zhen_kan.jpg"
     },
     {
       "id": "zhen_kun",
@@ -1738,7 +1797,8 @@
           "encouragement": "相信自己，白泽与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/zhen_kun.jpg"
     },
     {
       "id": "zhen_li",
@@ -1767,7 +1827,8 @@
           "encouragement": "相信自己，雷电兽与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/zhen_li.jpg"
     },
     {
       "id": "zhen_qian",
@@ -1796,7 +1857,8 @@
           "encouragement": "相信自己，狻猊与你同在。"
         }
       },
-      "category": "兽类"
+      "category": "兽类",
+      "image": "@/assets/beasts/zhen_qian.jpg"
     },
     {
       "id": "zhen_xun",
@@ -1825,7 +1887,8 @@
           "encouragement": "相信自己，青龙与你同在。"
         }
       },
-      "category": "龙类"
+      "category": "龙类",
+      "image": "@/assets/beasts/zhen_xun.jpg"
     },
     {
       "id": "zhen_zhen",
@@ -1854,7 +1917,8 @@
           "encouragement": "相信自己，雷神与你同在。"
         }
       },
-      "category": "其他"
+      "category": "其他",
+      "image": "@/assets/beasts/zhen_zhen.jpg"
     }
   ]
 }

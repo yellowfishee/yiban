@@ -46,7 +46,7 @@ export default function HomePage() {
     generateAgentContent,
   } = useInspiration();
   const { reload } = useCollection();
-  const { isLoggedIn, isLoading: authLoading, loginWithWeapp, hasProfile } = useAuth();
+  const { isLoggedIn, hasProfile } = useAuth();
   const [showDrawLot, setShowDrawLot] = useState(false);
   const [activeScene, setActiveScene] = useState<AgentScene>('suitable_for');
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
@@ -59,11 +59,7 @@ export default function HomePage() {
     loadToday();
   }, [loadToday]);
 
-  useEffect(() => {
-    if (!authLoading && (!isLoggedIn || !hasProfile)) {
-      Taro.redirectTo({ url: '/pages/authorize/index' });
-    }
-  }, [authLoading, isLoggedIn, hasProfile]);
+  
 
   useEffect(() => {
     if (process.env.TARO_ENV === 'weapp') {
@@ -99,10 +95,12 @@ export default function HomePage() {
 
     haptic.medium();
 
+    if (!isLoggedIn || !hasProfile) {
+      Taro.navigateTo({ url: '/pages/authorize/index' });
+      return;
+    }
+
     try {
-      if (!isLoggedIn) {
-        await loginWithWeapp();
-      }
       setShowDrawLot(true);
       await handleCheckIn();
       await reload();
@@ -111,7 +109,7 @@ export default function HomePage() {
       setShowDrawLot(false);
       Taro.showToast({ title: '操作失败', icon: 'none' });
     }
-  }, [isLoggedIn, loginWithWeapp, handleCheckIn, reload, checkAgreement]);
+  }, [isLoggedIn, hasProfile, handleCheckIn, reload, checkAgreement]);
 
   const onDrawLotComplete = useCallback(() => {
     setShowDrawLot(false);
@@ -153,7 +151,7 @@ export default function HomePage() {
   const currentSceneContent = agentContents.find((c) => c.scene === activeScene);
 
   // Loading state
-  if ((isLoading || authLoading) && !checkedInToday) {
+  if (isLoading && !checkedInToday) {
     return (
       <View className="home-page home-page--loading">
         <View className="home-page__skeleton">
@@ -228,7 +226,7 @@ export default function HomePage() {
       {/* 沉浸区 */}
       <View className="home-page__immersive">
         <View className="home-page__beast-glow" onClick={handleBeastTap}>
-          <HexagramSymbol symbol={currentHexagram!.symbol} size="lg" />
+          <HexagramSymbol symbol={currentHexagram!.symbol} image={currentHexagram!.image} size="lg" />
         </View>
         <Text className="home-page__hexagram-name">{currentHexagram!.name}</Text>
         <Text className="home-page__hexagram-nature">{currentHexagram!.nature}</Text>

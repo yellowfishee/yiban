@@ -17,3 +17,5 @@ project.private.config.json
 
 .claude/
 .trae/
+.DS_Store
+**/.DS_Store

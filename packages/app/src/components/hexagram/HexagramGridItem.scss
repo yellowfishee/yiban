@@ -26,6 +26,19 @@
     overflow: hidden;
   }
 
+  &__symbol-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: rgba(26, 43, 60, 0.6);
+  }
+
+  &__image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid rgba(26, 43, 60, 0.1);
+  }
+
   &__icon {
     font-size: 32px;
     font-weight: bold;

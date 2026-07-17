@@ -20,6 +20,7 @@ export interface RawHexagram {
   id: string;
   name: string;
   symbol: string;
+  image?: string;
   category?: BeastCategory;
   nature: string;
   concept: string;

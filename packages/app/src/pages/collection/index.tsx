@@ -183,7 +183,7 @@ export default function CollectionPage() {
           <View className="collection-page__modal-content">
             <View className="collection-page__modal-header">
               <View className="collection-page__modal-icon">
-                <HexagramSymbol symbol={selected.symbol} size="md" />
+                <HexagramSymbol symbol={selected.symbol} image={selected.image} size="md" />
               </View>
               <View className="collection-page__modal-info">
                 <Text className="collection-page__modal-name">{selected.name}</Text>
