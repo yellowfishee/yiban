@@ -2,66 +2,83 @@
  * 月度报告路由
  */
 
-import { Hono } from 'hono';
-import { authMiddleware, getUserId } from '../middleware/auth';
-import { getUserStats, getReportList, getReportDetail, generateMonthlyReport } from '../services/report';
-import type { ApiErrorResponse } from '../types/auth';
+import { Hono } from "hono";
+import { authMiddleware, getUserId } from "../middleware/auth";
+import {
+	getUserStats,
+	getReportList,
+	getReportDetail,
+	generateMonthlyReport,
+} from "../services/report";
+import type { ApiErrorResponse } from "../types/auth";
 
 const router = new Hono();
 
-router.get('/stats', authMiddleware, async (c) => {
-  try {
-    const userId = getUserId(c);
-    const stats = await getUserStats(userId);
-    return c.json(stats);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return c.json<ApiErrorResponse>({ error: '获取统计失败：' + message, code: 500 }, 500);
-  }
+router.get("/stats", authMiddleware, async (c) => {
+	try {
+		const userId = getUserId(c);
+		const stats = await getUserStats(userId);
+		return c.json(stats);
+	} catch (error) {
+		const message = error instanceof Error ? error.message : "Unknown error";
+		return c.json<ApiErrorResponse>(
+			{ error: "获取统计失败：" + message, code: 500 },
+			500,
+		);
+	}
 });
 
-router.get('/list', authMiddleware, async (c) => {
-  try {
-    const userId = getUserId(c);
-    const reports = await getReportList(userId);
-    return c.json({ reports });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return c.json<ApiErrorResponse>({ error: '获取报告列表失败：' + message, code: 500 }, 500);
-  }
+router.get("/list", authMiddleware, async (c) => {
+	try {
+		const userId = getUserId(c);
+		const reports = await getReportList(userId);
+		return c.json({ reports });
+	} catch (error) {
+		const message = error instanceof Error ? error.message : "Unknown error";
+		return c.json<ApiErrorResponse>(
+			{ error: "获取报告列表失败：" + message, code: 500 },
+			500,
+		);
+	}
 });
 
-router.get('/:yearMonth', authMiddleware, async (c) => {
-  try {
-    const userId = getUserId(c);
-    const yearMonth = c.req.param('yearMonth') as string;
-    const report = await getReportDetail(userId, yearMonth);
+router.get("/:yearMonth", authMiddleware, async (c) => {
+	try {
+		const userId = getUserId(c);
+		const yearMonth = c.req.param("yearMonth") as string;
+		const report = await getReportDetail(userId, yearMonth);
 
-    if (!report) {
-      return c.json<ApiErrorResponse>({ error: '报告不存在', code: 404 }, 404);
-    }
+		if (!report) {
+			return c.json<ApiErrorResponse>({ error: "报告不存在", code: 404 }, 404);
+		}
 
-    return c.json({ report });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return c.json<ApiErrorResponse>({ error: '获取报告详情失败：' + message, code: 500 }, 500);
-  }
+		return c.json({ report });
+	} catch (error) {
+		const message = error instanceof Error ? error.message : "Unknown error";
+		return c.json<ApiErrorResponse>(
+			{ error: "获取报告详情失败：" + message, code: 500 },
+			500,
+		);
+	}
 });
 
-router.post('/generate', authMiddleware, async (c) => {
-  try {
-    const userId = getUserId(c);
-    
-    // 自动使用当前月份
-    const now = new Date();
-    const yearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+router.post("/generate", authMiddleware, async (c) => {
+	try {
+		const userId = getUserId(c);
 
-    const report = await generateMonthlyReport(userId, yearMonth);
-    return c.json({ report });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return c.json<ApiErrorResponse>({ error: '生成报告失败：' + message, code: 500 }, 500);
-  }
+		// 自动使用当前月份
+		const now = new Date();
+		const yearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+		const report = await generateMonthlyReport(userId, yearMonth);
+		return c.json({ report });
+	} catch (error) {
+		const message = error instanceof Error ? error.message : "Unknown error";
+		return c.json<ApiErrorResponse>(
+			{ error: "生成报告失败：" + message, code: 500 },
+			500,
+		);
+	}
 });
 
 export default router;
